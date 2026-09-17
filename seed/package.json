@@ -1,0 +1,9 @@
+{
+  "name": "bienestar-upc-seed",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "firebase-admin": "^12.0.0",
+    "google-auth-library": "^9.0.0"
+  }
+}

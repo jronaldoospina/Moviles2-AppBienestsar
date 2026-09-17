@@ -1,0 +1,145 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // ============ HELPERS ============
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    function uid() {
+      return request.auth.uid;
+    }
+    function rolUsuario() {
+      return get(/databases/$(database)/documents/usuarios/$(uid())).data.rol;
+    }
+    function esRol(rol) {
+      return isSignedIn() && rolUsuario() == rol;
+    }
+    function esAdmin()     { return esRol('ADMIN'); }
+    function esPsicologo() { return esRol('PSICOLOGO'); }
+    function esDocente()   { return esRol('DOCENTE'); }
+    function esEstudiante(){ return esRol('ESTUDIANTE'); }
+
+    // ============ USUARIOS ============
+    match /usuarios/{userId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn()
+        && (esAdmin() || esPsicologo() || request.auth.uid == userId);
+      allow update: if isSignedIn()
+        && (esAdmin() || esPsicologo() || request.auth.uid == userId);
+      allow delete: if isSignedIn() && esAdmin();
+    }
+
+    // ============ NOTAS ============
+    match /notas/{notaId} {
+      // Lectura: admin, psicólogo, docente o propio estudiante
+      allow read: if isSignedIn() && (esAdmin() || esPsicologo() || esDocente()
+        || esEstudiante() || resource.data.estudianteId == uid());
+      
+      // Crear: estudiantes para sus propias notas, admin/docente para cualquier nota
+      allow create: if isSignedIn() && (esEstudiante() && resource.data.estudianteId == uid()
+        || esAdmin() || esDocente());
+      
+      // Actualizar: estudiantes sus propias notas, admin/docente cualquier nota
+      allow update: if isSignedIn() && (esEstudiante() && resource.data.estudianteId == uid()
+        || esAdmin() || esDocente());
+      
+      // Borrar: solo admin
+      allow delete: if isSignedIn() && esAdmin();
+    }
+
+    // ============ CURSOS ============
+    match /cursos/{cursoId} {
+      allow read, list: if isSignedIn();
+      allow write: if isSignedIn() && (esAdmin() || esDocente());
+    }
+
+    // ============ CITAS ============
+    match /citas/{citaId} {
+      allow read: if isSignedIn() && (esAdmin() || esPsicologo()
+        || resource.data.estudianteId == uid());
+      allow create: if isSignedIn() && (esEstudiante() || esPsicologo() || esAdmin());
+      allow update: if isSignedIn() && (esAdmin() || esPsicologo()
+        || resource.data.estudianteId == uid());
+      allow delete: if isSignedIn() && (esAdmin() || esPsicologo());
+    }
+
+    // ============ REPORTES EMOCIONALES ============
+    match /reportes_emocionales/{reporteId} {
+      allow read: if isSignedIn() && (esAdmin() || esPsicologo()
+        || resource.data.estudianteId == uid());
+      allow create, update: if isSignedIn() && (esEstudiante() || esPsicologo() || esAdmin());
+      allow delete: if isSignedIn() && (esAdmin() || esPsicologo());
+    }
+
+    // ============ REPORTES Y PLANES DE SEGUIMIENTO ============
+    match /reportes/{reporteId} {
+      allow read: if isSignedIn() && (esAdmin() || esPsicologo()
+        || resource.data.estudianteId == uid());
+      allow write: if isSignedIn() && (esAdmin() || esPsicologo());
+    }
+    match /planes/{planId} {
+      allow read: if isSignedIn() && (esAdmin() || esPsicologo()
+        || resource.data.estudianteId == uid());
+      allow write: if isSignedIn() && (esAdmin() || esPsicologo());
+    }
+
+    // ============ TUTORÍAS ============
+    match /tutorias/{tutoriaId} {
+      allow read: if isSignedIn();
+      allow create, update: if isSignedIn() && (esAdmin() || esPsicologo() || esDocente());
+      allow delete: if isSignedIn() && (esAdmin() || esPsicologo());
+    }
+
+    // ============ ALERTAS ============
+    match /alertas/{alertaId} {
+      allow read: if isSignedIn() && (esAdmin() || esPsicologo()
+                    || resource.data.docenteId == uid()
+                    || resource.data.estudianteId == uid());
+      allow create: if isSignedIn() && (esAdmin() || esPsicologo() || esDocente());
+      allow update, delete: if isSignedIn() && (esAdmin() || esPsicologo());
+    }
+
+    // ============ CONVERSACIONES (chat) ============
+    match /conversaciones/{conversacionId} {
+      function participa() {
+        return resource.data.participantes.hasAny([uid()]);
+      }
+      allow read, update, delete: if isSignedIn() && participa();
+      allow create: if isSignedIn()
+        && request.resource.data.participantes.hasAny([uid()]);
+    }
+
+    // ============ MENSAJES (chat) ============
+    match /mensajes/{mensajeId} {
+      function convParticipa(convId) {
+        return get(/databases/$(database)/documents/conversaciones/$(convId))
+          .data.participantes.hasAny([uid()]);
+      }
+      allow read, update: if isSignedIn()
+        && resource.data.conversacionId is string
+        && convParticipa(resource.data.conversacionId);
+      allow create: if isSignedIn()
+        && request.resource.data.conversacionId is string
+        && request.resource.data.remitenteId == uid()
+        && convParticipa(request.resource.data.conversacionId);
+      allow delete: if false;
+    }
+
+    // ============ AUDITORÍA ============
+    match /auditoria/{logId} {
+      allow read: if isSignedIn() && esAdmin();
+      allow create: if isSignedIn();
+      allow update, delete: if isSignedIn() && esAdmin();
+    }
+
+    // ============ NOTIFICACIONES ============
+    match /notificaciones/{notificacionId} {
+      allow read: if isSignedIn() && resource.data.receptorId == uid();
+      allow create: if isSignedIn();
+      allow update: if isSignedIn() && resource.data.receptorId == uid();
+      allow delete: if isSignedIn() && (esAdmin() || resource.data.receptorId == uid());
+    }
+  }
+}
