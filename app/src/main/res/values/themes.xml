@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- ============================================ -->
+    <!-- TEMA PRINCIPAL DE LA APP (LIGHT)             -->
+    <!-- ============================================ -->
+    <style name="Theme.BienestarUPC" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Primario: esmeralda -->
+        <item name="colorPrimary">@color/green_primary</item>
+        <item name="colorOnPrimary">@color/white_card</item>
+        <item name="colorPrimaryContainer">@color/green_container</item>
+        <item name="colorOnPrimaryContainer">@color/on_primary_container</item>
+
+        <!-- Secundario -->
+        <item name="colorSecondary">@color/green_primary</item>
+        <item name="colorOnSecondary">@color/white_card</item>
+        <item name="colorSecondaryContainer">@color/green_container</item>
+        <item name="colorOnSecondaryContainer">@color/on_primary_container</item>
+
+        <!-- Terciario -->
+        <item name="colorTertiary">@color/teal_primary</item>
+        <item name="colorOnTertiary">@color/white_card</item>
+        <item name="colorTertiaryContainer">@color/teal_light</item>
+        <item name="colorOnTertiaryContainer">#134E4A</item>
+
+        <!-- Fondo y superficies -->
+        <item name="android:colorBackground">@color/background_gray</item>
+        <item name="colorSurface">@color/white_card</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="colorOnSurfaceVariant">@color/text_secondary</item>
+        <item name="colorSurfaceContainerLow">@color/surface_container_low</item>
+        <item name="colorSurfaceContainer">@color/surface_container</item>
+        <item name="colorSurfaceContainerHigh">@color/surface_container_high</item>
+        <item name="colorSurfaceContainerHighest">@color/surface_container_highest</item>
+        <item name="colorSurfaceVariant">@color/background_gray</item>
+        <item name="colorOutline">@color/surface_outline</item>
+        <item name="colorOutlineVariant">@color/surface_outline_variant</item>
+
+        <!-- Error -->
+        <item name="colorError">@color/error_text</item>
+        <item name="colorOnError">@color/white_card</item>
+
+        <!-- Barra de estado -->
+        <item name="android:statusBarColor">@color/green_primary_dark</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <!-- Opt-out del edge-to-edge forzado (Android 15+); evita que el contenido
+             se dibuje debajo de la barra de estado. Se ignora en versiones anteriores. -->
+        <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
+
+        <!-- Barra de navegación -->
+        <item name="android:navigationBarColor">@color/white_card</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+
+        <!-- Componentes globales: estilos base (evitan tocar cada layout) -->
+        <item name="materialButtonStyle">@style/Widget.BienestarUPC.Button</item>
+        <item name="textInputStyle">@style/Widget.BienestarUPC.TextInputLayout</item>
+        <item name="materialCardViewStyle">@style/Widget.BienestarUPC.Card</item>
+        <item name="bottomNavigationStyle">@style/BottomNavigationStyle</item>
+        <item name="chipStyle">@style/Widget.BienestarUPC.Chip</item>
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.BienestarUPC.MaterialAlertDialog</item>
+        <item name="snackbarStyle">@style/Widget.BienestarUPC.Snackbar</item>
+
+        <!-- Tipografía -->
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:letterSpacing">0.0</item>
+
+        <!-- Window -->
+        <item name="android:windowBackground">@color/background_gray</item>
+    </style>
+
+    <!-- ============================================ -->
+    <!-- TEMA PARA SPLASH SCREEN                      -->
+    <!-- ============================================ -->
+    <style name="Theme.BienestarUPC.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white_card</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground_scaled</item>
+        <item name="postSplashScreenTheme">@style/Theme.BienestarUPC</item>
+    </style>
+
+    <!-- ============================================ -->
+    <!-- OVERRIDE ALERT DIALOG (esquinas redondeadas) -->
+    <!-- ============================================ -->
+    <style name="ThemeOverlay.BienestarUPC.MaterialAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.BienestarUPC.Dialog</item>
+        <item name="colorSecondary">@color/green_primary</item>
+    </style>
+
+    <style name="ShapeAppearance.BienestarUPC.Dialog" parent="ShapeAppearance.Material3.LargeComponent">
+        <item name="cornerSize">24dp</item>
+    </style>
+
+</resources>

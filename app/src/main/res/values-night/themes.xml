@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Theme.BienestarUPC" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Primario: esmeralda claro (dark scheme) -->
+        <item name="colorPrimary">@color/green_primary_night</item>
+        <item name="colorOnPrimary">#052E1B</item>
+        <item name="colorPrimaryContainer">#065F46</item>
+        <item name="colorOnPrimaryContainer">#A7F3D0</item>
+
+        <item name="colorSecondary">@color/green_primary_night</item>
+        <item name="colorOnSecondary">#052E1B</item>
+        <item name="colorSecondaryContainer">#0A7A5C</item>
+        <item name="colorOnSecondaryContainer">#A7F3D0</item>
+
+        <item name="colorTertiary">#5EEAD4</item>
+        <item name="colorOnTertiary">#134E4A</item>
+        <item name="colorTertiaryContainer">#0F766E</item>
+        <item name="colorOnTertiaryContainer">#CCFBF1</item>
+
+        <item name="android:colorBackground">@color/background_gray</item>
+        <item name="colorSurface">@color/white_card</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="colorOnSurfaceVariant">@color/text_secondary</item>
+        <item name="colorSurfaceContainerLow">@color/surface_container_low</item>
+        <item name="colorSurfaceContainer">@color/surface_container</item>
+        <item name="colorSurfaceContainerHigh">@color/surface_container_high</item>
+        <item name="colorSurfaceContainerHighest">@color/surface_container_highest</item>
+        <item name="colorSurfaceVariant">@color/white_card_night</item>
+        <item name="colorOutline">@color/surface_outline</item>
+        <item name="colorOutlineVariant">@color/surface_outline_variant</item>
+
+        <item name="colorError">@color/risk_high_text_night</item>
+        <item name="colorOnError">#300A0A</item>
+
+        <item name="android:statusBarColor">@color/background_gray_night</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
+
+        <item name="android:navigationBarColor">@color/white_card_night</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
+
+        <!-- Componentes globales: estilos base -->
+        <item name="materialButtonStyle">@style/Widget.BienestarUPC.Button</item>
+        <item name="textInputStyle">@style/Widget.BienestarUPC.TextInputLayout</item>
+        <item name="materialCardViewStyle">@style/Widget.BienestarUPC.Card</item>
+        <item name="bottomNavigationStyle">@style/BottomNavigationStyle</item>
+        <item name="chipStyle">@style/Widget.BienestarUPC.Chip</item>
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.BienestarUPC.MaterialAlertDialog</item>
+        <item name="snackbarStyle">@style/Widget.BienestarUPC.Snackbar</item>
+
+        <item name="android:fontFamily">sans-serif</item>
+
+        <item name="android:windowBackground">@color/background_gray</item>
+    </style>
+
+</resources>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph_psicologo"
+    app:startDestination="@id/nav_psi_home">
+
+    <fragment
+        android:id="@+id/nav_psi_home"
+        android:name="com.example.myapplication.fragments.DashboardFragment"
+        android:label="Inicio" />
+
+    <fragment
+        android:id="@+id/nav_psi_students"
+        android:name="com.example.myapplication.fragments.StudentsFragment"
+        android:label="Estudiantes" />
+
+    <fragment
+        android:id="@+id/nav_psi_agenda"
+        android:name="com.example.myapplication.fragments.AgendaFragment"
+        android:label="Agenda" />
+
+    <fragment
+        android:id="@+id/nav_psi_alerts"
+        android:name="com.example.myapplication.fragments.AlertsFragment"
+        android:label="Alertas" />
+
+    <fragment
+        android:id="@+id/nav_psi_profile"
+        android:name="com.example.myapplication.fragments.ProfileFragment"
+        android:label="Perfil" />
+</navigation>

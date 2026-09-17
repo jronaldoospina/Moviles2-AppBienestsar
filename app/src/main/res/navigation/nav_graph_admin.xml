@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph_admin"
+    app:startDestination="@id/nav_admin_home">
+
+    <fragment
+        android:id="@+id/nav_admin_home"
+        android:name="com.example.myapplication.fragments.DashboardFragment"
+        android:label="Inicio" />
+
+    <fragment
+        android:id="@+id/nav_admin_users"
+        android:name="com.example.myapplication.fragments.UsersFragment"
+        android:label="Usuarios" />
+
+    <fragment
+        android:id="@+id/nav_admin_courses"
+        android:name="com.example.myapplication.fragments.AdminCoursesFragment"
+        android:label="Cursos" />
+
+    <fragment
+        android:id="@+id/nav_admin_stats"
+        android:name="com.example.myapplication.fragments.StatsFragment"
+        android:label="Estadísticas" />
+
+    <fragment
+        android:id="@+id/nav_admin_audit"
+        android:name="com.example.myapplication.fragments.AuditFragment"
+        android:label="Auditoría" />
+
+    <fragment
+        android:id="@+id/nav_admin_profile"
+        android:name="com.example.myapplication.fragments.ProfileFragment"
+        android:label="Perfil" />
+</navigation>

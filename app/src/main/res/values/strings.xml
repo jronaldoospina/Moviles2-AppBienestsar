@@ -1,0 +1,108 @@
+<resources>
+    <!-- App -->
+    <string name="app_name">Apoyo y Seguimiento</string>
+    <string name="app_tagline">Bienestar</string>
+
+    <!-- ============ LOGIN ============ -->
+    <string name="login_title">Bienvenido</string>
+    <string name="login_subtitle">Inicia sesión para continuar</string>
+    <string name="login_email">Correo institucional</string>
+    <string name="login_password">Contraseña</string>
+    <string name="login_button">Iniciar Sesión</string>
+    <string name="login_forgot_password">¿Olvidaste tu contraseña?</string>
+    <string name="login_no_account">¿No tienes cuenta? Contacta a Bienestar</string>
+
+    <!-- ============ NAVEGACIÓN ============ -->
+    <string name="nav_home">Inicio</string>
+    <string name="nav_students">Estudiantes</string>
+    <string name="nav_calendar">Citas</string>
+    <string name="nav_chat">Mensajes</string>
+    <string name="nav_profile">Perfil</string>
+
+    <!-- ============ DASHBOARD ============ -->
+    <string name="dashboard_greeting">¡Hola, %1$s!</string>
+    <string name="dashboard_risk_students">En Riesgo</string>
+    <string name="dashboard_appointments_today">Citas Hoy</string>
+    <string name="dashboard_total_students">Estudiantes</string>
+    <string name="dashboard_improvement">Mejora</string>
+    <string name="dashboard_quick_access">Accesos Rápidos</string>
+    <string name="dashboard_recent_alerts">Alertas Recientes</string>
+    <string name="dashboard_view_all">Ver todas</string>
+    <string name="dashboard_register">Registrar</string>
+    <string name="dashboard_appointment">Cita</string>
+    <string name="dashboard_reports">Reportes</string>
+    <string name="dashboard_export">Exportar</string>
+
+    <!-- ============ ESTUDIANTES ============ -->
+    <string name="students_title">Estudiantes</string>
+    <string name="students_search_hint">Buscar estudiante...</string>
+    <string name="students_filter_all">Todos</string>
+    <string name="students_filter_critical">Crítico</string>
+    <string name="students_filter_high">Alto</string>
+    <string name="students_filter_medium">Medio</string>
+    <string name="students_filter_low">Bajo</string>
+    <string name="students_no_results">No se encontraron estudiantes</string>
+    <string name="students_add">Agregar Estudiante</string>
+
+    <!-- ============ RIESGO ============ -->
+    <string name="risk_critical">🔴 Riesgo Crítico</string>
+    <string name="risk_high">🟠 Riesgo Alto</string>
+    <string name="risk_medium">🟡 Riesgo Medio</string>
+    <string name="risk_low">🟢 Riesgo Bajo</string>
+
+    <!-- ============ CITAS ============ -->
+    <string name="calendar_title">Citas</string>
+    <string name="calendar_filter_all">Todas</string>
+    <string name="calendar_filter_pending">Pendientes</string>
+    <string name="calendar_filter_confirmed">Confirmadas</string>
+    <string name="calendar_filter_cancelled">Canceladas</string>
+    <string name="calendar_no_appointments">No hay citas para hoy</string>
+    <string name="calendar_new_appointment">Nueva Cita</string>
+    <string name="calendar_status_confirmed">✓ Confirmada</string>
+    <string name="calendar_status_pending">⏳ Pendiente</string>
+    <string name="calendar_status_cancelled">✗ Cancelada</string>
+    <string name="calendar_status_completed">✓ Completada</string>
+
+    <!-- ============ CHAT ============ -->
+    <string name="chat_title">Mensajes</string>
+    <string name="chat_search_hint">Buscar conversación...</string>
+    <string name="chat_no_conversations">No tienes conversaciones</string>
+
+    <!-- ============ PERFIL ============ -->
+    <string name="profile_title">Perfil</string>
+    <string name="profile_settings">Configuración</string>
+    <string name="profile_edit">Editar Perfil</string>
+    <string name="profile_change_password">Cambiar Contraseña</string>
+    <string name="profile_privacy">Política de Privacidad</string>
+    <string name="profile_logout">Cerrar Sesión</string>
+    <string name="profile_patients">Pacientes</string>
+    <string name="profile_appointments_today">Citas Hoy</string>
+    <string name="profile_effectiveness">Efectividad</string>
+
+    <!-- ============ ACCIONES ============ -->
+    <string name="action_save">Guardar</string>
+    <string name="action_cancel">Cancelar</string>
+    <string name="action_delete">Eliminar</string>
+    <string name="action_edit">Editar</string>
+    <string name="action_confirm">Confirmar</string>
+    <string name="action_close">Cerrar</string>
+    <string name="action_accept">Aceptar</string>
+    <string name="action_back">Atrás</string>
+    <string name="action_next">Siguiente</string>
+    <string name="action_search">Buscar</string>
+    <string name="action_filter">Filtrar</string>
+    <string name="action_notifications">Notificaciones</string>
+
+    <!-- ============ MENSAJES ============ -->
+    <string name="msg_loading">Cargando...</string>
+    <string name="msg_error_generic">Ocurrió un error. Intenta de nuevo.</string>
+    <string name="msg_no_internet">Sin conexión a internet</string>
+    <string name="msg_saved_success">Guardado exitosamente</string>
+    <string name="msg_deleted_success">Eliminado exitosamente</string>
+
+    <!-- ============ CONTENT DESCRIPTIONS ============ -->
+    <string name="cd_avatar">Avatar del usuario</string>
+    <string name="cd_notifications">Notificaciones</string>
+    <string name="cd_settings">Configuración</string>
+    <string name="cd_more_options">Más opciones</string>
+</resources>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_registrar_nota_individual"
+        android:icon="@drawable/ic_edit"
+        android:title="Registrar nota"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_registro_masivo"
+        android:icon="@drawable/ic_add"
+        android:title="Registro masivo"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_reporte_alerta"
+        android:icon="@drawable/ic_warning"
+        android:title="Reportar alerta"
+        app:showAsAction="ifRoom" />
+</menu>

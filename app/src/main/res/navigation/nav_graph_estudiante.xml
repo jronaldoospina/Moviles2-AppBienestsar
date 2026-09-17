@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph_estudiante"
+    app:startDestination="@id/nav_est_home">
+
+    <fragment
+        android:id="@+id/nav_est_home"
+        android:name="com.example.myapplication.fragments.StudentDashboardFragment"
+        android:label="Inicio" />
+
+    <fragment
+        android:id="@+id/nav_est_progress"
+        android:name="com.example.myapplication.fragments.MyProgressFragment"
+        android:label="Mi Progreso" />
+
+    <fragment
+        android:id="@+id/nav_est_appointments"
+        android:name="com.example.myapplication.fragments.MyAppointmentsFragment"
+        android:label="Citas" />
+
+    <fragment
+        android:id="@+id/nav_est_profile"
+        android:name="com.example.myapplication.fragments.ProfileFragment"
+        android:label="Perfil" />
+
+    <fragment
+        android:id="@+id/nav_est_emotion"
+        android:name="com.example.myapplication.fragments.EmotionalReportFragment"
+        android:label="Reporte Emocional" />
+
+    <fragment
+        android:id="@+id/nav_est_bienestar"
+        android:name="com.example.myapplication.fragments.MisReportesFragment"
+        android:label="Mi Bienestar" />
+
+    <fragment
+        android:id="@+id/nav_est_courses"
+        android:name="com.example.myapplication.fragments.MisCursosEstudianteFragment"
+        android:label="Mis Cursos" />
+</navigation>
