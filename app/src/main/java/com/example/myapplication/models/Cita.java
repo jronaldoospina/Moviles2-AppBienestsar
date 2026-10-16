@@ -15,6 +15,7 @@ public class Cita {
     private String notasPsicologo;
     private long fechaCreacion;
     private long ultimaActualizacion;
+    private String lugar;
 
     public Cita() {}
 
@@ -73,4 +74,7 @@ public class Cita {
 
     public long getUltimaActualizacion() { return ultimaActualizacion; }
     public void setUltimaActualizacion(long ultimaActualizacion) { this.ultimaActualizacion = ultimaActualizacion; }
+
+    public String getLugar() { return lugar; }
+    public void setLugar(String lugar) { this.lugar = lugar; }
 }
