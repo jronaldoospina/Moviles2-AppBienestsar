@@ -38,12 +38,7 @@
             </intent-filter>
         </activity>
 
-        <!-- Onboarding: solo en el primer arranque, el splash lo lanza -->
-        <activity
-            android:name=".OnboardingActivity"
-            android:exported="false" />
-
-        <!-- Login Activity -->
+                <!-- Login Activity -->
         <activity
             android:name=".LoginActivity"
             android:exported="false"

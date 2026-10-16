@@ -5,7 +5,6 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.assertNotNull;
 
 import android.content.Context;
@@ -14,7 +13,6 @@ import android.content.Intent;
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
-import androidx.test.platform.app.InstrumentationRegistry;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -38,14 +36,10 @@ public class ArranqueAppTest {
     @Before
     public void setUp() {
         context = ApplicationProvider.getApplicationContext();
-        // Cada prueba arranca desde el mismo estado. Sin esto el resultado
-        // depende del orden de ejecucion: si SplashActivity ya dejo
-        // first_time=true, su Handler pendiente lanza OnboardingActivity por
-        // encima del LoginActivity de la prueba y btn_login no existe.
+        // Cada prueba arranca desde el mismo estado: sin sesion, para que el
+        // splash siempre resuelva hacia el login.
         context.getSharedPreferences("BienestarUPCSession", Context.MODE_PRIVATE)
                 .edit().clear().apply();
-        context.getSharedPreferences("onboarding_prefs", Context.MODE_PRIVATE)
-                .edit().putBoolean("first_time", false).apply();
     }
 
     /**
@@ -101,53 +95,18 @@ public class ArranqueAppTest {
         }
     }
 
-    /** El onboarding debe poder completarse y llegar a la app. */
-    @Test
-    public void elOnboardingSePuedeCompletar() {
-        // Se limpia la preferencia para forzar la primera vez
-        context.getSharedPreferences("onboarding_prefs", Context.MODE_PRIVATE)
-                .edit().clear().apply();
-
-        try (ActivityScenario<OnboardingActivity> scenario =
-                     ActivityScenario.launch(OnboardingActivity.class)) {
-            onView(withId(R.id.btn_empezar)).perform(click());
-            // Tras Empezar debe navegar a MainActivity
-            assertNotNull(scenario.getState());
-        }
-    }
-
     /**
-     * Regresion: en una instalacion nueva el usuario no tiene sesion.
-     * El onboarding debe llevar al LOGIN, no a MainActivity, porque
-     * MainActivity sin sesion hace finish() y devuelve al launcher dejando
-     * al usuario sin forma de iniciar sesion.
+     * Regresion: el splash sin sesion debe llevar al LOGIN, no a MainActivity,
+     * porque MainActivity sin sesion hace finish() y devuelve al launcher
+     * dejando al usuario sin forma de iniciar sesion.
+     *
+     * El caso con sesion ya lo cubre conSesionMuestraLaApp en
+     * NavegacionTabsTest.
      */
     @Test
-    public void elOnboardingSinSesionLlegaAlLogin() throws Exception {
+    public void elSplashSinSesionVaAlLogin() throws Exception {
         context.getSharedPreferences("BienestarUPCSession", Context.MODE_PRIVATE)
                 .edit().clear().apply();
-        context.getSharedPreferences("onboarding_prefs", Context.MODE_PRIVATE)
-                .edit().clear().apply();   // primera vez
-
-        try (ActivityScenario<OnboardingActivity> scenario =
-                     ActivityScenario.launch(OnboardingActivity.class)) {
-            onView(withId(R.id.btn_empezar)).perform(click());
-            Thread.sleep(1200);
-            // Debe verse el formulario de login
-            onView(withId(R.id.edit_email)).check(matches(isDisplayed()));
-        }
-    }
-
-    /**
-     * Regresion: con onboarding ya completado y sin sesion, el splash debe
-     * llevar directo al login en vez de pasar por el onboarding.
-     */
-    @Test
-    public void elSplashSinSesionTrasOnboardingVaAlLogin() throws Exception {
-        context.getSharedPreferences("BienestarUPCSession", Context.MODE_PRIVATE)
-                .edit().clear().apply();
-        context.getSharedPreferences("onboarding_prefs", Context.MODE_PRIVATE)
-                .edit().putBoolean("first_time", false).apply();
 
         Intent intent = new Intent(ApplicationProvider.getApplicationContext(), SplashActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
