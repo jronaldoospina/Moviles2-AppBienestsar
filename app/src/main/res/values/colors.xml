@@ -22,6 +22,8 @@
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
 
+    <color name="on_green">#FFFFFF</color>
+
     <!-- ============================================ -->
     <!-- TEXTOS -->
     <!-- ============================================ -->
@@ -184,4 +186,40 @@
     <color name="mood_3">#F59E0B</color>
     <color name="mood_4">#0D9488</color>
     <color name="mood_5">#059669</color>
+
+    <!-- ============================================ -->
+    <!-- ROLES DE USUARIO Y ESTADOS (SOLIDOS Y LEGIBLES) -->
+    <!-- ============================================ -->
+    <color name="role_admin_bg">#6D28D9</color> <!-- Púrpura / Admin -->
+    <color name="role_psicologo_bg">#1D4ED8</color> <!-- Azul Intenso / Psicólogo -->
+    <color name="role_docente_bg">#D97706</color> <!-- Naranja Ámbar / Docente -->
+    <color name="role_estudiante_bg">#059669</color> <!-- Verde Esmeralda / Estudiante -->
+    <color name="status_active_bg">#16A34A</color> <!-- Verde Vivo / Activo -->
+    <color name="status_inactive_bg">#4B5563</color> <!-- Gris Pizarra / Inactivo -->
+
+    <!-- RIESGO CRÍTICO -->
+    <!-- ============================================ -->
+    <color name="risk_critical_bg">#B91C1C</color> <!-- Rojo Carmesí Crítico -->
+
+    <!-- SKELETON LOADING -->
+    <color name="skeleton_color">#E5E7EB</color>
+    <color name="skeleton_shimmer">#F3F4F6</color>
+    <color name="skeleton_surface">#F8F9FA</color>
+
+    <color name="risk_critical_text">#DC2626</color>
+    <color name="risk_high_bg_night">#B91C1C</color>
+    <color name="risk_medium_bg_night">#FFC857</color>
+    <color name="risk_low_bg_night">#059669</color>
+    <color name="info_bg_night">#E0F2FE</color>
+    <color name="success_bg_night">#D1FAE5</color>
+    <color name="warning_bg_night">#FFC857</color>
+    <color name="error_bg_night">#FEE2E2</color>
+    <color name="status_pending_bg_night">#FEF3C7</color>
+    <color name="status_confirmed_bg_night">#D1FAE5</color>
+    <color name="status_cancelled_bg_night">#FEE2E2</color>
+    <color name="status_completed_bg_night">#E0F2FE</color>
+    <color name="status_pending_text_night">#B45309</color>
+    <color name="status_confirmed_text_night">#047857</color>
+    <color name="status_cancelled_text_night">#DC2626</color>
+    <color name="status_completed_text_night">#0369A1</color>
 </resources>

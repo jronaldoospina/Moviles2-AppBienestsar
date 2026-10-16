@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ============================================ -->
+    <!-- ACCESIBILIDAD - MODO OSCURO                  -->
+    <!-- Los botones usan fondo esmeralda oscuro con  -->
+    <!-- texto blanco: contraste >= 4.5:1 (WCAG AA)   -->
+    <!-- ============================================ -->
+
+    <style name="Widget.BienestarUPC.Button" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/green_primary_dark</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="cornerRadius">14dp</item>
+        <item name="android:paddingTop">14dp</item>
+        <item name="android:paddingBottom">14dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="elevation">0dp</item>
+        <item name="android:letterSpacing">0.02</item>
+    </style>
+
+    <style name="Widget.BienestarUPC.Button.Secondary" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="strokeColor">@color/green_primary_night</item>
+        <item name="android:textColor">@color/green_primary_night</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="cornerRadius">14dp</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="android:minHeight">48dp</item>
+    </style>
+
+    <style name="Widget.BienestarUPC.Button.Tonal" parent="Widget.Material3.Button.TonalButton">
+        <item name="backgroundTint">@color/green_primary_dark</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="cornerRadius">14dp</item>
+        <item name="android:minHeight">48dp</item>
+    </style>
+
+    <style name="Widget.BienestarUPC.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">14dp</item>
+        <item name="boxCornerRadiusTopEnd">14dp</item>
+        <item name="boxCornerRadiusBottomStart">14dp</item>
+        <item name="boxCornerRadiusBottomEnd">14dp</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxStrokeWidthFocused">2dp</item>
+        <item name="boxStrokeColor">@color/green_primary_night</item>
+        <item name="hintTextColor">@color/green_primary_night</item>
+        <item name="cursorColor">@color/green_primary_night</item>
+        <item name="endIconTint">@color/gray_medium</item>
+        <item name="startIconTint">@color/gray_medium</item>
+    </style>
+
+    <!-- Bottom Navigation con iconos/texto legibles en oscuro -->
+    <style name="BottomNavigationStyle" parent="Widget.Material3.BottomNavigationView">
+        <item name="android:background">@color/white_card</item>
+        <item name="itemIconSize">24dp</item>
+        <item name="itemRippleColor">@color/green_primary_dark</item>
+        <item name="itemIconTint">@color/nav_item_text_color</item>
+        <item name="itemTextColor">@color/nav_item_text_color</item>
+        <item name="elevation">8dp</item>
+    </style>
+
+    <!-- Toolbar legible en oscuro -->
+    <style name="ToolbarTitleStyle" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">0.01</item>
+    </style>
+
+</resources>

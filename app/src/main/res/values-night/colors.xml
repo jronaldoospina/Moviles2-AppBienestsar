@@ -18,4 +18,64 @@
     <color name="surface_container_highest">#2D323A</color>
     <color name="surface_outline">#3E444D</color>
     <color name="surface_outline_variant">#2B3037</color>
+
+    <!-- SKELETON LOADING: en oscuro los bloques van mas oscuros que la tarjeta -->
+    <color name="skeleton_color">#262A2F</color>
+    <color name="skeleton_shimmer">#333940</color>
+    <color name="skeleton_surface">#1F2328</color>
+
+    <!-- CONTRASTE ACCESIBLE EN MODO OSCURO -->
+    <color name="green_primary">#34D399</color>   <!-- Esmeralda claro (acento) -->
+    <color name="green_primary_dark">#047857</color> <!-- Esmeralda oscuro (fondo de boton) -->
+    <color name="on_primary_container">#052E1B</color>
+    <color name="green_container">#065F46</color>
+    <color name="green_light">#0A7A5C</color>
+    <color name="error_text">#FCA5A5</color>
+    <color name="risk_high_text">#FCA5A5</color>
+    <color name="white">#FFFAFB</color>
+    <color name="card_stroke">#262A2F</color>
+
+    <!-- Texto sobre superficies verdes (botones/headers): siempre claro -->
+    <color name="on_green">#FFFFFF</color>
+
+    <!-- Riesgo en oscuro: fondos oscuros, texto claro -->
+    <color name="risk_critical_text">#FF6B6B</color>
+    <color name="risk_critical_bg">#B91C1C</color>
+    <color name="risk_high_bg_night">#7F1D1D</color>
+    <color name="risk_medium_bg_night">#78350F</color>
+    <color name="risk_low_bg_night">#14532D</color>
+    <color name="info_bg_night">#0C4A6E</color>
+    <color name="success_bg_night">#065F46</color>
+    <color name="warning_bg_night">#78350F</color>
+    <color name="error_bg_night">#7F1D1D</color>
+
+    <color name="status_pending_bg_night">#78350F</color>
+    <color name="status_confirmed_bg_night">#14532D</color>
+    <color name="status_cancelled_bg_night">#7F1D1D</color>
+    <color name="status_completed_bg_night">#0C4A6E</color>
+    <color name="status_pending_text_night">#FDE68A</color>
+    <color name="status_confirmed_text_night">#A7F3D0</color>
+    <color name="status_cancelled_text_night">#FECACA</color>
+    <color name="status_completed_text_night">#BAE6FD</color>
+
+    <!-- Acentos claros invertidos para modo oscuro -->
+    <color name="icon_secondary">#E5E7EB</color>
+    <color name="icon_dark">#FFFAFB</color>
+    <color name="chart_color_5">#E5E7EB</color>
+    <color name="purple_light">#4C1D95</color>
+    <color name="teal_light">#115E59</color>
+    <color name="orange_light">#7C2D12</color>
+    <color name="red_light">#7F1D1D</color>
+    <color name="blue_light">#0C4A6E</color>
+    <color name="info_light">#0C4A6E</color>
+    <color name="warning_light">#78350F</color>
+    <color name="error_light">#7F1D1D</color>
+    <color name="success_light">#065F46</color>
+
+    <color name="role_admin_bg">#6D28D9</color>
+    <color name="role_psicologo_bg">#1D4ED8</color>
+    <color name="role_docente_bg">#D97706</color>
+    <color name="role_estudiante_bg">#059669</color>
+    <color name="status_active_bg">#16A34A</color>
+    <color name="status_inactive_bg">#4B5563</color>
 </resources>
