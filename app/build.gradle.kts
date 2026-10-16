@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -7,6 +9,32 @@ plugins {
 android {
     namespace = "com.example.myapplication"
     compileSdk = 35
+
+    // ============ FIRMA DEL RELEASE ============
+    // Las credenciales NO viven en este archivo (nunca se suben a git).
+    // Se leen de keystore.properties (storeFile/storePassword/keyAlias/keyPassword)
+    // o de las variables de entorno BIENESTAR_*.
+    val propsFirma = Properties().apply {
+        val archivo = project.rootProject.file("keystore.properties")
+        if (archivo.exists()) {
+            archivo.inputStream().use { stream -> load(stream) }
+        }
+    }
+
+    fun credencial(prop: String, env: String): String? {
+        val deEntorno = System.getenv(env)
+        if (!deEntorno.isNullOrBlank()) return deEntorno
+        val deArchivo = propsFirma.getProperty(prop)
+        return if (deArchivo.isNullOrBlank()) null else deArchivo
+    }
+
+    val storeFilePath = credencial("storeFile", "BIENESTAR_STORE_FILE")
+    val passStore = credencial("storePassword", "BIENESTAR_STORE_PASSWORD")
+    val alias = credencial("keyAlias", "BIENESTAR_KEY_ALIAS")
+    val passKey = credencial("keyPassword", "BIENESTAR_KEY_PASSWORD")
+
+    val tieneFirma = storeFilePath != null && passStore != null
+        && alias != null && passKey != null
 
     defaultConfig {
         applicationId = "com.example.myapplication"
@@ -18,6 +46,17 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        if (tieneFirma) {
+            create("release") {
+                storeFile = rootProject.file(storeFilePath!!)
+                storePassword = passStore
+                keyAlias = alias
+                keyPassword = passKey
+            }
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -25,6 +64,15 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            if (tieneFirma) {
+                signingConfig = signingConfigs.getByName("release")
+                logger.lifecycle("Release: se firmara con el alias '$alias'")
+            } else {
+                logger.warn(
+                    "Release SIN FIRMA: falta keystore.properties (storeFile, " +
+                        "storePassword, keyAlias, keyPassword) o las variables BIENESTAR_*"
+                )
+            }
         }
     }
 
@@ -86,8 +134,22 @@ dependencies {
     // ============ PDF (Semáforo del Estudiante) ============
     implementation("com.tom-roush:pdfbox-android:2.0.27.0")
 
+    // ============ MAPA (OpenStreetMap / osmdroid - Ruta bus UPC Aguachica) ============
+    implementation("org.osmdroid:osmdroid-android:6.1.20")
+    implementation("com.google.android.gms:play-services-location:21.0.1")
+
+    // ============ ROOM (Persistencia Local) ============
+    val roomVersion = "2.6.1"
+    implementation("androidx.room:room-runtime:$roomVersion")
+    annotationProcessor("androidx.room:room-compiler:$roomVersion")
+
     // ============ TESTS ============
     testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation("androidx.test.ext:junit:1.3.0")
+    androidTestImplementation("androidx.test:core-ktx:1.7.0")
+    androidTestImplementation("androidx.test:runner:1.7.0")
+    androidTestImplementation("androidx.test:rules:1.7.0")
+    // 3.7.0+ usa getSystemService en vez de InputManager.getInstance por
+    // reflexion, que fue removido en Android 16/17 (API 36/37).
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.7.0")
 }
