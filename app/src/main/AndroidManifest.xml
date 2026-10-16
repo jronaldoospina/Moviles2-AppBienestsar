@@ -5,8 +5,15 @@
     <!-- Permisos -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- Ubicacion: la ruta indica la parada mas cercana y cuanto se camina -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+
+    <uses-feature
+        android:name="android.hardware.location"
+        android:required="false" />
 
     <application
         android:allowBackup="true"
@@ -30,6 +37,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Onboarding: solo en el primer arranque, el splash lo lanza -->
+        <activity
+            android:name=".OnboardingActivity"
+            android:exported="false" />
 
         <!-- Login Activity -->
         <activity

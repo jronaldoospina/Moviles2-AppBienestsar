@@ -63,13 +63,18 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     /**
-     * Decide la siguiente pantalla basándose en la sesión del usuario
+     * Decide la siguiente pantalla basándose en el onboarding y la sesión.
+     *
+     * Primer arranque  -> Onboarding (que al terminar lleva a Login o Main)
+     * Ya completado    -> Main si hay sesión, Login si no
      */
     private void decideNextScreen() {
-        SessionManager sessionManager = new SessionManager(this);
+        boolean primerArranque = OnboardingActivity.isPrimerArranque(this);
 
         Intent intent;
-        if (sessionManager.isLoggedIn()) {
+        if (primerArranque) {
+            intent = new Intent(SplashActivity.this, OnboardingActivity.class);
+        } else if (new SessionManager(this).isLoggedIn()) {
             // Usuario ya logueado → ir directo al Main
             intent = new Intent(SplashActivity.this, MainActivity.class);
         } else {
