@@ -17,6 +17,11 @@
         android:title="Citas" />
 
     <item
+        android:id="@+id/nav_est_ruta"
+        android:icon="@drawable/ic_bus"
+        android:title="Ruta" />
+
+    <item
         android:id="@+id/nav_est_profile"
         android:icon="@drawable/ic_person"
         android:title="Perfil" />

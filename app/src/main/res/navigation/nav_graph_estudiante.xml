@@ -38,4 +38,9 @@
         android:id="@+id/nav_est_courses"
         android:name="com.example.myapplication.fragments.MisCursosEstudianteFragment"
         android:label="Mis Cursos" />
+
+    <fragment
+        android:id="@+id/nav_est_ruta"
+        android:name="com.example.myapplication.fragments.RutaBusFragment"
+        android:label="Ruta Bus" />
 </navigation>
