@@ -24,11 +24,13 @@ import com.example.myapplication.adapters.RutaParadaAdapter;
 import com.example.myapplication.data.RutaUpcData;
 import com.example.myapplication.models.RutaParada;
 import com.example.myapplication.repositories.RutaBusRepository;
+import com.example.myapplication.utils.GeoUtils;
 import com.example.myapplication.utils.OsrmCaminata;
 import com.example.myapplication.utils.OsrmRouter;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.Priority;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import org.osmdroid.config.Configuration;
@@ -59,8 +61,12 @@ public class RutaBusFragment extends Fragment {
 
     private MapView map;
     private TextView txtCercana;
+    private TextView txtResumenCompacto;
+    private View cardCercana;
     private RutaParadaAdapter adapter;
     private List<RutaParada> paradas = new ArrayList<>();
+    /** Marcadores de parada en el mismo orden que la lista, para poder ajustarlos. */
+    private final List<Marker> marcadoresParada = new ArrayList<>();
 
     private FusedLocationProviderClient fused;
     private Double myLat = null;
@@ -74,6 +80,10 @@ public class RutaBusFragment extends Fragment {
     private Polyline polylineRuta = null;
     private Polyline polylineCaminata = null;
 
+    /** Horarios en pantalla; se leen de Firestore y se muestran en el menu. */
+    private String horarioRecogida = "Recogida: 05:00 A.M. / 01:00 P.M.";
+    private String horarioSalida = "Salida UPC: 12:00 M. / 06:00 P.M.";
+
     private final ActivityResultLauncher<String[]> permLauncher =
             registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(),
                     result -> {
@@ -83,7 +93,7 @@ public class RutaBusFragment extends Fragment {
                             localizar();
                         } else {
                             if (txtCercana != null) {
-                                txtCercana.setText(
+                                setMensajeCercano(
                                         "Sin permiso de ubicacion: no podemos indicarte "
                                                 + "cuál parada te queda más cerca.\n"
                                                 + "Puedes ver la ruta completa igual.");
@@ -113,6 +123,8 @@ public class RutaBusFragment extends Fragment {
 
         map = view.findViewById(R.id.map_ruta);
         txtCercana = view.findViewById(R.id.txt_parada_cercana);
+        txtResumenCompacto = view.findViewById(R.id.txt_resumen_compacto);
+        cardCercana = view.findViewById(R.id.card_cercana);
         RecyclerView recycler = view.findViewById(R.id.recycler_paradas);
 
         // OSM Humanitario (HOT - tile.openstreetmap.fr): datos OSM, sin API key
@@ -152,6 +164,10 @@ public class RutaBusFragment extends Fragment {
         mostrarUltimaParada();
         cargarRutaFirestore(view);
         preguntarPermisoSiHaceFalta();
+
+        // Menu hamburguesa: el detalle de la ruta vive en una hoja inferior
+        // para no tapar el mapa
+        view.findViewById(R.id.btn_menu_ruta).setOnClickListener(v -> abrirInfoRuta());
 
         fused = LocationServices.getFusedLocationProviderClient(requireContext());
 
@@ -200,10 +216,10 @@ public class RutaBusFragment extends Fragment {
                 if (latN <= latS || lonE <= lonW) return;
                 map.zoomToBoundingBox(
                         new org.osmdroid.util.BoundingBox(latN, lonE, latS, lonW), true);
-                double km = distanciaRutaKm(puntos);
-                txtCercana.setText(String.format(new Locale("es", "CO"),
-                        "Ruta sobre la calle: %.1f km · %d paradas", km, paradas.size()));
+                // El detalle va al resumen compacto de la barra, no a una
+                // tarjeta sobre el mapa.
                 mostrarDistanciaRuta = true;
+                actualizarResumen();
             } catch (Exception ex) {
                 Toast.makeText(requireContext(),
                         "No se pudo mostrar la ruta completa",
@@ -219,13 +235,11 @@ public class RutaBusFragment extends Fragment {
                     try {
                         String hRec = doc.getString("horarioRecogida");
                         String hSal = doc.getString("horarioSalida");
-                        if (hRec != null) {
-                            TextView t = view.findViewById(R.id.txt_horario_recogida);
-                            if (t != null) t.setText(hRec);
+                        if (hRec != null && hRec.trim().length() > 0) {
+                            horarioRecogida = hRec.trim();
                         }
-                        if (hSal != null) {
-                            TextView t = view.findViewById(R.id.txt_horario_salida);
-                            if (t != null) t.setText(hSal);
+                        if (hSal != null && hSal.trim().length() > 0) {
+                            horarioSalida = hSal.trim();
                         }
                         Object arr = doc.get("paradas");
                         if (arr instanceof java.util.List) {
@@ -258,6 +272,43 @@ public class RutaBusFragment extends Fragment {
                 });
     }
 
+    /**
+     * Abre el detalle de la ruta en una hoja inferior: horarios, resumen del
+     * recorrido y listado de paradas. Se mantiene fuera del mapa para que la
+     * vista del recorrido no pierda espacio.
+     */
+    private void abrirInfoRuta() {
+        if (!isAdded()) return;
+        View sheet = LayoutInflater.from(requireContext())
+                .inflate(R.layout.sheet_ruta_info, null);
+
+        TextView rec = sheet.findViewById(R.id.txt_horario_recogida_menu);
+        TextView sal = sheet.findViewById(R.id.txt_horario_salida_menu);
+        TextView lista = sheet.findViewById(R.id.txt_paradas_ruta_menu);
+        TextView resumen = sheet.findViewById(R.id.txt_resumen_ruta);
+        TextView fuente = sheet.findViewById(R.id.txt_fuente_menu);
+
+        rec.setText(horarioRecogida);
+        sal.setText(horarioSalida);
+        resumen.setText(resumenRuta());
+        fuente.setText(rutaReal != null ? "OSM + OSRM" : "OSM");
+
+        StringBuilder sb = new StringBuilder();
+        for (RutaParada p : paradas) {
+            if (sb.length() > 0) sb.append('\n');
+            sb.append(p.getOrden()).append(". ").append(p.getNombre());
+            if (p.getReferencia() != null && !p.getReferencia().isEmpty()) {
+                sb.append(" · ").append(p.getReferencia());
+            }
+        }
+        sb.append('\n').append("10. Sede UPC Aguachica");
+        lista.setText(sb.toString());
+
+        BottomSheetDialog dialog = new BottomSheetDialog(requireContext());
+        dialog.setContentView(sheet);
+        dialog.show();
+    }
+
     private void guardarUltimaParada(RutaParada p) {
         if (getContext() == null) return;
         getContext().getSharedPreferences("ruta_bus", android.content.Context.MODE_PRIVATE)
@@ -272,7 +323,8 @@ public class RutaBusFragment extends Fragment {
                 android.content.Context.MODE_PRIVATE).getString("ultima_nombre", null);
         if (ultima != null && txtCercana != null
                 && txtCercana.getText().toString().contains("Pulsa")) {
-            txtCercana.setText("Tu última parada: " + ultima + ". Pulsa el botón de ubicación para actualizar.");
+            setMensajeCercano("Tu última parada: " + ultima
+                    + ". Pulsa el botón de ubicación para actualizar.");
         }
     }
 
@@ -314,6 +366,9 @@ public class RutaBusFragment extends Fragment {
     private void dibujarRuta() {
         if (map == null) return;
         map.getOverlays().clear();
+        polylineBorde = null;
+        polylineRuta = null;
+        polylineCaminata = null;
 
         List<GeoPoint> paradasCoords = new ArrayList<>();
         for (RutaParada p : paradas) {
@@ -321,29 +376,64 @@ public class RutaBusFragment extends Fragment {
         }
         paradasCoords.add(new GeoPoint(RutaUpcData.UPC_LAT, RutaUpcData.UPC_LNG));
 
-        dibujarMarcadores();
+        dibujarMarcadores(paradasCoords);
 
         // Pedir la geometria real de la calle a OSRM (OpenStreetMap)
-        OsrmRouter.calcularRuta(paradasCoords, puntos -> {
-            if (!isAdded() || map == null) return;
-            if (puntos == null || puntos.isEmpty()) {
-                // Sin internet o servicio caido: fallback en linea recta
+        OsrmRouter.calcularRuta(paradasCoords, resultado -> {
+            if (!isAdded() || map == null || getView() == null) return;
+
+            if (resultado == null || resultado.geometria == null
+                    || resultado.geometria.isEmpty()) {
+                // Sin internet o servicio caido: fallback en linea recta.
+                // Los marcadores se apoyan en esa misma linea.
+                rutaReal = paradasCoords;
+                ajustarMarcadores(GeoUtils.ajustarParadas(paradasCoords, paradasCoords));
                 pintarPolyline(paradasCoords);
+                actualizarResumen();
                 map.invalidate();
                 return;
             }
-            rutaReal = puntos;
-            // Reemplaza cualquier linea previa: solo queda la ruta real
-            pintarPolyline(puntos);
+
+            rutaReal = resultado.geometria;
+            // OSRM ya devuelve cada parada fijada sobre la calzada, asi que el
+            // marcador cae exactamente en la linea dibujada.
+            List<GeoPoint> ajustadas = resultado.paradasAjustadas != null
+                    && resultado.paradasAjustadas.size() == paradasCoords.size()
+                    ? resultado.paradasAjustadas
+                    : GeoUtils.ajustarParadas(paradasCoords, resultado.geometria);
+
+            ajustarMarcadores(ajustadas);
+            pintarPolyline(resultado.geometria);
+            actualizarResumen();
             map.invalidate();
-            if (mostrarDistanciaRuta) {
-                double km = distanciaRutaKm(puntos);
-                if (km > 0 && txtCercana != null) {
-                    txtCercana.setText(String.format(new Locale("es", "CO"),
-                            "Ruta sobre la calle: %.1f km · %d paradas", km, paradas.size()));
-                }
-            }
         });
+    }
+
+    /** Reubica los marcadores sobre los puntos ya ajustados a la calzada. */
+    private void ajustarMarcadores(List<GeoPoint> ajustadas) {
+        if (ajustadas == null) return;
+        int n = Math.min(marcadoresParada.size(), ajustadas.size());
+        for (int i = 0; i < n; i++) {
+            marcadoresParada.get(i).setPosition(ajustadas.get(i));
+        }
+    }
+
+    private void actualizarResumen() {
+        if (txtResumenCompacto == null) return;
+        txtResumenCompacto.setText(resumenRuta());
+    }
+
+    /** Linea de resumen compartida por la barra compacta y la hoja de detalle. */
+    private String resumenRuta() {
+        String km = rutaReal != null && rutaReal.size() > 1
+                ? String.format(new Locale("es", "CO"), "%.1f km",
+                        distanciaRutaKm(rutaReal))
+                : null;
+        if (km == null) {
+            return paradas.size() + " paradas · OpenStreetMap";
+        }
+        return paradas.size() + " paradas · " + km
+                + (mostrarDistanciaRuta ? " sobre la calle" : "");
     }
 
     /** Dibuja la polyline con borde blanco, reemplazando la anterior si existe */
@@ -386,36 +476,42 @@ public class RutaBusFragment extends Fragment {
         return metros / 1000.0;
     }
 
-    private void dibujarMarcadores() {
+    private void dibujarMarcadores(List<GeoPoint> coords) {
+        marcadoresParada.clear();
 
-        // Markers de paradas
-        for (RutaParada p : paradas) {
+        // Markers de paradas, en el mismo orden que la lista de coordenadas
+        for (int i = 0; i < paradas.size() && i < coords.size(); i++) {
+            RutaParada p = paradas.get(i);
             Marker m = new Marker(map);
-            m.setPosition(new GeoPoint(p.getLat(), p.getLng()));
+            m.setPosition(coords.get(i));
             m.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
             m.setTitle(p.getOrden() + ". " + p.getNombre());
             m.setSnippet(p.getReferencia());
+            final Marker marcador = m;
             m.setOnMarkerClickListener((marker, mapView) -> {
                 guardarUltimaParada(p);
+                mapView.getController().setZoom(18.5);
+                mapView.getController().animateTo(marcador.getPosition());
+                return true;
+            });
+            map.getOverlays().add(m);
+            marcadoresParada.add(m);
+        }
+
+        // Marker UPC (destino), en la ultima coordenada
+        if (coords.size() > paradas.size()) {
+            Marker upc = new Marker(map);
+            upc.setPosition(coords.get(coords.size() - 1));
+            upc.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+            upc.setTitle("UPC Seccional Aguachica");
+            upc.setSnippet("Cra 40 Vía al mar - Destino");
+            upc.setOnMarkerClickListener((marker, mapView) -> {
                 mapView.getController().setZoom(18.5);
                 mapView.getController().animateTo(marker.getPosition());
                 return true;
             });
-            map.getOverlays().add(m);
+            map.getOverlays().add(upc);
         }
-
-        // Marker UPC (destino)
-        Marker upc = new Marker(map);
-        upc.setPosition(new GeoPoint(RutaUpcData.UPC_LAT, RutaUpcData.UPC_LNG));
-        upc.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
-        upc.setTitle("UPC Seccional Aguachica");
-        upc.setSnippet("Cra 40 Vía al mar - Destino");
-        upc.setOnMarkerClickListener((marker, mapView) -> {
-            mapView.getController().setZoom(18.5);
-            mapView.getController().animateTo(marker.getPosition());
-            return true;
-        });
-        map.getOverlays().add(upc);
 
         map.invalidate();
     }
@@ -610,10 +706,9 @@ private void pedirPermisoYLocalizar() {
         Location.distanceBetween(lat, lng, RutaUpcData.UPC_LAT, RutaUpcData.UPC_LNG, out);
         sb.append("\nSede UPC a ").append(formatearDistancia(out[0])).append(" de ti.");
 
-        txtCercana.setText(sb.toString());
+        setMensajeCercano(sb.toString());
         guardarUltimaParada(mejor);
     }
-
     /** Dibuja como caminar por la calle hasta el paradero, en azul punteado */
     private void dibujarRutaCaminata(List<GeoPoint> puntos, RutaParada parada) {
         if (map == null || parada == null) return;
@@ -636,6 +731,17 @@ private void pedirPermisoYLocalizar() {
             polylineCaminata = caminata;
         }
         map.invalidate();
+    }
+
+    /**
+     * Muestra un mensaje en la tarjeta de parada cercana. Se centraliza aqui
+     * porque la tarjeta arranca oculta y solo debe aparecer cuando hay algo
+     * que decir, para no tapar el mapa sin motivo.
+     */
+    private void setMensajeCercano(CharSequence texto) {
+        if (txtCercana == null) return;
+        txtCercana.setText(texto);
+        if (cardCercana != null) cardCercana.setVisibility(View.VISIBLE);
     }
 
     private String formatearDistancia(double metros) {

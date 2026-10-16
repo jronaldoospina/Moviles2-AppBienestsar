@@ -11,135 +11,113 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <!-- ==================== HEADER SUPERIOR (overlay) ==================== -->
+    <!-- ==================== BARRA SUPERIOR COMPACTA (overlay) ====================
+         El detalle de la ruta (horarios, paradas, resumen) vive en una hoja
+         inferior que abre el boton de menu. Asi el mapa conserva la pantalla
+         casi completa y la vista del recorrido sigue siendo lo principal. -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_margin="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
         app:cardBackgroundColor="@color/white_card"
-        app:cardCornerRadius="18dp"
-        app:cardElevation="8dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="6dp"
         app:strokeColor="@color/divider_color"
         app:strokeWidth="1dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="14dp">
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="4dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="4dp">
 
-            <!-- Fila titulo + chip de estado -->
+            <!-- Menu hamburguesa: abre el detalle de la ruta -->
+            <ImageButton
+                android:id="@+id/btn_menu_ruta"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Ver informacion de la ruta"
+                android:src="@android:drawable/ic_menu_sort_by_size"
+                app:tint="@color/text_primary" />
+
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <View
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:background="@drawable/badge_circle_green" />
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp">
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_weight="1"
-                    android:text="Ruta Bus UPC"
-                    android:textColor="@color/text_primary"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/txt_badge_fuente"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/badge_info"
-                    android:paddingHorizontal="10dp"
-                    android:paddingVertical="4dp"
-                    android:text="OpenStreetMap"
-                    android:textColor="@color/info_text"
-                    android:textSize="10sp"
+                    android:text="Ruta Bus UPC"
+                    android:textColor="@color/text_primary"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
+
+                <!-- Resumen en una sola linea; el resto va en la hoja -->
+                <TextView
+                    android:id="@+id/txt_resumen_compacto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="9 paradas · OpenStreetMap"
+                    android:textColor="@color/text_hint"
+                    android:textSize="11sp" />
             </LinearLayout>
 
-            <!-- Horarios en dos columnas -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="RECOGIDA"
-                        android:textColor="@color/text_hint"
-                        android:textSize="9sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/txt_horario_recogida"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="05:00 AM / 01:00 PM"
-                        android:textColor="@color/text_primary"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/divider_color" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="SALIDA UPC"
-                        android:textColor="@color/text_hint"
-                        android:textSize="9sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/txt_horario_salida"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="12:00 M / 06:00 P"
-                        android:textColor="@color/text_primary"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <!-- Resultado: parada mas cercana -->
             <TextView
-                android:id="@+id/txt_parada_cercana"
-                android:layout_width="match_parent"
+                android:id="@+id/txt_badge_fuente"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:background="@color/gray_light"
-                android:lineSpacingExtra="2dp"
-                android:padding="12dp"
-                android:text="Pulsa el botón de ubicación del mapa para ver si la ruta te sirve."
-                android:textColor="@color/text_primary"
-                android:textSize="12sp" />
+                android:background="@drawable/badge_info"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
+                android:text="OSM"
+                android:textColor="@color/info_text"
+                android:textSize="10sp"
+                android:textStyle="bold" />
         </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- ==================== AVISO DE PARADA CERCANA (overlay compacto) ============ -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_cercana"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/card_header"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="12dp"
+        android:visibility="gone"
+        app:cardBackgroundColor="@color/white_card"
+        app:cardCornerRadius="14dp"
+        app:cardElevation="4dp"
+        app:strokeColor="@color/divider_color"
+        app:strokeWidth="1dp">
+
+        <TextView
+            android:id="@+id/txt_parada_cercana"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="2dp"
+            android:padding="12dp"
+            android:text="Pulsa el botón de ubicación para ver si la ruta te sirve."
+            android:textColor="@color/text_primary"
+            android:textSize="12sp" />
     </com.google.android.material.card.MaterialCardView>
 
     <!-- ==================== FAB UBICACION (sobre el mapa) ==================== -->
@@ -177,7 +155,8 @@
                 android:layout_height="4dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/badge_circle_white" />
+                android:background="@drawable/badge_circle_white"
+                android:backgroundTint="@color/divider_color" />
 
             <!-- Barra de acciones: "Ver ruta" es la accion principal (boton
                      solido, mas ancho); UPC y Compartir son secundarias.

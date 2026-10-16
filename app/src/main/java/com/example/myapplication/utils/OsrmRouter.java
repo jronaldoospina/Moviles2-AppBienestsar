@@ -28,27 +28,43 @@ public final class OsrmRouter {
     private static final String BASE =
             "https://router.project-osrm.org/route/v1/driving/";
 
-    /** Callback con la geometria de la ruta (lista de puntos sobre la calle). */
+    /** Callback con la geometria de la ruta y las paradas ya ajustadas. */
     public interface Callback {
-        void onRuta(List<GeoPoint> puntos);
+        void onRuta(Resultado resultado);
     }
 
     private OsrmRouter() {}
 
     public static void calcularRuta(List<GeoPoint> paradas, Callback cb) {
         new Thread(() -> {
-            List<GeoPoint> resultado = null;
+            Resultado resultado = null;
             try {
                 resultado = consultar(paradas);
             } catch (Exception ignored) {
                 resultado = null;
             }
-            final List<GeoPoint> puntos = resultado;
-            new Handler(Looper.getMainLooper()).post(() -> cb.onRuta(puntos));
+            final Resultado r = resultado;
+            new Handler(Looper.getMainLooper()).post(() -> cb.onRuta(r));
         }).start();
     }
 
-    private static List<GeoPoint> consultar(List<GeoPoint> paradas)
+    /**
+     * Polilinea completa sobre la calle y, en la misma cantidad, la parada ya
+     * ajustada al punto de calzada que uso el motor. Sin este ajuste los
+     * marcadores quedan desplazados de la linea, porque la coordenada original
+     * suele caer en el centro de la manzana y no sobre el asfalto.
+     */
+    public static final class Resultado {
+        public final List<GeoPoint> geometria;
+        public final List<GeoPoint> paradasAjustadas;
+
+        Resultado(List<GeoPoint> geometria, List<GeoPoint> paradasAjustadas) {
+            this.geometria = geometria;
+            this.paradasAjustadas = paradasAjustadas;
+        }
+    }
+
+    private static Resultado consultar(List<GeoPoint> paradas)
             throws Exception {
         if (paradas == null || paradas.size() < 2) return null;
 
@@ -60,8 +76,7 @@ public final class OsrmRouter {
             coords.append(p.getLongitude()).append(",").append(p.getLatitude());
         }
 
-        String url = BASE + coords
-                + "?overview=full&geometries=geojson";
+        String url = BASE + coords + "?overview=full&geometries=geojson";
 
         HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
         conn.setConnectTimeout(8000);
@@ -99,6 +114,25 @@ public final class OsrmRouter {
             double lat = c.getDouble(1);
             puntos.add(new GeoPoint(lat, lng));
         }
-        return puntos;
+
+        // waypoints[i].location es donde el motor fijo la parada i, ya sobre la
+        // calzada. Es lo que evita que el marcador flote lejos de la linea.
+        List<GeoPoint> ajustadas = new ArrayList<>();
+        JSONArray waypoints = root.optJSONArray("waypoints");
+        if (waypoints != null && waypoints.length() == paradas.size()) {
+            for (int i = 0; i < waypoints.length(); i++) {
+                JSONObject w = waypoints.optJSONObject(i);
+                JSONArray loc = w == null ? null : w.optJSONArray("location");
+                if (loc != null && loc.length() >= 2) {
+                    ajustadas.add(new GeoPoint(loc.getDouble(1), loc.getDouble(0)));
+                } else {
+                    ajustadas.add(paradas.get(i));
+                }
+            }
+        } else {
+            ajustadas.addAll(paradas);
+        }
+
+        return new Resultado(puntos, ajustadas);
     }
 }

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Contenido del menu hamburguesa de la Ruta. Se muestra en un BottomSheet
+     para no tapar el mapa: el encabezado queda como barra compacta y el
+     detalle vive aqui. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white_card"
+    android:orientation="vertical"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
+    android:paddingBottom="24dp">
+
+    <!-- Horarios -->
+    <TextView
+        style="@style/TituloSeccion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Horarios" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/EtiquetaSeccion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RECOGIDA" />
+
+            <TextView
+                android:id="@+id/txt_horario_recogida_menu"
+                style="@style/ValorSeccion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="05:00 A.M. / 01:00 P.M." />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/EtiquetaSeccion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SALIDA UPC" />
+
+            <TextView
+                android:id="@+id/txt_horario_salida_menu"
+                style="@style/ValorSeccion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="12:00 M. / 06:00 P.M." />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginBottom="18dp"
+        android:background="@color/divider_color" />
+
+    <!-- Resumen del recorrido -->
+    <TextView
+        style="@style/TituloSeccion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recorrido" />
+
+    <TextView
+        android:id="@+id/txt_resumen_ruta"
+        style="@style/ValorSeccion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="9 paradas hasta la sede UPC" />
+
+    <!-- Paradas -->
+    <TextView
+        style="@style/TituloSeccion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:text="Paradas" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="8dp">
+
+        <TextView
+            android:id="@+id/txt_paradas_ruta_menu"
+            style="@style/ValorSeccion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="4dp"
+            android:text="Cargando paradas..." />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginBottom="18dp"
+        android:background="@color/divider_color" />
+
+    <!-- Origen de los datos -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray_light"
+        android:orientation="horizontal"
+        android:padding="12dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Mapa y ruta sobre OpenStreetMap. Sin API key ni costo."
+            android:textColor="@color/text_hint"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/txt_fuente_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="OSM"
+            android:textColor="@color/info_text"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+</LinearLayout>
