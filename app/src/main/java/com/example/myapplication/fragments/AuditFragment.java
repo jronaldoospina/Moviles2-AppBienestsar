@@ -18,7 +18,6 @@ import com.example.myapplication.adapters.AuditAdapter;
 import com.example.myapplication.models.AuditoriaLog;
 import com.example.myapplication.repositories.AuditRepository;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -29,11 +28,11 @@ public class AuditFragment extends Fragment {
     private final List<AuditoriaLog> logs = new ArrayList<>();
     private AuditAdapter adapter;
     private AuditRepository repo;
-    private ListenerRegistration registration;
 
     private RecyclerView recycler;
     private TextView txtEmpty;
     private ProgressBar progress;
+    private boolean stopped = false;
 
     @Nullable
     @Override
@@ -60,23 +59,27 @@ public class AuditFragment extends Fragment {
     public void onStart() {
         super.onStart();
         progress.setVisibility(View.VISIBLE);
-        registration = repo.escucharLogs(this::onLogsActualizados);
+        repo.getLogs()
+                .addOnSuccessListener(snap -> onLogsActualizados(snap, null))
+                .addOnFailureListener(e -> onLogsActualizados(null, e.getMessage()));
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        if (registration != null) {
-            registration.remove();
-            registration = null;
-        }
+        // Fetch unico: no hay listener que remover, pero el callback puede
+        // llegar despues de onStop, asi que se marca para ignorarlo.
+        stopped = true;
     }
 
     private void onLogsActualizados(@Nullable QuerySnapshot snapshots,
-                                    @Nullable com.google.firebase.firestore.FirebaseFirestoreException e) {
+                                    @Nullable String errorMsg) {
+        // La vista puede estar destruida si el usuario salio antes de la respuesta
+        if (stopped || !isAdded() || progress == null || txtEmpty == null) return;
+
         progress.setVisibility(View.GONE);
-        if (e != null) {
-            txtEmpty.setText("No se pudieron cargar los registros.\n" + e.getMessage());
+        if (errorMsg != null) {
+            txtEmpty.setText("No se pudieron cargar los registros.\n" + errorMsg);
             txtEmpty.setVisibility(View.VISIBLE);
             return;
         }

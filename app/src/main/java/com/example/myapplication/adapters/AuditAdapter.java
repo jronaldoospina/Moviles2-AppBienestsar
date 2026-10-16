@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
@@ -20,10 +21,61 @@ public class AuditAdapter extends RecyclerView.Adapter<AuditAdapter.ViewHolder> 
 
     private final List<AuditoriaLog> logs = new ArrayList<>();
 
+    /**
+     * Reemplaza los datos recalculando solo las filas que cambian, en vez de
+     * invalidar toda la lista. Importa cuando la pantalla se recarga con
+     * metricas nuevas (por ejemplo tras exportar el reporte).
+     */
     public void setData(List<AuditoriaLog> nuevos) {
+        List<AuditoriaLog> copia = nuevos != null
+                ? new ArrayList<>(nuevos)
+                : new ArrayList<>();
+        DiffUtil.DiffResult diff = DiffUtil.calculateDiff(new DiffCallback(logs, copia));
         logs.clear();
-        if (nuevos != null) logs.addAll(nuevos);
-        notifyDataSetChanged();
+        logs.addAll(copia);
+        diff.dispatchUpdatesTo(this);
+    }
+
+    private static boolean igual(Object a, Object b) {
+        return a == null ? b == null : a.equals(b);
+    }
+
+    /** Compara por identidad de documento y luego por contenido. */
+    private static final class DiffCallback extends DiffUtil.Callback {
+        private final List<AuditoriaLog> viejo;
+        private final List<AuditoriaLog> nuevo;
+
+        DiffCallback(List<AuditoriaLog> viejo, List<AuditoriaLog> nuevo) {
+            this.viejo = viejo;
+            this.nuevo = nuevo;
+        }
+
+        @Override
+        public int getOldListSize() {
+            return viejo.size();
+        }
+
+        @Override
+        public int getNewListSize() {
+            return nuevo.size();
+        }
+
+        @Override
+        public boolean areItemsTheSame(int posViejo, int posNuevo) {
+            return igual(viejo.get(posViejo).getId(), nuevo.get(posNuevo).getId());
+        }
+
+        @Override
+        public boolean areContentsTheSame(int posViejo, int posNuevo) {
+            AuditoriaLog a = viejo.get(posViejo);
+            AuditoriaLog b = nuevo.get(posNuevo);
+            return a.getFecha() == b.getFecha()
+                    && igual(a.getTipo(), b.getTipo())
+                    && igual(a.getDetalle(), b.getDetalle())
+                    && igual(a.getUsuarioNombre(), b.getUsuarioNombre())
+                    && igual(a.getUsuarioId(), b.getUsuarioId())
+                    && igual(a.getRol(), b.getRol());
+        }
     }
 
     @NonNull
