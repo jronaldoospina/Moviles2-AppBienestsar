@@ -13,3 +13,27 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# --- Secretos: nunca deben subirse ---
+# Claves de firma del release
+*.jks
+*.keystore
+keystore.properties
+
+# Credenciales de Firebase / Google Cloud
+seed/serviceAccountKey.json
+*serviceAccountKey*.json
+
+# Entorno
+.env
+.env.local
+
+# Dependencias de Node (se reinstalan con npm install)
+/node_modules
+seed/node_modules
+functions/node_modules
+
+# Logs
+firebase-debug.log
+logcat.txt
+*-debug.log
