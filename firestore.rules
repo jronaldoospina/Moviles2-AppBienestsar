@@ -38,11 +38,12 @@ service cloud.firestore {
         || esEstudiante() || resource.data.estudianteId == uid());
       
       // Crear: estudiantes para sus propias notas, admin/docente para cualquier nota
-      allow create: if isSignedIn() && (esEstudiante() && resource.data.estudianteId == uid()
+      allow create: if isSignedIn() && (esEstudiante() && request.resource.data.estudianteId == uid()
         || esAdmin() || esDocente());
       
       // Actualizar: estudiantes sus propias notas, admin/docente cualquier nota
       allow update: if isSignedIn() && (esEstudiante() && resource.data.estudianteId == uid()
+        && request.resource.data.estudianteId == resource.data.estudianteId
         || esAdmin() || esDocente());
       
       // Borrar: solo admin
@@ -59,7 +60,8 @@ service cloud.firestore {
     match /citas/{citaId} {
       allow read: if isSignedIn() && (esAdmin() || esPsicologo()
         || resource.data.estudianteId == uid());
-      allow create: if isSignedIn() && (esEstudiante() || esPsicologo() || esAdmin());
+      allow create: if isSignedIn() && (esEstudiante() && request.resource.data.estudianteId == uid()
+        || esPsicologo() || esAdmin());
       allow update: if isSignedIn() && (esAdmin() || esPsicologo()
         || resource.data.estudianteId == uid());
       allow delete: if isSignedIn() && (esAdmin() || esPsicologo());
@@ -69,7 +71,8 @@ service cloud.firestore {
     match /reportes_emocionales/{reporteId} {
       allow read: if isSignedIn() && (esAdmin() || esPsicologo()
         || resource.data.estudianteId == uid());
-      allow create, update: if isSignedIn() && (esEstudiante() || esPsicologo() || esAdmin());
+      allow create, update: if isSignedIn() && (esEstudiante() && request.resource.data.estudianteId == uid()
+        || esPsicologo() || esAdmin());
       allow delete: if isSignedIn() && (esAdmin() || esPsicologo());
     }
 
@@ -77,18 +80,21 @@ service cloud.firestore {
     match /reportes/{reporteId} {
       allow read: if isSignedIn() && (esAdmin() || esPsicologo()
         || resource.data.estudianteId == uid());
-      allow write: if isSignedIn() && (esAdmin() || esPsicologo());
+      allow write: if isSignedIn() && (esEstudiante() && request.resource.data.estudianteId == uid()
+        || esAdmin() || esPsicologo());
     }
     match /planes/{planId} {
       allow read: if isSignedIn() && (esAdmin() || esPsicologo()
         || resource.data.estudianteId == uid());
-      allow write: if isSignedIn() && (esAdmin() || esPsicologo());
+      allow write: if isSignedIn() && (esEstudiante() && request.resource.data.estudianteId == uid()
+        || esAdmin() || esPsicologo());
     }
 
     // ============ TUTORÍAS ============
     match /tutorias/{tutoriaId} {
       allow read: if isSignedIn();
-      allow create, update: if isSignedIn() && (esAdmin() || esPsicologo() || esDocente());
+      allow create, update: if isSignedIn() && (esAdmin() || esPsicologo()
+        || (esDocente() && request.resource.data.docenteId == uid()));
       allow delete: if isSignedIn() && (esAdmin() || esPsicologo());
     }
 
@@ -97,7 +103,8 @@ service cloud.firestore {
       allow read: if isSignedIn() && (esAdmin() || esPsicologo()
                     || resource.data.docenteId == uid()
                     || resource.data.estudianteId == uid());
-      allow create: if isSignedIn() && (esAdmin() || esPsicologo() || esDocente());
+      allow create: if isSignedIn() && (esAdmin() || esPsicologo()
+        || (esDocente() && request.resource.data.docenteId == uid()));
       allow update, delete: if isSignedIn() && (esAdmin() || esPsicologo());
     }
 
@@ -130,16 +137,28 @@ service cloud.firestore {
     // ============ AUDITORÍA ============
     match /auditoria/{logId} {
       allow read: if isSignedIn() && esAdmin();
-      allow create: if isSignedIn();
+      allow create: if isSignedIn() && request.resource.data.usuarioId == uid();
       allow update, delete: if isSignedIn() && esAdmin();
     }
 
     // ============ NOTIFICACIONES ============
     match /notificaciones/{notificacionId} {
       allow read: if isSignedIn() && resource.data.receptorId == uid();
-      allow create: if isSignedIn();
+      allow create: if isSignedIn() && (esAdmin() || esPsicologo() || esDocente()
+        || (esEstudiante() && request.resource.data.receptorId == uid()));
       allow update: if isSignedIn() && resource.data.receptorId == uid();
       allow delete: if isSignedIn() && (esAdmin() || resource.data.receptorId == uid());
+    }
+
+    // ============ RUTA BUS ============
+    match /rutas/{rutaId} {
+      allow read: if isSignedIn() && (esAdmin() || esPsicologo() || esDocente()
+        || resource.data.estudianteId == uid());
+      allow create: if isSignedIn() && (esEstudiante() && request.resource.data.estudianteId == uid()
+        || esAdmin() || esDocente());
+      allow update: if isSignedIn() && (esAdmin() || esDocente()
+        || (esEstudiante() && request.resource.data.estudianteId == uid()));
+      allow delete: if isSignedIn() && esAdmin();
     }
   }
 }
