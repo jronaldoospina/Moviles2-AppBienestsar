@@ -10,30 +10,24 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.adapters.AlertsAdapter;
 import com.example.myapplication.models.Alerta;
-import com.example.myapplication.repositories.AlertRepository;
 import com.example.myapplication.services.SessionManager;
 import com.example.myapplication.utils.FechaUtils;
+import com.example.myapplication.utils.UiUtils;
+import com.example.myapplication.viewmodels.TeacherAlertsViewModel;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.ListenerRegistration;
-import com.google.firebase.firestore.QuerySnapshot;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MisAlertasDocenteFragment extends Fragment {
 
-    private final List<Alerta> alertas = new ArrayList<>();
     private AlertsAdapter adapter;
-    private AlertRepository repo;
     private SessionManager sessionManager;
-    private ListenerRegistration registration;
+    private TeacherAlertsViewModel viewModel;
 
     private RecyclerView recycler;
     private TextView txtEmpty;
@@ -54,55 +48,43 @@ public class MisAlertasDocenteFragment extends Fragment {
         txtEmpty = view.findViewById(R.id.txt_alerts_empty);
         progress = view.findViewById(R.id.progress_alertas);
 
-        repo = new AlertRepository();
         sessionManager = new SessionManager(requireContext());
+        viewModel = new ViewModelProvider(this).get(TeacherAlertsViewModel.class);
 
         adapter = new AlertsAdapter();
         adapter.setOnAlertaClickListener(this::mostrarDetalle);
         recycler.setLayoutManager(new LinearLayoutManager(requireContext()));
         recycler.setAdapter(adapter);
+
+        observarViewModel();
+    }
+
+    private void observarViewModel() {
+        viewModel.getAlertas().observe(getViewLifecycleOwner(), alertas -> {
+            adapter.setData(alertas);
+            txtEmpty.setText("Aún no has reportado alertas.");
+            txtEmpty.setVisibility(alertas.isEmpty() ? View.VISIBLE : View.GONE);
+        });
+        viewModel.getLoading().observe(getViewLifecycleOwner(), cargando ->
+                progress.setVisibility(
+                        Boolean.TRUE.equals(cargando) ? View.VISIBLE : View.GONE));
+        viewModel.getError().observe(getViewLifecycleOwner(), mensaje -> {
+            if (mensaje == null || !isAdded() || getView() == null) return;
+            UiUtils.showRetry(requireView(), mensaje, viewModel::reintentar);
+            viewModel.clearError();
+        });
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        String uid = sessionManager.getUserId();
-        if (uid == null) return;
-        progress.setVisibility(View.VISIBLE);
-        registration = repo.escucharAlertasDeDocente(uid, this::onAlertasActualizadas);
+        viewModel.empezarEscucha(sessionManager.getUserId());
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        if (registration != null) {
-            registration.remove();
-            registration = null;
-        }
-    }
-
-    private void onAlertasActualizadas(@Nullable QuerySnapshot snapshots,
-                                       @Nullable com.google.firebase.firestore.FirebaseFirestoreException e) {
-        progress.setVisibility(View.GONE);
-        if (e != null) {
-            txtEmpty.setText("No se pudieron cargar las alertas.\n" + e.getMessage());
-            txtEmpty.setVisibility(View.VISIBLE);
-            return;
-        }
-        alertas.clear();
-        if (snapshots != null) {
-            for (DocumentSnapshot doc : snapshots.getDocuments()) {
-                Alerta a = doc.toObject(Alerta.class);
-                if (a != null) {
-                    a.setId(doc.getId());
-                    alertas.add(a);
-                }
-            }
-        }
-        alertas.sort((x, y) -> Long.compare(y.getFecha(), x.getFecha()));
-        adapter.setData(alertas);
-        txtEmpty.setText("Aún no has reportado alertas.");
-        txtEmpty.setVisibility(alertas.isEmpty() ? View.VISIBLE : View.GONE);
+        viewModel.detenerEscucha();
     }
 
     private void mostrarDetalle(Alerta a) {

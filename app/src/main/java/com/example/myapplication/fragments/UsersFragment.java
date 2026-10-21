@@ -13,7 +13,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.RegisterUserActivity;
@@ -23,11 +25,11 @@ import com.example.myapplication.databinding.FragmentUsersBinding;
 import com.example.myapplication.models.Usuario;
 import com.example.myapplication.repositories.AuditRepository;
 import com.example.myapplication.repositories.UserRepository;
+import com.example.myapplication.utils.Debouncer;
+import com.example.myapplication.utils.UiUtils;
 import com.example.myapplication.services.SessionManager;
+import com.example.myapplication.viewmodels.UsersViewModel;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class UsersFragment extends Fragment {
 
@@ -43,9 +45,11 @@ public class UsersFragment extends Fragment {
     private UserRepository userRepository;
     private SessionManager sessionManager;
     private UsersAdapter adapter;
+    private UsersViewModel viewModel;
 
     private String rolActual = null;    // filtro actual (null = todos)
     private String queryActual = "";
+    private boolean primeraResume = true;
 
     @Nullable
     @Override
@@ -62,13 +66,15 @@ public class UsersFragment extends Fragment {
 
         userRepository = new UserRepository();
         sessionManager = new SessionManager(requireContext());
+        viewModel = new ViewModelProvider(this).get(UsersViewModel.class);
+        rolActual = viewModel.getRol();
+        queryActual = viewModel.getQuery();
 
         configurarRecycler();
         configurarBuscador();
         configurarChips();
         configurarFAB();
-
-        cargarUsuarios();
+        observarViewModel();
     }
 
     private void configurarRecycler() {
@@ -83,7 +89,17 @@ public class UsersFragment extends Fragment {
         );
         binding.recyclerUsers.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.recyclerUsers.setAdapter(adapter);
+        binding.recyclerUsers.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                if (!recyclerView.canScrollVertically(1)) {
+                    viewModel.cargarMas();
+                }
+            }
+        });
     }
+
+    private final Debouncer searchDebouncer = new Debouncer(300);
 
     private void configurarBuscador() {
         binding.editSearch.addTextChangedListener(new TextWatcher() {
@@ -92,8 +108,12 @@ public class UsersFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                queryActual = s.toString();
-                aplicarFiltros();
+                String query = s.toString();
+                searchDebouncer.submit(() -> {
+                    queryActual = query;
+                    viewModel.setQuery(query);
+                    aplicarFiltros();
+                });
             }
         });
     }
@@ -110,6 +130,7 @@ public class UsersFragment extends Fragment {
                 else if (id == R.id.chip_estudiante) rolActual = SessionManager.ROLE_ESTUDIANTE;
                 else rolActual = null;
             }
+            viewModel.setRol(rolActual);
             aplicarFiltros();
         });
     }
@@ -128,31 +149,25 @@ public class UsersFragment extends Fragment {
         binding.layoutEmpty.setVisibility(total == 0 ? View.VISIBLE : View.GONE);
     }
 
-    private void cargarUsuarios() {
-        binding.progressUsers.setVisibility(View.VISIBLE);
-
-        userRepository.getAllUsers()
-                .addOnSuccessListener(snapshot -> {
-                    binding.progressUsers.setVisibility(View.GONE);
-
-                    List<Usuario> lista = new ArrayList<>();
-                    snapshot.forEach(doc -> {
-                        Usuario u = doc.toObject(Usuario.class);
-                        if (u != null) {
-                            u.setUid(doc.getId());
-                            lista.add(u);
-                        }
-                    });
-
-                    adapter.setUsuarios(lista);
-                    aplicarFiltros();
-                })
-                .addOnFailureListener(e -> {
-                    binding.progressUsers.setVisibility(View.GONE);
-                    Toast.makeText(requireContext(),
-                            "Error cargando usuarios: " + e.getMessage(),
-                            Toast.LENGTH_LONG).show();
-                });
+    private void observarViewModel() {
+        viewModel.getUsuarios().observe(getViewLifecycleOwner(), lista -> {
+            adapter.setUsuarios(lista);
+            aplicarFiltros();
+            binding.recyclerUsers.post(() -> {
+                if (binding != null && viewModel.isHaySiguiente()
+                        && !binding.recyclerUsers.canScrollVertically(1)) {
+                    viewModel.cargarMas();
+                }
+            });
+        });
+        viewModel.getLoading().observe(getViewLifecycleOwner(), cargando ->
+                binding.progressUsers.setVisibility(
+                        Boolean.TRUE.equals(cargando) ? View.VISIBLE : View.GONE));
+        viewModel.getError().observe(getViewLifecycleOwner(), mensaje -> {
+            if (mensaje == null) return;
+            UiUtils.showRetry(binding.getRoot(), mensaje, viewModel::recargar);
+            viewModel.clearError();
+        });
     }
 
     /**
@@ -228,7 +243,7 @@ public class UsersFragment extends Fragment {
                                         "Cambió el rol de " + (usuario.getNombre() != null ? usuario.getNombre() : "-")
                                                 + " a " + ROLES_LABEL[which],
                                         sessionManager);
-                                cargarUsuarios();
+                                viewModel.recargar();
                             })
                             .addOnFailureListener(e ->
                                     Toast.makeText(requireContext(),
@@ -285,7 +300,7 @@ public class UsersFragment extends Fragment {
                             "Cambió estado de " + (usuario.getNombre() != null ? usuario.getNombre() : "-")
                                     + " (" + (usuario.getRol() != null ? usuario.getRol() : "-") + ")",
                             sessionManager);
-                    cargarUsuarios();
+                    viewModel.recargar();
                 })
                 .addOnFailureListener(e ->
                         Toast.makeText(requireContext(),
@@ -295,12 +310,17 @@ public class UsersFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        // Recargar al volver de RegisterUserActivity
-        cargarUsuarios();
+        if (primeraResume) {
+            primeraResume = false;
+            viewModel.cargar();
+        } else {
+            viewModel.recargar();
+        }
     }
 
     @Override
     public void onDestroyView() {
+        searchDebouncer.cancel();
         super.onDestroyView();
         binding = null;
     }

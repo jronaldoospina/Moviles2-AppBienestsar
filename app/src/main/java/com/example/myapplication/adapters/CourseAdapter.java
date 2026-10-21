@@ -6,10 +6,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.models.Curso;
+import com.example.myapplication.utils.ListDiff;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +40,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     /** Filtra los cursos por nombre, código, programa, periodo o docente. */
     public void aplicarFiltro(String texto) {
         query = (texto != null) ? texto : "";
-        cursosFiltrados.clear();
+        List<Curso> nuevos = new ArrayList<>();
         String q = query.trim().toLowerCase();
         for (Curso c : cursos) {
             boolean ok = q.isEmpty()
@@ -47,9 +49,19 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
                     || contiene(c.getPrograma(), q)
                     || contiene(c.getPeriodo(), q)
                     || contiene(c.getDocenteNombre(), q);
-            if (ok) cursosFiltrados.add(c);
+            if (ok) nuevos.add(c);
         }
-        notifyDataSetChanged();
+        DiffUtil.DiffResult diff = ListDiff.calculate(cursosFiltrados, nuevos,
+                (a, b) -> ListDiff.eq(a.getId(), b.getId()),
+                (a, b) -> ListDiff.eq(a.getNombre(), b.getNombre())
+                        && ListDiff.eq(a.getCodigo(), b.getCodigo())
+                        && ListDiff.eq(a.getPeriodo(), b.getPeriodo())
+                        && ListDiff.eq(a.getPrograma(), b.getPrograma())
+                        && a.getTotalEstudiantes() == b.getTotalEstudiantes()
+                        && a.getTotalCortes() == b.getTotalCortes());
+        cursosFiltrados.clear();
+        cursosFiltrados.addAll(nuevos);
+        diff.dispatchUpdatesTo(this);
     }
 
     public int getTotalFiltrado() {

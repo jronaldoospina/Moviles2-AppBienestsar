@@ -7,11 +7,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.models.Cita;
 import com.example.myapplication.utils.FechaUtils;
+import com.example.myapplication.utils.ListDiff;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,9 +32,20 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.ViewHolder
     }
 
     public void setCitas(List<Cita> lista) {
+        List<Cita> nuevas = lista != null ? new ArrayList<>(lista) : new ArrayList<>();
+        DiffUtil.DiffResult diff = ListDiff.calculate(citas, nuevas,
+                (a, b) -> ListDiff.eq(a.getId(), b.getId()),
+                (a, b) -> ListDiff.eq(a.getFecha(), b.getFecha())
+                        && ListDiff.eq(a.getHora(), b.getHora())
+                        && ListDiff.eq(a.getEstudianteNombre(), b.getEstudianteNombre())
+                        && ListDiff.eq(a.getPsicologoNombre(), b.getPsicologoNombre())
+                        && ListDiff.eq(a.getMotivo(), b.getMotivo())
+                        && ListDiff.eq(a.getEstado(), b.getEstado())
+                        && ListDiff.eq(a.getLugar(), b.getLugar())
+                        && a.getDuracionMinutos() == b.getDuracionMinutos());
         citas.clear();
-        if (lista != null) citas.addAll(lista);
-        notifyDataSetChanged();
+        citas.addAll(nuevas);
+        diff.dispatchUpdatesTo(this);
     }
 
     @NonNull

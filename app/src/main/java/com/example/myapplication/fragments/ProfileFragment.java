@@ -21,6 +21,7 @@ import com.example.myapplication.models.Usuario;
 import com.example.myapplication.repositories.GradeRepository;
 import com.example.myapplication.repositories.UserRepository;
 import com.example.myapplication.services.SessionManager;
+import com.example.myapplication.utils.SemaforoUtils;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -112,22 +113,12 @@ public class ProfileFragment extends Fragment {
                         double promedio = suma / valores.size();
 
                         // Determinar nivel de riesgo
-                        String nivelRiesgo;
-                        if (promedio >= 4.0) nivelRiesgo = "BAJO";
-                        else if (promedio >= 3.0) nivelRiesgo = "MEDIO";
-                        else nivelRiesgo = "ALTO";
+                        String nivelRiesgo = SemaforoUtils.nivelFor(promedio);
 
                         binding.txtPromedio.setText(String.format("Prom: %.1f", promedio));
                         binding.txtNivelRiesgo.setText(nivelRiesgo);
-
-                        // Color según nivel
-                        int color;
-                        switch (nivelRiesgo) {
-                            case "ALTO":  color = 0xFFD32F2F; break;
-                            case "MEDIO": color = 0xFFF57F17; break;
-                            default:      color = 0xFF388E3C; break;
-                        }
-                        binding.txtNivelRiesgo.setTextColor(color);
+                        binding.txtNivelRiesgo.setTextColor(
+                                SemaforoUtils.colorFor(requireContext(), promedio));
                         binding.layoutPromedio.setVisibility(View.VISIBLE);
                         binding.layoutRiesgo.setVisibility(View.VISIBLE);
                     } else {

@@ -11,20 +11,16 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.NavOptions;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.myapplication.databinding.ActivityMainBinding;
-import com.example.myapplication.models.Conversacion;
-import com.example.myapplication.models.Notificacion;
-import com.example.myapplication.repositories.ChatRepository;
-import com.example.myapplication.repositories.NotificacionRepository;
 import com.example.myapplication.services.SessionManager;
+import com.example.myapplication.viewmodels.MainViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.ListenerRegistration;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,12 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private SessionManager sessionManager;
     private NavController navController;
-    private NotificacionRepository notificacionRepository;
-    private ListenerRegistration notificacionRegistration;
-    private final ChatRepository chatRepository = new ChatRepository();
-    private ListenerRegistration chatRegistration;
-    private int noLeidasNotif = 0;
-    private int noLeidasChat = 0;
+    private MainViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,8 +66,8 @@ public class MainActivity extends AppCompatActivity {
         // 6. Botón de notificaciones + contador de no leídas en vivo
         binding.btnNotifications.setOnClickListener(v ->
                 startActivity(new Intent(this, NotificationsActivity.class)));
-        configurarBadgeNotificaciones();
-        configurarBadgeChat();
+        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        viewModel.getNoLeidas().observe(this, this::actualizarBadge);
 
         // 7. Deep-link desde notificaciones (cold start)
         procesarDeepLink(getIntent());
@@ -149,52 +140,7 @@ public class MainActivity extends AppCompatActivity {
         return 0;
     }
 
-    private void configurarBadgeNotificaciones() {
-        String uid = sessionManager.getUserId();
-        if (uid == null) return;
-
-        notificacionRepository = new NotificacionRepository();
-        // Cancelar registro previo si existe
-        if (notificacionRegistration != null) {
-            notificacionRegistration.remove();
-            notificacionRegistration = null;
-        }
-        notificacionRegistration = notificacionRepository.escuchar(uid, (snapshot, error) -> {
-            if (error != null || snapshot == null) return;
-
-            noLeidasNotif = 0;
-            for (DocumentSnapshot doc : snapshot.getDocuments()) {
-                Notificacion n = doc.toObject(Notificacion.class);
-                if (n != null && !n.isLeida()) {
-                    noLeidasNotif++;
-                }
-            }
-            actualizarBadge();
-        });
-    }
-
-    private void configurarBadgeChat() {
-        String uid = sessionManager.getUserId();
-        if (uid == null) return;
-
-        chatRegistration = chatRepository.escucharConversaciones(uid, (snapshot, error) -> {
-            if (error != null || snapshot == null) return;
-
-            noLeidasChat = 0;
-            if (snapshot.getDocuments() != null) {
-                for (DocumentSnapshot doc : snapshot.getDocuments()) {
-                    Conversacion c = doc.toObject(Conversacion.class);
-                    if (c == null || c.getPendientes() == null) continue;
-                    Long v = c.getPendientes().get(uid);
-                    if (v != null) noLeidasChat += v;
-                }
-            }
-            actualizarBadge();
-        });
-    }
-
-    private void actualizarBadge() {
-        int total = noLeidasNotif + noLeidasChat;
+    private void actualizarBadge(int total) {
         TextView badge = binding.badgeNotifications;
         if (total > 0) {
             badge.setText(total > 9 ? "9+" : String.valueOf(total));
@@ -285,15 +231,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy() {
-        if (notificacionRegistration != null) {
-            notificacionRegistration.remove();
-            notificacionRegistration = null;
+    protected void onStart() {
+        super.onStart();
+        if (viewModel != null) {
+            viewModel.empezar(sessionManager.getUserId());
         }
-        if (chatRegistration != null) {
-            chatRegistration.remove();
-            chatRegistration = null;
+    }
+
+    @Override
+    protected void onStop() {
+        if (viewModel != null) {
+            viewModel.detener();
         }
-        super.onDestroy();
+        super.onStop();
     }
 }

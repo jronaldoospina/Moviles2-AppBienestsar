@@ -4,11 +4,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,34 +19,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myapplication.R;
 import com.example.myapplication.adapters.AlertsAdapter;
 import com.example.myapplication.models.Alerta;
-import com.example.myapplication.models.Curso;
-import com.example.myapplication.models.Tutoria;
-import com.example.myapplication.repositories.AlertRepository;
-import com.example.myapplication.repositories.CourseRepository;
-import com.example.myapplication.repositories.TutoriaRepository;
 import com.example.myapplication.services.SessionManager;
 import com.example.myapplication.utils.FechaUtils;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.ListenerRegistration;
-import com.google.firebase.firestore.QuerySnapshot;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.example.myapplication.utils.UiUtils;
+import com.example.myapplication.viewmodels.TeacherDashboardViewModel;
 
 public class TeacherDashboardFragment extends Fragment {
 
-    private final List<Alerta> recientes = new ArrayList<>();
     private AlertsAdapter alertsAdapter;
-    private ListenerRegistration alertasReg;
 
     private TextView textDate;
     private TextView textKpi1Value, textKpi2Value, textKpi3Value, textKpi4Value;
-    private TextView txtKpi1Label, txtKpi2Label;
+    private ProgressBar progressKpis;
 
     private SessionManager sessionManager;
-    private CourseRepository courseRepository;
-    private TutoriaRepository tutoriaRepository;
-    private AlertRepository alertRepository;
+    private TeacherDashboardViewModel viewModel;
 
     @Nullable
     @Override
@@ -63,10 +52,11 @@ public class TeacherDashboardFragment extends Fragment {
         textKpi2Value = view.findViewById(R.id.text_appointments_today);
         textKpi3Value = view.findViewById(R.id.text_total_students);
         textKpi4Value = view.findViewById(R.id.text_improvement);
-        txtKpi1Label = view.findViewById(R.id.txt_kpi1_label);
-        txtKpi2Label = view.findViewById(R.id.txt_kpi2_label);
+        progressKpis = view.findViewById(R.id.progress_kpis);
 
+        TextView txtKpi1Label = view.findViewById(R.id.txt_kpi1_label);
         txtKpi1Label.setText("Mis Cursos");
+        TextView txtKpi2Label = view.findViewById(R.id.txt_kpi2_label);
         txtKpi2Label.setText("Tutorías Activas");
 
         TextView txtKpi4Label = view.findViewById(R.id.txt_kpi4_label);
@@ -86,7 +76,6 @@ public class TeacherDashboardFragment extends Fragment {
         TextView txtAaAlertas = view.findViewById(R.id.txt_aa_alertas);
         if (txtAaAlertas != null) txtAaAlertas.setText("Alertas");
 
-
         RecyclerView recyclerAlertas = view.findViewById(R.id.recycler_recent_alerts);
         alertsAdapter = new AlertsAdapter();
         recyclerAlertas.setLayoutManager(new LinearLayoutManager(requireContext()));
@@ -94,14 +83,32 @@ public class TeacherDashboardFragment extends Fragment {
         alertsAdapter.setOnAlertaClickListener(this::mostrarDetalle);
 
         sessionManager = new SessionManager(requireContext());
-        courseRepository = new CourseRepository();
-        tutoriaRepository = new TutoriaRepository();
-        alertRepository = new AlertRepository();
+        viewModel = new ViewModelProvider(this).get(TeacherDashboardViewModel.class);
 
         pintarSaludo();
         configurarAccesosRapidos(view);
-        cargarCursosYEstudiantes();
-        cargarTutorias();
+        observarViewModel();
+    }
+
+    private void observarViewModel() {
+        viewModel.getResumen().observe(getViewLifecycleOwner(), resumen -> {
+            if (textKpi1Value != null) textKpi1Value.setText(String.valueOf(resumen.cursos));
+            if (textKpi2Value != null) textKpi2Value.setText(String.valueOf(resumen.tutoriasActivas));
+            if (textKpi3Value != null) textKpi3Value.setText(String.valueOf(resumen.estudiantes));
+            if (textKpi4Value != null) {
+                textKpi4Value.setText(resumen.porcentajeAtendidas >= 0
+                        ? resumen.porcentajeAtendidas + "%" : "--");
+            }
+            if (alertsAdapter != null) alertsAdapter.setData(resumen.recientes);
+        });
+        viewModel.getLoading().observe(getViewLifecycleOwner(), cargando ->
+                progressKpis.setVisibility(Boolean.TRUE.equals(cargando)
+                        ? View.VISIBLE : View.GONE));
+        viewModel.getError().observe(getViewLifecycleOwner(), mensaje -> {
+            if (mensaje == null) return;
+            UiUtils.showRetry(requireView(), mensaje, viewModel::reintentar);
+            viewModel.clearError();
+        });
     }
 
     private void pintarSaludo() {
@@ -113,13 +120,13 @@ public class TeacherDashboardFragment extends Fragment {
     private void configurarAccesosRapidos(View view) {
         View cardEstudiantes = view.findViewById(R.id.card_aa_estudiantes);
         if (cardEstudiantes != null) cardEstudiantes.setOnClickListener(v -> navegar(R.id.nav_doc_courses));
-        
+
         View cardCita = view.findViewById(R.id.card_aa_cita);
         if (cardCita != null) cardCita.setOnClickListener(v -> navegar(R.id.nav_doc_tutorias));
-        
+
         View cardAlertas = view.findViewById(R.id.card_aa_alertas);
         if (cardAlertas != null) cardAlertas.setOnClickListener(v -> navegar(R.id.nav_doc_alerts));
-        
+
         View viewAll = view.findViewById(R.id.text_view_all);
         if (viewAll != null) viewAll.setOnClickListener(v -> navegar(R.id.nav_doc_alerts));
     }
@@ -138,82 +145,16 @@ public class TeacherDashboardFragment extends Fragment {
         }
     }
 
-    private void cargarCursosYEstudiantes() {
-        String uid = sessionManager.getUserId();
-        if (uid == null) return;
-        courseRepository.getCursosByDocente(uid).addOnSuccessListener(snap -> {
-            if (!isAdded() || getView() == null) return;
-            int cursos = 0, estudiantes = 0;
-            for (DocumentSnapshot doc : snap.getDocuments()) {
-                Curso c = doc.toObject(Curso.class);
-                if (c == null) continue;
-                cursos++;
-                if (c.getEstudiantesIds() != null) {
-                    estudiantes += c.getEstudiantesIds().size();
-                }
-            }
-            if (textKpi1Value != null) textKpi1Value.setText(String.valueOf(cursos));
-            if (textKpi3Value != null) textKpi3Value.setText(String.valueOf(estudiantes));
-        }).addOnFailureListener(e -> { /* mantener valores por defecto */ });
-    }
-
-    private void cargarTutorias() {
-        String uid = sessionManager.getUserId();
-        if (uid == null) return;
-        tutoriaRepository.getTutoriasByDocente(uid).addOnSuccessListener(snap -> {
-            if (!isAdded() || getView() == null) return;
-            int activas = 0;
-            for (DocumentSnapshot doc : snap.getDocuments()) {
-                Tutoria t = doc.toObject(Tutoria.class);
-                if (t != null && t.isActiva()) activas++;
-            }
-            if (textKpi2Value != null) textKpi2Value.setText(String.valueOf(activas));
-        }).addOnFailureListener(e -> { /* mantener valores por defecto */ });
+    @Override
+    public void onStart() {
+        super.onStart();
+        viewModel.empezar(sessionManager.getUserId());
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        String uid = sessionManager != null ? sessionManager.getUserId() : null;
-        if (alertasReg == null && uid != null) {
-            alertasReg = alertRepository.escucharAlertasDeDocente(uid, this::onAlertasActualizadas);
-        }
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        if (alertasReg != null) {
-            alertasReg.remove();
-            alertasReg = null;
-        }
-    }
-
-    private void onAlertasActualizadas(@Nullable QuerySnapshot snapshots,
-                                       @Nullable com.google.firebase.firestore.FirebaseFirestoreException e) {
-        if (e != null || !isAdded() || getView() == null) return;
-
-        int total = 0, pendientes = 0, atendidas = 0;
-        recientes.clear();
-
-        if (snapshots != null) {
-            total = snapshots.size();
-            List<Alerta> items = new ArrayList<>();
-            for (DocumentSnapshot doc : snapshots.getDocuments()) {
-                Alerta a = doc.toObject(Alerta.class);
-                if (a == null) continue;
-                a.setId(doc.getId());
-                items.add(a);
-                if ("PENDIENTE".equals(a.getEstado())) pendientes++;
-                if ("ATENDIDA".equals(a.getEstado())) atendidas++;
-            }
-            items.sort((x, y) -> Long.compare(y.getFecha(), x.getFecha()));
-            recientes.addAll(items.subList(0, Math.min(5, items.size())));
-        }
-
-        if (alertsAdapter != null) alertsAdapter.setData(recientes);
-        int mejora = total > 0 ? (int) Math.round(atendidas * 100.0 / total) : -1;
-        if (textKpi4Value != null) textKpi4Value.setText(mejora >= 0 ? mejora + "%" : "--");
+    public void onStop() {
+        viewModel.detener();
+        super.onStop();
     }
 
     private void mostrarDetalle(Alerta a) {

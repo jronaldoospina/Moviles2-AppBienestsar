@@ -57,7 +57,7 @@
 
     <!-- Bottom Navigation con iconos/texto legibles en oscuro -->
     <style name="BottomNavigationStyle" parent="Widget.Material3.BottomNavigationView">
-        <item name="android:background">@color/white_card</item>
+        <item name="android:background">@color/nav_background</item>
         <item name="itemIconSize">24dp</item>
         <item name="itemRippleColor">@color/green_primary_dark</item>
         <item name="itemIconTint">@color/nav_item_text_color</item>

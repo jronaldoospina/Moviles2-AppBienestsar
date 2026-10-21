@@ -7,38 +7,30 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.myapplication.R;
 import com.example.myapplication.StudentDetailActivity;
 import com.example.myapplication.adapters.StudentsAdapter;
 import com.example.myapplication.databinding.FragmentStudentsBinding;
-import com.example.myapplication.models.Reporte;
-import com.example.myapplication.models.Usuario;
-import com.example.myapplication.repositories.ReportRepository;
-import com.example.myapplication.repositories.UserRepository;
-import com.example.myapplication.services.SessionManager;
-import com.google.firebase.firestore.DocumentSnapshot;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import com.example.myapplication.utils.Debouncer;
+import com.example.myapplication.utils.UiUtils;
+import com.example.myapplication.viewmodels.StudentsViewModel;
 
 public class StudentsFragment extends Fragment {
 
     private FragmentStudentsBinding binding;
-    private UserRepository userRepository;
-    private SessionManager sessionManager;
     private StudentsAdapter adapter;
+    private StudentsViewModel viewModel;
 
     private String riesgoActual = null;
     private String queryActual = "";
+    private boolean primeraResume = true;
 
     @Nullable
     @Override
@@ -53,14 +45,14 @@ public class StudentsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        userRepository = new UserRepository();
-        sessionManager = new SessionManager(requireContext());
+        viewModel = new ViewModelProvider(this).get(StudentsViewModel.class);
+        riesgoActual = viewModel.getRiesgo();
+        queryActual = viewModel.getQuery();
 
         configurarRecycler();
         configurarBuscador();
         configurarChips();
-
-        cargarEstudiantes();
+        observarViewModel();
     }
 
     private void configurarRecycler() {
@@ -73,6 +65,8 @@ public class StudentsFragment extends Fragment {
         binding.recyclerStudents.setAdapter(adapter);
     }
 
+    private final Debouncer searchDebouncer = new Debouncer(300);
+
     private void configurarBuscador() {
         binding.editSearch.addTextChangedListener(new TextWatcher() {
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -80,8 +74,12 @@ public class StudentsFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                queryActual = s.toString();
-                aplicarFiltros();
+                String query = s.toString();
+                searchDebouncer.submit(() -> {
+                    queryActual = query;
+                    viewModel.setQuery(query);
+                    aplicarFiltros();
+                });
             }
         });
     }
@@ -94,9 +92,11 @@ public class StudentsFragment extends Fragment {
                 int id = checkedIds.get(0);
                 if (id == R.id.chip_low) riesgoActual = "BAJO";
                 else if (id == R.id.chip_medium) riesgoActual = "MEDIO";
-                else if (id == R.id.chip_high || id == R.id.chip_critical) riesgoActual = "ALTO";
+                else if (id == R.id.chip_high) riesgoActual = "ALTO";
+                else if (id == R.id.chip_critical) riesgoActual = "CRITICO";
                 else riesgoActual = null;
             }
+            viewModel.setRiesgo(riesgoActual);
             aplicarFiltros();
         });
     }
@@ -108,65 +108,37 @@ public class StudentsFragment extends Fragment {
         binding.layoutEmpty.setVisibility(total == 0 ? View.VISIBLE : View.GONE);
     }
 
-    private void cargarEstudiantes() {
-        binding.progressStudents.setVisibility(View.VISIBLE);
-
-        userRepository.getAllEstudiantes()
-                .addOnSuccessListener(snapshot -> {
-                    binding.progressStudents.setVisibility(View.GONE);
-
-                    List<Usuario> lista = new ArrayList<>();
-                    snapshot.forEach(doc -> {
-                        Usuario u = doc.toObject(Usuario.class);
-                        if (u != null) {
-                            u.setUid(doc.getId());
-                            lista.add(u);
-                        }
-                    });
-
-                    adapter.setEstudiantes(lista);
-                    aplicarFiltros();
-                })
-                .addOnFailureListener(e -> {
-                    binding.progressStudents.setVisibility(View.GONE);
-                    Toast.makeText(requireContext(),
-                            "Error cargando estudiantes: " + e.getMessage(),
-                            Toast.LENGTH_LONG).show();
-                });
-
-        cargarReportesActivos();
-    }
-
-    private void cargarReportesActivos() {
-        new ReportRepository().getAllReportes()
-                .addOnSuccessListener(snapshot -> {
-                    Set<String> activos = new HashSet<>();
-                    if (snapshot != null) {
-                        for (DocumentSnapshot doc : snapshot.getDocuments()) {
-                            Reporte r = doc.toObject(Reporte.class);
-                            if (r != null && !r.isPlanCumplido() && r.getEstudianteId() != null) {
-                                activos.add(r.getEstudianteId());
-                            }
-                        }
-                    }
-                    adapter.setReportesActivos(activos);
-                })
-                .addOnFailureListener(e -> {
-                    binding.progressStudents.setVisibility(View.GONE);
-                    Toast.makeText(requireContext(),
-                            "Error cargando reportes: " + e.getMessage(),
-                            Toast.LENGTH_LONG).show();
-                });
+    private void observarViewModel() {
+        viewModel.getEstudiantes().observe(getViewLifecycleOwner(), lista -> {
+            adapter.setEstudiantes(lista);
+            aplicarFiltros();
+        });
+        viewModel.getReportesActivos().observe(getViewLifecycleOwner(),
+                activos -> adapter.setReportesActivos(activos));
+        viewModel.getLoading().observe(getViewLifecycleOwner(), cargando ->
+                binding.progressStudents.setVisibility(
+                        Boolean.TRUE.equals(cargando) ? View.VISIBLE : View.GONE));
+        viewModel.getError().observe(getViewLifecycleOwner(), mensaje -> {
+            if (mensaje == null) return;
+            UiUtils.showRetry(binding.getRoot(), mensaje, viewModel::recargar);
+            viewModel.clearError();
+        });
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        cargarEstudiantes();
+        if (primeraResume) {
+            primeraResume = false;
+            viewModel.cargar();
+        } else {
+            viewModel.recargar();
+        }
     }
 
     @Override
     public void onDestroyView() {
+        searchDebouncer.cancel();
         super.onDestroyView();
         binding = null;
     }

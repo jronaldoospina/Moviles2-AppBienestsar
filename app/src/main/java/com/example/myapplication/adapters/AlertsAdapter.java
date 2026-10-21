@@ -7,11 +7,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.models.Alerta;
 import com.example.myapplication.utils.FechaUtils;
+import com.example.myapplication.utils.ListDiff;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,9 +32,19 @@ public class AlertsAdapter extends RecyclerView.Adapter<AlertsAdapter.ViewHolder
     }
 
     public void setData(List<Alerta> nuevas) {
+        List<Alerta> copia = nuevas != null ? new ArrayList<>(nuevas) : new ArrayList<>();
+        DiffUtil.DiffResult diff = ListDiff.calculate(alertas, copia,
+                (a, b) -> ListDiff.eq(a.getId(), b.getId()),
+                (a, b) -> ListDiff.eq(a.getEstudianteNombre(), b.getEstudianteNombre())
+                        && ListDiff.eq(a.getCursoNombre(), b.getCursoNombre())
+                        && ListDiff.eq(a.getMotivo(), b.getMotivo())
+                        && ListDiff.eq(a.getDescripcion(), b.getDescripcion())
+                        && ListDiff.eq(a.getDocenteNombre(), b.getDocenteNombre())
+                        && ListDiff.eq(a.getEstado(), b.getEstado())
+                        && a.getFecha() == b.getFecha());
         alertas.clear();
-        if (nuevas != null) alertas.addAll(nuevas);
-        notifyDataSetChanged();
+        alertas.addAll(copia);
+        diff.dispatchUpdatesTo(this);
     }
 
     @NonNull

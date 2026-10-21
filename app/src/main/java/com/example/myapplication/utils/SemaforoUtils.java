@@ -18,7 +18,8 @@ import java.util.Map;
  * Escala 0.0 - 5.0:
  *  - Verde  (BAJO)  : >= 4.0
  *  - Ámbar  (MEDIO) : 3.0 - 3.9
- *  - Rojo   (ALTO)  : < 3.0
+ *  - Rojo   (ALTO)  : 2.0 - 2.9
+ *  - Crítico (CRITICO): < 2.0
  */
 public class SemaforoUtils {
 
@@ -28,7 +29,8 @@ public class SemaforoUtils {
     public static int colorFor(Context ctx, double valor) {
         if (valor >= 4.0) return ContextCompat.getColor(ctx, R.color.green_primary);
         if (valor >= 3.0) return ContextCompat.getColor(ctx, R.color.risk_medium_text);
-        return ContextCompat.getColor(ctx, R.color.risk_high_text);
+        if (valor >= 2.0) return ContextCompat.getColor(ctx, R.color.risk_high_text);
+        return ContextCompat.getColor(ctx, R.color.risk_critical_text);
     }
 
     public static int drawableFor(double valor) {
@@ -40,7 +42,8 @@ public class SemaforoUtils {
     public static String nivelFor(double valor) {
         if (valor >= 4.0) return "BAJO";
         if (valor >= 3.0) return "MEDIO";
-        return "ALTO";
+        if (valor >= 2.0) return "ALTO";
+        return "CRITICO";
     }
 
     public static String format(double valor) {

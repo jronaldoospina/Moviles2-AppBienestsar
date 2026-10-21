@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,6 +29,9 @@ import com.example.myapplication.repositories.CourseRepository;
 import com.example.myapplication.repositories.NotificacionRepository;
 import com.example.myapplication.repositories.UserRepository;
 import com.example.myapplication.services.SessionManager;
+import com.example.myapplication.utils.Debouncer;
+import com.example.myapplication.utils.UiUtils;
+import com.example.myapplication.viewmodels.AdminCoursesViewModel;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -38,7 +42,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -63,6 +66,9 @@ public class AdminCoursesFragment extends Fragment {
     private SessionManager sessionManager;
 
     private String queryActual = "";
+    private final Debouncer searchDebouncer = new Debouncer(300);
+    private AdminCoursesViewModel viewModel;
+    private boolean primeraResume = true;
 
     @Nullable
     @Override
@@ -87,6 +93,8 @@ public class AdminCoursesFragment extends Fragment {
         userRepository = new UserRepository();
         notificacionRepository = new NotificacionRepository();
         sessionManager = new SessionManager(requireContext());
+        viewModel = new ViewModelProvider(this).get(AdminCoursesViewModel.class);
+        queryActual = viewModel.getQuery();
 
         adapter = new CourseAdapter(this::abrirDetalleCurso);
         recycler.setLayoutManager(new LinearLayoutManager(requireContext()));
@@ -99,12 +107,38 @@ public class AdminCoursesFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                queryActual = s.toString();
-                aplicarFiltro();
+                String query = s.toString();
+                searchDebouncer.submit(() -> {
+                    queryActual = query;
+                    viewModel.setQuery(query);
+                    aplicarFiltro();
+                });
             }
         });
 
+        observarViewModel();
         fab.setOnClickListener(v -> mostrarDialogoCrearCurso());
+    }
+
+    private void observarViewModel() {
+        viewModel.getCursos().observe(getViewLifecycleOwner(), lista -> {
+            adapter.setCursos(lista);
+            aplicarFiltro();
+        });
+        viewModel.getLoading().observe(getViewLifecycleOwner(), cargando ->
+                progress.setVisibility(
+                        Boolean.TRUE.equals(cargando) ? View.VISIBLE : View.GONE));
+        viewModel.getError().observe(getViewLifecycleOwner(), mensaje -> {
+            if (mensaje == null || !isAdded() || getView() == null) return;
+            UiUtils.showRetry(requireView(), mensaje, viewModel::recargar);
+            viewModel.clearError();
+        });
+    }
+
+    @Override
+    public void onDestroyView() {
+        searchDebouncer.cancel();
+        super.onDestroyView();
     }
 
     private void aplicarFiltro() {
@@ -122,33 +156,12 @@ public class AdminCoursesFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        cargarCursos();
-    }
-
-    private void cargarCursos() {
-        progress.setVisibility(View.VISIBLE);
-        courseRepository.getAllCursos()
-                .addOnSuccessListener(snap -> {
-                    progress.setVisibility(View.GONE);
-                    List<Curso> lista = new ArrayList<>();
-                    for (DocumentSnapshot doc : snap.getDocuments()) {
-                        Curso c = doc.toObject(Curso.class);
-                        if (c != null) {
-                            c.setId(doc.getId());
-                            lista.add(c);
-                        }
-                    }
-                    Collections.sort(lista, (a, b) ->
-                            Long.compare(b.getFechaCreacion(), a.getFechaCreacion()));
-                    adapter.setCursos(lista);
-                    aplicarFiltro();
-                })
-                .addOnFailureListener(e -> {
-                    progress.setVisibility(View.GONE);
-                    Toast.makeText(requireContext(),
-                            "Error al cargar cursos: " + e.getMessage(),
-                            Toast.LENGTH_LONG).show();
-                });
+        if (primeraResume) {
+            primeraResume = false;
+            viewModel.cargar();
+        } else {
+            viewModel.recargar();
+        }
     }
 
     // ============================================================
@@ -273,7 +286,7 @@ public class AdminCoursesFragment extends Fragment {
                                     + docenteNombre,
                             sessionManager);
                     notificarDocente(docenteId, nombre, codigo);
-                    cargarCursos();
+                    viewModel.recargar();
                 })
                 .addOnFailureListener(err -> Toast.makeText(requireContext(),
                         "Error al crear: " + err.getMessage(), Toast.LENGTH_LONG).show());
@@ -332,7 +345,7 @@ public class AdminCoursesFragment extends Fragment {
                                     new AuditRepository().registrar("CURSO_ELIMINADO",
                                             "Eliminó el curso " + nvl(curso.getNombre(), "-"),
                                             sessionManager);
-                                    cargarCursos();
+                                    viewModel.recargar();
                                 })
                                 .addOnFailureListener(err -> Toast.makeText(requireContext(),
                                         "Error: " + err.getMessage(), Toast.LENGTH_LONG).show()))
@@ -426,7 +439,7 @@ public class AdminCoursesFragment extends Fragment {
                             + aAgregar.size() + " inscritos, -" + aQuitar.size() + " retirados",
                     sessionManager);
             notificarNuevosInscritos(aAgregar, curso.getNombre());
-            cargarCursos();
+            viewModel.recargar();
         }).addOnFailureListener(err -> Toast.makeText(requireContext(),
                 "Error al guardar matrícula: " + err.getMessage(), Toast.LENGTH_LONG).show());
     }

@@ -6,11 +6,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.models.PacienteResumen;
 import com.example.myapplication.utils.AnimoUtils;
+import com.example.myapplication.utils.ListDiff;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,9 +31,16 @@ public class PacienteResumenAdapter extends RecyclerView.Adapter<PacienteResumen
     }
 
     public void setData(List<PacienteResumen> lista) {
+        List<PacienteResumen> nuevas = lista != null ? new ArrayList<>(lista) : new ArrayList<>();
+        DiffUtil.DiffResult diff = ListDiff.calculate(items, nuevas,
+                (a, b) -> ListDiff.eq(a.getUid(), b.getUid()),
+                (a, b) -> ListDiff.eq(a.getNombre(), b.getNombre())
+                        && ListDiff.eq(a.getNivelRiesgo(), b.getNivelRiesgo())
+                        && a.getAnimo() == b.getAnimo()
+                        && a.getAlertasActivas() == b.getAlertasActivas());
         items.clear();
-        if (lista != null) items.addAll(lista);
-        notifyDataSetChanged();
+        items.addAll(nuevas);
+        diff.dispatchUpdatesTo(this);
     }
 
     public void updateAnimo(String uid, int animo) {

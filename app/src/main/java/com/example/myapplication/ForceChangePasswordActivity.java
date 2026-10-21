@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.content.Intent;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -47,6 +48,7 @@ public class ForceChangePasswordActivity extends AppCompatActivity {
         btnCambiar.setOnClickListener(v -> attemptChange());
     }
 
+    @SuppressLint("MissingSuperCall")
     @Override
     public void onBackPressed() {
         // Bloqueado: no puede salir sin cambiar la contraseña

@@ -95,6 +95,11 @@ public class UserRepository {
         return usuariosRef.orderBy("nombre", Query.Direction.ASCENDING).get();
     }
 
+    /** Consulta paginable de usuarios ordenada por nombre. */
+    public Query getUsuariosQuery() {
+        return usuariosRef.orderBy("nombre", Query.Direction.ASCENDING);
+    }
+
     /**
      * Obtiene estudiantes (para Psicólogo)
      */

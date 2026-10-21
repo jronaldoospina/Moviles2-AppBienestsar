@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,13 +15,10 @@ import com.example.myapplication.adapters.NotificationsAdapter;
 import com.example.myapplication.models.Notificacion;
 import com.example.myapplication.repositories.NotificacionRepository;
 import com.example.myapplication.services.SessionManager;
+import com.example.myapplication.utils.UiUtils;
+import com.example.myapplication.viewmodels.NotificationsViewModel;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.ListenerRegistration;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class NotificationsActivity extends AppCompatActivity {
 
@@ -31,7 +29,7 @@ public class NotificationsActivity extends AppCompatActivity {
     private final NotificacionRepository repositorio = new NotificacionRepository();
     private SessionManager sessionManager;
     private NotificationsAdapter adapter;
-    private ListenerRegistration registration;
+    private NotificationsViewModel viewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,6 +43,7 @@ public class NotificationsActivity extends AppCompatActivity {
             return;
         }
         sessionManager = new SessionManager(this);
+        viewModel = new ViewModelProvider(this).get(NotificationsViewModel.class);
 
         MaterialToolbar toolbar = findViewById(R.id.toolbar_notifs);
         toolbar.setNavigationOnClickListener(v -> finish());
@@ -66,34 +65,22 @@ public class NotificationsActivity extends AppCompatActivity {
         recycler.setAdapter(adapter);
         recycler.setItemAnimator(null);
 
-        escuchar();
+        observarViewModel();
+        viewModel.empezarEscucha(uid);
     }
 
-    private void escuchar() {
-        progress.setVisibility(android.view.View.VISIBLE);
-        txtEmpty.setVisibility(android.view.View.GONE);
-
-        registration = repositorio.escuchar(sessionManager.getUserId(), (snapshot, error) -> {
-            progress.setVisibility(android.view.View.GONE);
-            if (error != null) {
-                txtEmpty.setText("No se pudieron cargar las notificaciones.");
-                txtEmpty.setVisibility(android.view.View.VISIBLE);
-                return;
-            }
-
-            List<Notificacion> lista = new ArrayList<>();
-            if (snapshot != null) {
-                for (DocumentSnapshot doc : snapshot.getDocuments()) {
-                    Notificacion n = doc.toObject(Notificacion.class);
-                    if (n != null) {
-                        n.setId(doc.getId());
-                        lista.add(n);
-                    }
-                }
-            }
-            lista.sort((a, b) -> Long.compare(b.getFecha(), a.getFecha()));
+    private void observarViewModel() {
+        viewModel.getNotificaciones().observe(this, lista -> {
             adapter.setNotificaciones(lista);
             txtEmpty.setVisibility(lista.isEmpty() ? android.view.View.VISIBLE : android.view.View.GONE);
+        });
+        viewModel.getLoading().observe(this, cargando ->
+                progress.setVisibility(
+                        Boolean.TRUE.equals(cargando) ? android.view.View.VISIBLE : android.view.View.GONE));
+        viewModel.getError().observe(this, mensaje -> {
+            if (mensaje == null) return;
+            UiUtils.showRetry(findViewById(android.R.id.content), mensaje, viewModel::reintentar);
+            viewModel.clearError();
         });
     }
 
@@ -147,10 +134,7 @@ public class NotificationsActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        if (registration != null) {
-            registration.remove();
-            registration = null;
-        }
+        viewModel.detenerEscucha();
         super.onDestroy();
     }
 }

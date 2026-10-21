@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,24 +25,25 @@ import com.example.myapplication.repositories.AuditRepository;
 import com.example.myapplication.repositories.CourseRepository;
 import com.example.myapplication.repositories.TutoriaRepository;
 import com.example.myapplication.services.SessionManager;
+import com.example.myapplication.utils.UiUtils;
+import com.example.myapplication.viewmodels.TutoriasViewModel;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TutoriasFragment extends Fragment {
 
-    private final List<Tutoria> tutorias = new ArrayList<>();
     private final List<Curso> misCursos = new ArrayList<>();
     private TutoriaAdapter adapter;
     private TutoriaRepository repo;
     private CourseRepository courseRepository;
     private SessionManager sessionManager;
+    private TutoriasViewModel viewModel;
 
     private RecyclerView recycler;
     private TextView txtEmpty;
@@ -65,6 +67,7 @@ public class TutoriasFragment extends Fragment {
         repo = new TutoriaRepository();
         courseRepository = new CourseRepository();
         sessionManager = new SessionManager(requireContext());
+        viewModel = new ViewModelProvider(this).get(TutoriasViewModel.class);
 
         adapter = new TutoriaAdapter();
         adapter.setOnTutoriaClickListener(this::mostrarOpciones);
@@ -73,39 +76,23 @@ public class TutoriasFragment extends Fragment {
 
         view.findViewById(R.id.fab_nueva_tutoria).setOnClickListener(v -> abrirDialogoNueva());
 
-        cargarTutorias();
+        observarViewModel();
+        viewModel.cargar(sessionManager.getUserId());
     }
 
-    private void cargarTutorias() {
-        progress.setVisibility(View.VISIBLE);
-        String uid = sessionManager.getUserId();
-        if (uid == null) {
-            progress.setVisibility(View.GONE);
-            return;
-        }
-        repo.getTutoriasByDocente(uid)
-                .addOnSuccessListener(this::onTutoriasCargadas)
-                .addOnFailureListener(e -> {
-                    progress.setVisibility(View.GONE);
-                    txtEmpty.setText("No se pudieron cargar las tutorías.\n" + e.getMessage());
-                    txtEmpty.setVisibility(View.VISIBLE);
-                });
-    }
-
-    private void onTutoriasCargadas(QuerySnapshot snap) {
-        progress.setVisibility(View.GONE);
-        tutorias.clear();
-        if (snap != null) {
-            for (DocumentSnapshot doc : snap.getDocuments()) {
-                Tutoria t = doc.toObject(Tutoria.class);
-                if (t != null) {
-                    t.setId(doc.getId());
-                    tutorias.add(t);
-                }
-            }
-        }
-        adapter.setData(tutorias);
-        txtEmpty.setVisibility(tutorias.isEmpty() ? View.VISIBLE : View.GONE);
+    private void observarViewModel() {
+        viewModel.getTutorias().observe(getViewLifecycleOwner(), tutorias -> {
+            adapter.setData(tutorias);
+            txtEmpty.setVisibility(tutorias.isEmpty() ? View.VISIBLE : View.GONE);
+        });
+        viewModel.getLoading().observe(getViewLifecycleOwner(), cargando ->
+                progress.setVisibility(
+                        Boolean.TRUE.equals(cargando) ? View.VISIBLE : View.GONE));
+        viewModel.getError().observe(getViewLifecycleOwner(), mensaje -> {
+            if (mensaje == null || !isAdded() || getView() == null) return;
+            UiUtils.showRetry(requireView(), mensaje, viewModel::recargar);
+            viewModel.clearError();
+        });
     }
 
     private void abrirDialogoNueva() {
@@ -241,7 +228,7 @@ public class TutoriasFragment extends Fragment {
                             "Creó tutoría '" + materia + "' en "
                                     + cursoSeleccionado.getNombre(),
                             sessionManager);
-                    cargarTutorias();
+                    viewModel.recargar();
                 })
                 .addOnFailureListener(e ->
                         Toast.makeText(requireContext(), "Error: " + e.getMessage(),
@@ -268,7 +255,7 @@ public class TutoriasFragment extends Fragment {
                                                     + (tutoria.getMateria() != null
                                                     ? tutoria.getMateria() : "-") + "'",
                                             sessionManager);
-                                    cargarTutorias();
+                                    viewModel.recargar();
                                 })
                                 .addOnFailureListener(e ->
                                         Toast.makeText(requireContext(), "Error: " + e.getMessage(),

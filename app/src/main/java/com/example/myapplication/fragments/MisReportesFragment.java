@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,10 +27,10 @@ import com.example.myapplication.repositories.ReportRepository;
 import com.example.myapplication.services.SessionManager;
 import com.example.myapplication.utils.FechaUtils;
 import com.example.myapplication.utils.PdfExporter;
+import com.example.myapplication.utils.UiUtils;
+import com.example.myapplication.viewmodels.MisReportesViewModel;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -45,6 +46,7 @@ public class MisReportesFragment extends Fragment {
     private MisReportesAdapter adapter;
     private ReportRepository repo;
     private SessionManager sessionManager;
+    private MisReportesViewModel viewModel;
 
     private RecyclerView recycler;
     private TextView txtEmpty;
@@ -68,47 +70,49 @@ public class MisReportesFragment extends Fragment {
 
         repo = new ReportRepository();
         sessionManager = new SessionManager(requireContext());
+        viewModel = new ViewModelProvider(this).get(MisReportesViewModel.class);
 
         adapter = new MisReportesAdapter();
         adapter.setOnReporteClickListener(this::mostrarDetalle);
         recycler.setLayoutManager(new LinearLayoutManager(requireContext()));
         recycler.setAdapter(adapter);
+        recycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                if (!recyclerView.canScrollVertically(1)) {
+                    viewModel.cargarMas();
+                }
+            }
+        });
+
+        observarViewModel();
+    }
+
+    private void observarViewModel() {
+        viewModel.getReportes().observe(getViewLifecycleOwner(), reportes -> {
+            adapter.setData(reportes);
+            txtEmpty.setVisibility(reportes.isEmpty() ? View.VISIBLE : View.GONE);
+            recycler.post(() -> {
+                if (getView() != null && viewModel.isHaySiguiente()
+                        && !recycler.canScrollVertically(1)) {
+                    viewModel.cargarMas();
+                }
+            });
+        });
+        viewModel.getLoading().observe(getViewLifecycleOwner(), cargando ->
+                progress.setVisibility(
+                        Boolean.TRUE.equals(cargando) ? View.VISIBLE : View.GONE));
+        viewModel.getError().observe(getViewLifecycleOwner(), mensaje -> {
+            if (mensaje == null || !isAdded() || getView() == null) return;
+            UiUtils.showRetry(requireView(), mensaje, viewModel::recargar);
+            viewModel.clearError();
+        });
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        cargarReportes();
-    }
-
-    private void cargarReportes() {
-        String uid = sessionManager.getUserId();
-        if (uid == null) return;
-        progress.setVisibility(View.VISIBLE);
-        repo.getReportesByEstudianteSinOrden(uid)
-                .addOnSuccessListener(this::onReportesCargados)
-                .addOnFailureListener(e -> {
-                    progress.setVisibility(View.GONE);
-                    txtEmpty.setText("No se pudieron cargar los registros.\n" + e.getMessage());
-                    txtEmpty.setVisibility(View.VISIBLE);
-                });
-    }
-
-    private void onReportesCargados(@Nullable QuerySnapshot snapshots) {
-        progress.setVisibility(View.GONE);
-        List<Reporte> items = new ArrayList<>();
-        if (snapshots != null) {
-            for (DocumentSnapshot doc : snapshots.getDocuments()) {
-                Reporte r = doc.toObject(Reporte.class);
-                if (r != null) {
-                    r.setId(doc.getId());
-                    items.add(r);
-                }
-            }
-        }
-        items.sort((a, b) -> Long.compare(b.getFecha(), a.getFecha()));
-        adapter.setData(items);
-        txtEmpty.setVisibility(items.isEmpty() ? View.VISIBLE : View.GONE);
+        viewModel.cargar(sessionManager.getUserId());
     }
 
     private void mostrarDetalle(Reporte r) {
@@ -247,7 +251,7 @@ public class MisReportesFragment extends Fragment {
                     .addOnSuccessListener(aVoid -> {
                         dialogo.dismiss();
                         Toast.makeText(requireContext(), "Avance registrado", Toast.LENGTH_SHORT).show();
-                        cargarReportes();
+                        viewModel.recargar();
                         notificarPsi(r, "Registró un avance en el plan: " + texto, true);
                     })
                     .addOnFailureListener(e ->
@@ -264,7 +268,7 @@ public class MisReportesFragment extends Fragment {
                                 .addOnSuccessListener(aVoid -> {
                                     Toast.makeText(requireContext(), "¡Felicidades! Plan cumplido",
                                             Toast.LENGTH_SHORT).show();
-                                    cargarReportes();
+                                    viewModel.recargar();
                                     notificarPsi(r, "Marcó el plan como cumplido", false);
                                 })
                                 .addOnFailureListener(e ->
@@ -301,6 +305,7 @@ public class MisReportesFragment extends Fragment {
     private String riesgoLabel(String nivel) {
         if (nivel == null) return "-";
         switch (nivel) {
+            case "CRITICO": return "Crítico";
             case "ALTO":  return "Alto";
             case "MEDIO": return "Medio";
             case "BAJO":  return "Bajo";

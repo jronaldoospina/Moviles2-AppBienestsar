@@ -31,6 +31,7 @@ import com.example.myapplication.repositories.GradeRepository;
 import com.example.myapplication.repositories.NotificacionRepository;
 import com.example.myapplication.repositories.UserRepository;
 import com.example.myapplication.services.SessionManager;
+import com.example.myapplication.utils.SemaforoUtils;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.chip.Chip;
@@ -809,9 +810,7 @@ private void abrirDialogoRegistroMasivo() {
     }
 
     private String semaforoDe(double valor) {
-        if (valor >= 4.0) return "BAJO";
-        if (valor >= 3.0) return "MEDIO";
-        return "ALTO";
+        return SemaforoUtils.nivelFor(valor);
     }
 
     private void terminarRegistro(AlertDialog dialog, int creadas, int actualizadas,

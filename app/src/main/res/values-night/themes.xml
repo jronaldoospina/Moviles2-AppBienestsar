@@ -35,7 +35,7 @@
 
         <item name="android:statusBarColor">@color/background_gray_night</item>
         <item name="android:windowLightStatusBar">false</item>
-        <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
+        <item name="android:windowOptOutEdgeToEdgeEnforcement" tools:targetApi="35">true</item>
 
         <item name="android:navigationBarColor">@color/white_card_night</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>

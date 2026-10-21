@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,6 +18,7 @@ import com.example.myapplication.databinding.FragmentCoursesBinding;
 import com.example.myapplication.models.Curso;
 import com.example.myapplication.repositories.CourseRepository;
 import com.example.myapplication.services.SessionManager;
+import com.example.myapplication.utils.UiUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,9 +95,11 @@ public class CoursesFragment extends Fragment {
                     binding.layoutEmpty.setVisibility(lista.isEmpty() ? View.VISIBLE : View.GONE);
                 })
                 .addOnFailureListener(e -> {
+                    if (binding == null) return;
                     binding.progressCourses.setVisibility(View.GONE);
-                    Toast.makeText(requireContext(),
-                            "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    UiUtils.showRetry(binding.getRoot(),
+                            "No se pudieron cargar los cursos",
+                            this::cargarCursos);
                 });
     }
 

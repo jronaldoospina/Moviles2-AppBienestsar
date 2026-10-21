@@ -7,10 +7,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.models.RutaParada;
+import com.example.myapplication.utils.ListDiff;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,15 +32,22 @@ public class RutaParadaAdapter extends RecyclerView.Adapter<RutaParadaAdapter.VH
     public void setListener(OnParadaClick l) { this.listener = l; }
 
     public void setData(List<RutaParada> list) {
+        List<RutaParada> nuevas = list != null ? new ArrayList<>(list) : new ArrayList<>();
+        DiffUtil.DiffResult diff = ListDiff.calculate(data, nuevas,
+                (a, b) -> a.getOrden() == b.getOrden(),
+                (a, b) -> ListDiff.eq(a.getNombre(), b.getNombre())
+                        && ListDiff.eq(a.getReferencia(), b.getReferencia())
+                        && a.getLat() == b.getLat()
+                        && a.getLng() == b.getLng());
         data.clear();
-        if (list != null) data.addAll(list);
-        notifyDataSetChanged();
+        data.addAll(nuevas);
+        diff.dispatchUpdatesTo(this);
     }
 
     public void setMyLocation(Double lat, Double lng) {
         this.myLat = lat;
         this.myLng = lng;
-        notifyDataSetChanged();
+        notifyItemRangeChanged(0, data.size());
     }
 
     @NonNull

@@ -6,11 +6,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.models.Conversacion;
 import com.example.myapplication.utils.FechaUtils;
+import com.example.myapplication.utils.ListDiff;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -36,11 +38,19 @@ public class ConversationsAdapter extends RecyclerView.Adapter<ConversationsAdap
     }
 
     public void setConversaciones(List<Conversacion> conversaciones) {
+        List<Conversacion> nuevas = conversaciones != null
+                ? new ArrayList<>(conversaciones)
+                : new ArrayList<>();
+        DiffUtil.DiffResult diff = ListDiff.calculate(items, nuevas,
+                (a, b) -> ListDiff.eq(a.getId(), b.getId()),
+                (a, b) -> ListDiff.eq(a.getEstudianteNombre(), b.getEstudianteNombre())
+                        && ListDiff.eq(a.getPsicologoNombre(), b.getPsicologoNombre())
+                        && ListDiff.eq(a.getUltimoMensaje(), b.getUltimoMensaje())
+                        && ListDiff.eq(a.getPendientes(), b.getPendientes())
+                        && a.getUltimaActualizacion() == b.getUltimaActualizacion());
         items.clear();
-        if (conversaciones != null) {
-            items.addAll(conversaciones);
-        }
-        notifyDataSetChanged();
+        items.addAll(nuevas);
+        diff.dispatchUpdatesTo(this);
     }
 
     private String nombreOtro(Conversacion c) {

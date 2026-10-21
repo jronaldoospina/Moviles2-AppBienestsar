@@ -43,5 +43,5 @@
         android:textSize="13sp"
         android:gravity="center"
         android:paddingStart="16dp"
-        paddingEnd="16dp"/>
+        android:paddingEnd="16dp"/>
 </LinearLayout>

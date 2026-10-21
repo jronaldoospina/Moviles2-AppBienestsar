@@ -179,6 +179,9 @@ public class SemaforoPdfActivity extends AppCompatActivity {
         txtNivel.setText(nivel);
         int bg;
         switch (nivel) {
+            case "CRITICO":
+                bg = R.drawable.badge_risk_critical;
+                break;
             case "ALTO":
                 bg = R.drawable.badge_risk_high;
                 break;

@@ -6,19 +6,22 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.models.Alerta;
+import com.example.myapplication.utils.ListDiff;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AlertaAdapter extends RecyclerView.Adapter<AlertaAdapter.ViewHolder> {
 
-    private final List<Alerta> alertas;
+    private final List<Alerta> alertas = new ArrayList<>();
 
     public AlertaAdapter(List<Alerta> alertas) {
-        this.alertas = alertas;
+        if (alertas != null) this.alertas.addAll(alertas);
     }
 
     @NonNull
@@ -47,11 +50,20 @@ public class AlertaAdapter extends RecyclerView.Adapter<AlertaAdapter.ViewHolder
     }
 
     public void updateData(List<Alerta> nuevasAlertas) {
+        List<Alerta> copia = nuevasAlertas != null
+                ? new ArrayList<>(nuevasAlertas)
+                : new ArrayList<>();
+        DiffUtil.DiffResult diff = ListDiff.calculate(alertas, copia,
+                (a, b) -> ListDiff.eq(a.getId(), b.getId()),
+                (a, b) -> ListDiff.eq(a.getTitulo(), b.getTitulo())
+                        && ListDiff.eq(a.getEstudianteNombre(), b.getEstudianteNombre())
+                        && ListDiff.eq(a.getMotivo(), b.getMotivo())
+                        && ListDiff.eq(a.getDescripcion(), b.getDescripcion())
+                        && ListDiff.eq(a.getEstado(), b.getEstado())
+                        && a.getFecha() == b.getFecha());
         alertas.clear();
-        if (nuevasAlertas != null) {
-            alertas.addAll(nuevasAlertas);
-        }
-        notifyDataSetChanged();
+        alertas.addAll(copia);
+        diff.dispatchUpdatesTo(this);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

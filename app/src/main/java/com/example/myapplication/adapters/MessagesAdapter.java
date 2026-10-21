@@ -9,11 +9,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.models.Mensaje;
 import com.example.myapplication.utils.FechaUtils;
+import com.example.myapplication.utils.ListDiff;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,11 +30,16 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.VH> {
     }
 
     public void setMensajes(List<Mensaje> mensajes) {
+        List<Mensaje> nuevos = mensajes != null ? new ArrayList<>(mensajes) : new ArrayList<>();
+        DiffUtil.DiffResult diff = ListDiff.calculate(items, nuevos,
+                (a, b) -> ListDiff.eq(a.getId(), b.getId()),
+                (a, b) -> ListDiff.eq(a.getTexto(), b.getTexto())
+                        && ListDiff.eq(a.getRemitenteId(), b.getRemitenteId())
+                        && a.isLeido() == b.isLeido()
+                        && a.getFecha() == b.getFecha());
         items.clear();
-        if (mensajes != null) {
-            items.addAll(mensajes);
-        }
-        notifyDataSetChanged();
+        items.addAll(nuevos);
+        diff.dispatchUpdatesTo(this);
     }
 
     @NonNull

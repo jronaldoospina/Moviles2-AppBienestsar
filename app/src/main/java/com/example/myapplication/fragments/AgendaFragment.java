@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,14 +32,14 @@ import com.example.myapplication.repositories.UserRepository;
 import com.example.myapplication.services.SessionManager;
 import com.example.myapplication.utils.CitaReminderScheduler;
 import com.example.myapplication.utils.FechaUtils;
+import com.example.myapplication.utils.UiUtils;
+import com.example.myapplication.viewmodels.AgendaViewModel;
 import com.google.android.material.button.MaterialButtonToggleGroup;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.ListenerRegistration;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -54,7 +55,6 @@ public class AgendaFragment extends Fragment
     };
     private static final String[] DURACIONES = {"30 min", "45 min", "60 min"};
 
-    private final List<Cita> citas = new ArrayList<>();
     private final List<String> nombresEstudiantes = new ArrayList<>();
     private final List<String> idsEstudiantes = new ArrayList<>();
 
@@ -63,7 +63,7 @@ public class AgendaFragment extends Fragment
     private UserRepository userRepository;
     private NotificacionRepository notificacionRepository;
     private SessionManager sessionManager;
-    private ListenerRegistration registration;
+    private AgendaViewModel viewModel;
 
     private RecyclerView recycler;
     private TextView txtEmpty;
@@ -97,6 +97,7 @@ public class AgendaFragment extends Fragment
         userRepository = new UserRepository();
         notificacionRepository = new NotificacionRepository();
         sessionManager = new SessionManager(requireContext());
+        viewModel = new ViewModelProvider(this).get(AgendaViewModel.class);
 
         adapter = new AgendaAdapter();
         adapter.setOnCitaClickListener(this);
@@ -110,65 +111,43 @@ public class AgendaFragment extends Fragment
         grupoPeriodo.addOnButtonCheckedListener((group, checkedId, isChecked) -> {
             if (!isChecked) return;
             vistaSemana = checkedId == R.id.btn_periodo_semana;
-            aplicarPeriodo();
+            aplicarPeriodo(viewModel.getCitas().getValue());
         });
         grupoPeriodo.check(R.id.btn_periodo_todas);
 
+        observarViewModel();
         fab.setOnClickListener(v -> mostrarDialogoNuevaCita());
+    }
+
+    private void observarViewModel() {
+        viewModel.getCitas().observe(getViewLifecycleOwner(), lista -> {
+            aplicarPeriodo(lista);
+            sincronizarRecordatorios(lista);
+        });
+        viewModel.getLoading().observe(getViewLifecycleOwner(), cargando ->
+                progress.setVisibility(
+                        Boolean.TRUE.equals(cargando) ? View.VISIBLE : View.GONE));
+        viewModel.getError().observe(getViewLifecycleOwner(), mensaje -> {
+            if (mensaje == null || !isAdded() || getView() == null) return;
+            UiUtils.showRetry(requireView(), mensaje, viewModel::reintentar);
+            viewModel.clearError();
+        });
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        String uid = sessionManager.getUserId();
-        if (uid == null) return;
-        progress.setVisibility(View.VISIBLE);
-        registration = appointmentRepository.escucharCitasDePsicologo(uid, this::onCitasActualizadas);
+        viewModel.empezarEscucha(sessionManager.getUserId());
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        if (registration != null) {
-            registration.remove();
-            registration = null;
-        }
+        viewModel.detenerEscucha();
     }
 
-    private void onCitasActualizadas(@Nullable QuerySnapshot snapshots,
-                                     @Nullable com.google.firebase.firestore.FirebaseFirestoreException e) {
-        progress.setVisibility(View.GONE);
-        if (e != null) {
-            txtEmpty.setText("No se pudieron cargar las citas.\n" + e.getMessage());
-            txtEmpty.setVisibility(View.VISIBLE);
-            return;
-        }
-        citas.clear();
-        if (snapshots != null) {
-            for (DocumentSnapshot doc : snapshots.getDocuments()) {
-                Cita c = doc.toObject(Cita.class);
-                if (c != null) {
-                    c.setId(doc.getId());
-                    citas.add(c);
-                }
-            }
-        }
-        citas.sort((a, b) -> {
-            boolean aCanc = "CANCELADA".equals(a.getEstado());
-            boolean bCanc = "CANCELADA".equals(b.getEstado());
-            if (aCanc != bCanc) return aCanc ? 1 : -1;
-            int cmp = Comparator.nullsLast(String::compareTo)
-                    .compare(a.getFecha(), b.getFecha());
-            if (cmp != 0) return cmp;
-            return Comparator.nullsLast(String::compareTo)
-                    .compare(a.getHora(), b.getHora());
-        });
-        adapter.setCitas(citas);
-        txtEmpty.setVisibility(citas.isEmpty() ? View.VISIBLE : View.GONE);
-        sincronizarRecordatorios();
-    }
-
-    private void aplicarPeriodo() {
+    private void aplicarPeriodo(List<Cita> citas) {
+        if (citas == null) citas = new ArrayList<>();
         List<Cita> visibles;
         if (vistaSemana) {
             String hoyIso = LocalDate.now().toString();
@@ -205,7 +184,8 @@ public class AgendaFragment extends Fragment
         }
     }
 
-    private void sincronizarRecordatorios() {
+    private void sincronizarRecordatorios(List<Cita> citas) {
+        if (citas == null) return;
         for (Cita c : citas) {
             CitaReminderScheduler.sincronizar(requireContext(), c);
         }

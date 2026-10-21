@@ -9,11 +9,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.models.Usuario;
 import com.example.myapplication.services.SessionManager;
+import com.example.myapplication.utils.ListDiff;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +35,8 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
     private final Context context;
     private final OnUserClickListener userClickListener;
     private final OnOptionsClickListener optionsClickListener;
+    private String filtroRol = "";
+    private String filtroQuery = "";
 
     public UsersAdapter(Context context,
                         OnUserClickListener userClickListener,
@@ -44,8 +48,8 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
 
     public void setUsuarios(List<Usuario> lista) {
         usuarios.clear();
-        usuarios.addAll(lista);
-        aplicarFiltro(null, null);
+        if (lista != null) usuarios.addAll(lista);
+        aplicarFiltro(filtroRol, filtroQuery);
     }
 
     /**
@@ -54,11 +58,14 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
      * @param query  texto de búsqueda (null o "" para no filtrar)
      */
     public void aplicarFiltro(String rol, String query) {
-        usuariosFiltrados.clear();
-        String q = (query != null) ? query.toLowerCase().trim() : "";
+        filtroRol = (rol != null) ? rol : "";
+        filtroQuery = (query != null) ? query : "";
+
+        List<Usuario> nuevos = new ArrayList<>();
+        String q = filtroQuery.toLowerCase().trim();
 
         for (Usuario u : usuarios) {
-            boolean coincideRol = (rol == null || rol.isEmpty() || rol.equals(u.getRol()));
+            boolean coincideRol = (filtroRol.isEmpty() || filtroRol.equals(u.getRol()));
             boolean coincideTexto = q.isEmpty()
                     || (u.getNombre() != null && u.getNombre().toLowerCase().contains(q))
                     || (u.getEmail() != null && u.getEmail().toLowerCase().contains(q))
@@ -66,10 +73,18 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
                     || (u.getDocumento() != null && u.getDocumento().contains(q));
 
             if (coincideRol && coincideTexto) {
-                usuariosFiltrados.add(u);
+                nuevos.add(u);
             }
         }
-        notifyDataSetChanged();
+        DiffUtil.DiffResult diff = ListDiff.calculate(usuariosFiltrados, nuevos,
+                (a, b) -> ListDiff.eq(a.getUid(), b.getUid()),
+                (a, b) -> ListDiff.eq(a.getNombre(), b.getNombre())
+                        && ListDiff.eq(a.getEmail(), b.getEmail())
+                        && ListDiff.eq(a.getRol(), b.getRol())
+                        && a.isActivo() == b.isActivo());
+        usuariosFiltrados.clear();
+        usuariosFiltrados.addAll(nuevos);
+        diff.dispatchUpdatesTo(this);
     }
 
     public int getTotalFiltrado() {

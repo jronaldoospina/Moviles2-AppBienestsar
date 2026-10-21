@@ -8,10 +8,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.models.Message;
+import com.example.myapplication.utils.ListDiff;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,17 +23,26 @@ import java.util.Locale;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
 
-    private List<Message> messages;
+    private final List<Message> messages = new ArrayList<>();
     private final String userCurrentId; // ID del usuario actual (para saber si es emisor o receptor)
 
     public MessageAdapter(List<Message> messages, String userCurrentId) {
-        this.messages = messages != null ? messages : new ArrayList<>();
+        if (messages != null) this.messages.addAll(messages);
         this.userCurrentId = userCurrentId;
     }
 
     public void updateData(List<Message> newMessages) {
-        this.messages = newMessages != null ? newMessages : new ArrayList<>();
-        notifyDataSetChanged();
+        List<Message> nuevos = newMessages != null ? new ArrayList<>(newMessages) : new ArrayList<>();
+        DiffUtil.DiffResult diff = ListDiff.calculate(messages, nuevos,
+                (a, b) -> ListDiff.eq(a.getId(), b.getId()),
+                (a, b) -> ListDiff.eq(a.getMensaje(), b.getMensaje())
+                        && ListDiff.eq(a.getRemitenteId(), b.getRemitenteId())
+                        && ListDiff.eq(a.getNombreRemitente(), b.getNombreRemitente())
+                        && a.isLeido() == b.isLeido()
+                        && a.getFecha() == b.getFecha());
+        messages.clear();
+        messages.addAll(nuevos);
+        diff.dispatchUpdatesTo(this);
     }
 
     @NonNull

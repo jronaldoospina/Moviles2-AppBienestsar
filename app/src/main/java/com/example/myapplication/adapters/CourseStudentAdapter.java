@@ -7,10 +7,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.models.Nota;
+import com.example.myapplication.utils.ListDiff;
+import com.example.myapplication.utils.SemaforoUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,9 +52,31 @@ public class CourseStudentAdapter extends RecyclerView.Adapter<CourseStudentAdap
     }
 
     public void setData(List<StudentRow> nuevas, Map<String, Nota> notasIgnorado) {
+        List<StudentRow> copia = nuevas != null ? new ArrayList<>(nuevas) : new ArrayList<>();
+        DiffUtil.DiffResult diff = ListDiff.calculate(filas, copia,
+                (a, b) -> ListDiff.eq(a.estudianteId, b.estudianteId),
+                (a, b) -> ListDiff.eq(a.nombre, b.nombre)
+                        && ListDiff.eq(a.codigo, b.codigo)
+                        && mismaNota(a.nota, b.nota)
+                        && mismasNotas(a.notas, b.notas));
         filas.clear();
-        if (nuevas != null) filas.addAll(nuevas);
-        notifyDataSetChanged();
+        filas.addAll(copia);
+        diff.dispatchUpdatesTo(this);
+    }
+
+    private static boolean mismaNota(Nota a, Nota b) {
+        if (a == null || b == null) return a == b;
+        return a.getValor() == b.getValor()
+                && ListDiff.eq(a.getNivelRiesgo(), b.getNivelRiesgo());
+    }
+
+    private static boolean mismasNotas(List<Nota> a, List<Nota> b) {
+        if (a == null || b == null) return a == b;
+        if (a.size() != b.size()) return false;
+        for (int i = 0; i < a.size(); i++) {
+            if (!mismaNota(a.get(i), b.get(i))) return false;
+        }
+        return true;
     }
 
     @NonNull
@@ -99,14 +124,8 @@ public class CourseStudentAdapter extends RecyclerView.Adapter<CourseStudentAdap
             if (txtNota != null) {
                 if (fila.nota != null) {
                     txtNota.setText(String.format("%.1f", fila.nota.getValor()));
-                    int color;
-                    String nivel = fila.nota.getNivelRiesgo();
-                    switch (nivel != null ? nivel : "") {
-                        case "ALTO":  color = 0xFFD32F2F; break;
-                        case "MEDIO": color = 0xFFF57F17; break;
-                        default:      color = 0xFF388E3C; break;
-                    }
-                    txtNota.setTextColor(color);
+                    txtNota.setTextColor(
+                            SemaforoUtils.colorFor(itemView.getContext(), fila.nota.getValor()));
                 } else {
                     txtNota.setText("—");
                     txtNota.setTextColor(0xFF757575);

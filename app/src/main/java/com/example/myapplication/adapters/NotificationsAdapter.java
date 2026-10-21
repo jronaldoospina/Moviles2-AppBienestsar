@@ -8,11 +8,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.models.Notificacion;
 import com.example.myapplication.utils.FechaUtils;
+import com.example.myapplication.utils.ListDiff;
 import com.google.android.material.card.MaterialCardView;
 
 import java.time.LocalDate;
@@ -37,11 +39,19 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
     }
 
     public void setNotificaciones(List<Notificacion> notificaciones) {
+        List<Notificacion> nuevas = notificaciones != null
+                ? new ArrayList<>(notificaciones)
+                : new ArrayList<>();
+        DiffUtil.DiffResult diff = ListDiff.calculate(items, nuevas,
+                (a, b) -> ListDiff.eq(a.getId(), b.getId()),
+                (a, b) -> ListDiff.eq(a.getTitulo(), b.getTitulo())
+                        && ListDiff.eq(a.getCuerpo(), b.getCuerpo())
+                        && ListDiff.eq(a.getTipo(), b.getTipo())
+                        && a.isLeida() == b.isLeida()
+                        && a.getFecha() == b.getFecha());
         items.clear();
-        if (notificaciones != null) {
-            items.addAll(notificaciones);
-        }
-        notifyDataSetChanged();
+        items.addAll(nuevas);
+        diff.dispatchUpdatesTo(this);
     }
 
     private String fechaLabel(long ms) {

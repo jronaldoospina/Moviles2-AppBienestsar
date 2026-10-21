@@ -55,6 +55,19 @@ public class AppointmentRepository {
         return getCollection().get();
     }
 
+    /** Citas de una fecha concreta. */
+    public Task<QuerySnapshot> getCitasByFecha(String fecha) {
+        return getCollection().whereEqualTo("fecha", fecha).get();
+    }
+
+    /** Citas de un psicólogo en una fecha concreta. */
+    public Task<QuerySnapshot> getCitasByPsicologoYFecha(String psicologoId, String fecha) {
+        return getCollection()
+                .whereEqualTo("psicologoId", psicologoId)
+                .whereEqualTo("fecha", fecha)
+                .get();
+    }
+
     public Task<Void> updateCita(String citaId, Map<String, Object> updates) {
         updates.put("ultimaActualizacion", System.currentTimeMillis());
         return getCollection().document(citaId).update(updates);

@@ -24,6 +24,7 @@ import com.example.myapplication.repositories.CourseRepository;
 import com.example.myapplication.repositories.GradeRepository;
 import com.example.myapplication.repositories.TutoriaRepository;
 import com.example.myapplication.services.SessionManager;
+import com.example.myapplication.utils.UiUtils;
 import com.example.myapplication.utils.FechaUtils;
 import com.example.myapplication.utils.SemaforoUtils;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -41,7 +42,7 @@ public class MisCursosEstudianteFragment extends Fragment
         implements CourseAdapter.OnCourseClickListener {
 
     private RecyclerView recycler;
-    private TextView txtEmpty;
+    private View txtEmpty;
     private ProgressBar progress;
 
     private CourseAdapter adapter;
@@ -106,10 +107,11 @@ public class MisCursosEstudianteFragment extends Fragment
                     txtEmpty.setVisibility(lista.isEmpty() ? View.VISIBLE : View.GONE);
                 })
                 .addOnFailureListener(e -> {
+                    if (!isAdded() || getView() == null) return;
                     progress.setVisibility(View.GONE);
-                    Toast.makeText(requireContext(),
-                            "Error al cargar cursos: " + e.getMessage(),
-                            Toast.LENGTH_LONG).show();
+                    UiUtils.showRetry(requireView(),
+                            "No se pudieron cargar tus cursos",
+                            this::cargarCursos);
                 });
     }
 
@@ -230,7 +232,8 @@ public class MisCursosEstudianteFragment extends Fragment
             txtValor.setTextColor(requireContext().getColor(R.color.risk_high_text));
         }
         txtObs.setTextColor(requireContext().getColor(
-                n.getNivelRiesgo() != null && "ALTO".equals(n.getNivelRiesgo())
+                n.getNivelRiesgo() != null
+                        && ("ALTO".equals(n.getNivelRiesgo()) || "CRITICO".equals(n.getNivelRiesgo()))
                         ? R.color.risk_high_text
                         : R.color.text_secondary));
         txtObs.setText(n.getObservacion() != null && !n.getObservacion().isEmpty()

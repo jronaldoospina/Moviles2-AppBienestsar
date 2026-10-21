@@ -7,11 +7,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.models.Reporte;
 import com.example.myapplication.utils.FechaUtils;
+import com.example.myapplication.utils.ListDiff;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,9 +32,19 @@ public class MisReportesAdapter extends RecyclerView.Adapter<MisReportesAdapter.
     }
 
     public void setData(List<Reporte> nuevos) {
+        List<Reporte> copia = nuevos != null ? new ArrayList<>(nuevos) : new ArrayList<>();
+        DiffUtil.DiffResult diff = ListDiff.calculate(reportes, copia,
+                (a, b) -> ListDiff.eq(a.getId(), b.getId()),
+                (a, b) -> ListDiff.eq(a.getTipo(), b.getTipo())
+                        && ListDiff.eq(a.getEstado(), b.getEstado())
+                        && ListDiff.eq(a.getTitulo(), b.getTitulo())
+                        && ListDiff.eq(a.getDescripcion(), b.getDescripcion())
+                        && ListDiff.eq(a.getPsicologoNombre(), b.getPsicologoNombre())
+                        && ListDiff.eq(a.getNivelRiesgo(), b.getNivelRiesgo())
+                        && a.getFecha() == b.getFecha());
         reportes.clear();
-        if (nuevos != null) reportes.addAll(nuevos);
-        notifyDataSetChanged();
+        reportes.addAll(copia);
+        diff.dispatchUpdatesTo(this);
     }
 
     @NonNull
@@ -70,7 +82,11 @@ public class MisReportesAdapter extends RecyclerView.Adapter<MisReportesAdapter.
                 ? r.getPsicologoNombre() : "Bienestar Univ."));
 
         String nivel = r.getNivelRiesgo() != null ? r.getNivelRiesgo() : "";
-        if ("ALTO".equals(nivel)) {
+        if ("CRITICO".equals(nivel)) {
+            holder.txtRiesgo.setText("Riesgo: Crítico");
+            holder.txtRiesgo.setTextColor(holder.itemView.getContext()
+                    .getColor(R.color.risk_critical_text));
+        } else if ("ALTO".equals(nivel)) {
             holder.txtRiesgo.setText("Riesgo: Alto");
             holder.txtRiesgo.setTextColor(holder.itemView.getContext()
                     .getColor(R.color.risk_high_text));

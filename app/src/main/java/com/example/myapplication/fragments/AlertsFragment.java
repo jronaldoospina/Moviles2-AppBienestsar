@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,21 +21,16 @@ import com.example.myapplication.models.Alerta;
 import com.example.myapplication.repositories.AlertRepository;
 import com.example.myapplication.repositories.AuditRepository;
 import com.example.myapplication.services.SessionManager;
+import com.example.myapplication.utils.UiUtils;
+import com.example.myapplication.viewmodels.AlertsViewModel;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.ListenerRegistration;
-import com.google.firebase.firestore.QuerySnapshot;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class AlertsFragment extends Fragment {
 
-    private final List<Alerta> alertas = new ArrayList<>();
     private AlertsAdapter adapter;
     private AlertRepository repo;
     private SessionManager sessionManager;
-    private ListenerRegistration registration;
+    private AlertsViewModel viewModel;
 
     private RecyclerView recycler;
     private TextView txtEmpty;
@@ -57,48 +53,41 @@ public class AlertsFragment extends Fragment {
 
         repo = new AlertRepository();
         sessionManager = new SessionManager(requireContext());
+        viewModel = new ViewModelProvider(this).get(AlertsViewModel.class);
 
         adapter = new AlertsAdapter();
         adapter.setOnAlertaClickListener(this::mostrarOpciones);
         recycler.setLayoutManager(new LinearLayoutManager(requireContext()));
         recycler.setAdapter(adapter);
+
+        observarViewModel();
+    }
+
+    private void observarViewModel() {
+        viewModel.getAlertas().observe(getViewLifecycleOwner(), alertas -> {
+            adapter.setData(alertas);
+            txtEmpty.setVisibility(alertas.isEmpty() ? View.VISIBLE : View.GONE);
+        });
+        viewModel.getLoading().observe(getViewLifecycleOwner(), cargando ->
+                progress.setVisibility(
+                        Boolean.TRUE.equals(cargando) ? View.VISIBLE : View.GONE));
+        viewModel.getError().observe(getViewLifecycleOwner(), mensaje -> {
+            if (mensaje == null || !isAdded() || getView() == null) return;
+            UiUtils.showRetry(requireView(), mensaje, viewModel::reintentar);
+            viewModel.clearError();
+        });
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        progress.setVisibility(View.VISIBLE);
-        registration = repo.escucharAlertas(this::onAlertasActualizadas);
+        viewModel.empezarEscucha();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        if (registration != null) {
-            registration.remove();
-            registration = null;
-        }
-    }
-
-    private void onAlertasActualizadas(@Nullable QuerySnapshot snapshots, @Nullable com.google.firebase.firestore.FirebaseFirestoreException e) {
-        progress.setVisibility(View.GONE);
-        if (e != null) {
-            txtEmpty.setText("No se pudieron cargar las alertas.\n" + e.getMessage());
-            txtEmpty.setVisibility(View.VISIBLE);
-            return;
-        }
-        alertas.clear();
-        if (snapshots != null) {
-            for (DocumentSnapshot doc : snapshots.getDocuments()) {
-                Alerta a = doc.toObject(Alerta.class);
-                if (a != null) {
-                    a.setId(doc.getId());
-                    alertas.add(a);
-                }
-            }
-        }
-        adapter.setData(alertas);
-        txtEmpty.setVisibility(alertas.isEmpty() ? View.VISIBLE : View.GONE);
+        viewModel.detenerEscucha();
     }
 
     private void mostrarOpciones(Alerta alerta) {

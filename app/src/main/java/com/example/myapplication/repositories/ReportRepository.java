@@ -6,6 +6,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Map;
@@ -36,6 +37,11 @@ public class ReportRepository {
         return getCollection()
                 .whereEqualTo("estudianteId", estudianteId)
                 .get();
+    }
+
+    /** Consulta paginable de reportes de un estudiante. */
+    public Query getReportesQuery(String estudianteId) {
+        return getCollection().whereEqualTo("estudianteId", estudianteId);
     }
 
     /** Todos los reportes (para Admin) */

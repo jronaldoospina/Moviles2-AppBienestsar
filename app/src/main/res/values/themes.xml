@@ -45,7 +45,7 @@
         <item name="android:windowLightStatusBar">false</item>
         <!-- Opt-out del edge-to-edge forzado (Android 15+); evita que el contenido
              se dibuje debajo de la barra de estado. Se ignora en versiones anteriores. -->
-        <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
+        <item name="android:windowOptOutEdgeToEdgeEnforcement" tools:targetApi="35">true</item>
 
         <!-- Barra de navegación -->
         <item name="android:navigationBarColor">@color/white_card</item>

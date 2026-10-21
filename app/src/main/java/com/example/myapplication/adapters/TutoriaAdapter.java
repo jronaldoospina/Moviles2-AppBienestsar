@@ -7,10 +7,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.models.Tutoria;
+import com.example.myapplication.utils.ListDiff;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,12 +32,21 @@ public class TutoriaAdapter extends RecyclerView.Adapter<TutoriaAdapter.ViewHold
     }
 
     public void setData(List<Tutoria> nuevas) {
+        List<Tutoria> copia = nuevas != null ? new ArrayList<>(nuevas) : new ArrayList<>();
+        Collections.sort(copia, (a, b) -> Long.compare(b.getFechaCreacion(), a.getFechaCreacion()));
+        DiffUtil.DiffResult diff = ListDiff.calculate(tutorias, copia,
+                (a, b) -> ListDiff.eq(a.getId(), b.getId()),
+                (a, b) -> ListDiff.eq(a.getMateria(), b.getMateria())
+                        && ListDiff.eq(a.getCodigoCurso(), b.getCodigoCurso())
+                        && ListDiff.eq(a.getCursoNombre(), b.getCursoNombre())
+                        && ListDiff.eq(a.getDiaSemana(), b.getDiaSemana())
+                        && ListDiff.eq(a.getHoraInicio(), b.getHoraInicio())
+                        && ListDiff.eq(a.getHoraFin(), b.getHoraFin())
+                        && ListDiff.eq(a.getAula(), b.getAula())
+                        && a.isActiva() == b.isActiva());
         tutorias.clear();
-        if (nuevas != null) {
-            tutorias.addAll(nuevas);
-            Collections.sort(tutorias, (a, b) -> Long.compare(b.getFechaCreacion(), a.getFechaCreacion()));
-        }
-        notifyDataSetChanged();
+        tutorias.addAll(copia);
+        diff.dispatchUpdatesTo(this);
     }
 
     @NonNull

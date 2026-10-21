@@ -5,10 +5,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.models.Usuario;
+import com.example.myapplication.utils.ListDiff;
 import com.google.android.material.checkbox.MaterialCheckBox;
 
 import java.util.ArrayList;
@@ -33,9 +35,15 @@ public class EstudiantesMatriculaAdapter extends RecyclerView.Adapter<Estudiante
     }
 
     public void setEstudiantes(List<Usuario> lista) {
+        List<Usuario> nuevas = lista != null ? new ArrayList<>(lista) : new ArrayList<>();
+        DiffUtil.DiffResult diff = ListDiff.calculate(estudiantes, nuevas,
+                (a, b) -> ListDiff.eq(a.getUid(), b.getUid()),
+                (a, b) -> ListDiff.eq(a.getNombre(), b.getNombre())
+                        && ListDiff.eq(a.getDocumento(), b.getDocumento())
+                        && inscritos.contains(a.getUid()) == inscritos.contains(b.getUid()));
         estudiantes.clear();
-        if (lista != null) estudiantes.addAll(lista);
-        notifyDataSetChanged();
+        estudiantes.addAll(nuevas);
+        diff.dispatchUpdatesTo(this);
     }
 
     public List<String> getInscritos() {
