@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- ============================================ -->
-    <!-- MARCA: VERDE ESMERALDA (bienestar académico)  -->
+    <!-- MARCA: VERDE ESMERALDA (bienestar acadÃ©mico)  -->
     <!-- ============================================ -->
     <color name="green_primary">#059669</color>
     <color name="green_primary_dark">#047857</color>
@@ -14,7 +14,6 @@
     <!-- FONDOS Y SUPERFICIES -->
     <!-- ============================================ -->
     <color name="background_gray">#F6F7F9</color>
-    <color name="card_background">#FFFFFF</color>
     <color name="surface_container_low">#F8FAFC</color>
     <color name="surface_container">#EFF2F5</color>
     <color name="surface_container_high">#E7EAEE</color>
@@ -30,10 +29,9 @@
     <color name="text_primary">#111827</color>
     <color name="text_secondary">#6B7280</color>
     <color name="text_hint">#9CA3AF</color>
-    <color name="text_white">#FFFFFF</color>
 
     <!-- ============================================ -->
-    <!-- SEMÁFORO DE RIESGO (píldora clara + texto oscuro) -->
+    <!-- SEMÃFORO DE RIESGO (pÃ­ldora clara + texto oscuro) -->
     <!-- ============================================ -->
     <color name="risk_high_bg">#F44336</color>
     <color name="risk_high_text">#DC2626</color>
@@ -47,36 +45,22 @@
     <!-- ============================================ -->
     <color name="info_bg">#E0F2FE</color>
     <color name="info_text">#0369A1</color>
-    <color name="info_light">#BAE6FD</color>
-    <color name="info_text_icon">#0284C7</color>
-    <color name="info_icon">#0284C7</color>
 
     <!-- ============================================ -->
-    <!-- ÉXITO (ESMERALDA) -->
+    <!-- Ã‰XITO (ESMERALDA) -->
     <!-- ============================================ -->
     <color name="success_bg">#D1FAE5</color>
     <color name="success_text">#047857</color>
-    <color name="success_light">#A7F3D0</color>
-    <color name="success_text_icon">#047857</color>
-    <color name="success_icon">#059669</color>
 
     <!-- ============================================ -->
-    <!-- ADVERTENCIA (ÁMBAR) -->
+    <!-- ADVERTENCIA (ÃMBAR) -->
     <!-- ============================================ -->
-    <color name="warning_bg">#FFEB3B</color>
     <color name="warning_text">#B45309</color>
-    <color name="warning_light">#FDE68A</color>
-    <color name="warning_text_icon">#D97706</color>
-    <color name="warning_icon">#D97706</color>
 
     <!-- ============================================ -->
     <!-- ERROR (ROJO) -->
     <!-- ============================================ -->
-    <color name="error_bg">#FEE2E2</color>
     <color name="error_text">#DC2626</color>
-    <color name="error_light">#FECACA</color>
-    <color name="error_text_icon">#DC2626</color>
-    <color name="error_icon">#DC2626</color>
 
     <!-- ============================================ -->
     <!-- DIVISORES Y CONTORNOS -->
@@ -93,7 +77,7 @@
     <color name="chip_text">#111827</color>
 
     <!-- ============================================ -->
-    <!-- ACENTOS DE MÓDULO (misma profundidad tonal 600) -->
+    <!-- ACENTOS DE MÃ“DULO (misma profundidad tonal 600) -->
     <!-- ============================================ -->
     <color name="gray_light">#F3F4F6</color>
     <color name="gray_medium">#9CA3AF</color>
@@ -101,38 +85,19 @@
     <color name="blue_primary">#0284C7</color>
     <color name="blue_light">#BAE6FD</color>
     <color name="orange_primary">#D97706</color>
-    <color name="orange_light">#FED7AA</color>
-    <color name="red_primary">#DC2626</color>
-    <color name="red_light">#FECACA</color>
-    <color name="purple_primary">#7C3AED</color>
-    <color name="purple_light">#EDE9FE</color>
     <color name="teal_primary">#0D9488</color>
     <color name="teal_light">#CCFBF1</color>
 
     <!-- ============================================ -->
-    <!-- GRÁFICOS (fríos + 1 acento cálido, armónico con esmeralda) -->
+    <!-- GRÃFICOS (frÃ­os + 1 acento cÃ¡lido, armÃ³nico con esmeralda) -->
     <!-- ============================================ -->
-    <color name="chart_color_1">#059669</color>
-    <color name="chart_color_2">#0D9488</color>
-    <color name="chart_color_3">#0284C7</color>
-    <color name="chart_color_4">#8B5CF6</color>
-    <color name="chart_color_5">#F59E0B</color>
 
     <!-- ============================================ -->
     <!-- ICONOS -->
     <!-- ============================================ -->
-    <color name="icon_primary">#059669</color>
-    <color name="icon_secondary">#6B7280</color>
-    <color name="icon_white">#FFFFFF</color>
-    <color name="icon_dark">#111827</color>
-    <color name="icon_light">#F3F4F6</color>
-    <color name="icon_green">#059669</color>
-    <color name="icon_blue">#0284C7</color>
-    <color name="icon_orange">#D97706</color>
-    <color name="icon_red">#DC2626</color>
 
     <!-- ============================================ -->
-    <!-- NAVEGACIÓN -->
+    <!-- NAVEGACIÃ“N -->
     <!-- ============================================ -->
     <color name="nav_item_selected">#047857</color>
     <color name="nav_item_unselected">#6B7280</color>
@@ -147,14 +112,10 @@
     <!-- ============================================ -->
     <!-- GRADIENTES -->
     <!-- ============================================ -->
-    <color name="gradient_start">#10B981</color>
-    <color name="gradient_end">#047857</color>
 
     <!-- ============================================ -->
     <!-- TARJETAS -->
     <!-- ============================================ -->
-    <color name="card_stroke">#E5E7EB</color>
-    <color name="card_shadow">#14000000</color>
 
     <!-- ============================================ -->
     <!-- MODO OSCURO -->
@@ -162,24 +123,14 @@
     <color name="green_primary_night">#34D399</color>
     <color name="white_card_night">#171A1E</color>
     <color name="background_gray_night">#0E1013</color>
-    <color name="text_primary_night">#E5E7EB</color>
-    <color name="text_secondary_night">#9CA3AF</color>
     <color name="risk_high_text_night">#FCA5A5</color>
 
     <!-- ============================================ -->
     <!-- ESTADOS DE CITAS -->
     <!-- ============================================ -->
-    <color name="status_pending_bg">#FEF3C7</color>
-    <color name="status_pending_text">#B45309</color>
-    <color name="status_confirmed_bg">#D1FAE5</color>
-    <color name="status_confirmed_text">#047857</color>
-    <color name="status_cancelled_bg">#FEE2E2</color>
-    <color name="status_cancelled_text">#DC2626</color>
-    <color name="status_completed_bg">#E0F2FE</color>
-    <color name="status_completed_text">#0369A1</color>
 
     <!-- ============================================ -->
-    <!-- ÁNIMO (gradiente emocional cálido -> frío esmeralda) -->
+    <!-- ÃNIMO (gradiente emocional cÃ¡lido -> frÃ­o esmeralda) -->
     <!-- ============================================ -->
     <color name="mood_1">#EF4444</color>
     <color name="mood_2">#F97316</color>
@@ -190,36 +141,19 @@
     <!-- ============================================ -->
     <!-- ROLES DE USUARIO Y ESTADOS (SOLIDOS Y LEGIBLES) -->
     <!-- ============================================ -->
-    <color name="role_admin_bg">#6D28D9</color> <!-- Púrpura / Admin -->
-    <color name="role_psicologo_bg">#1D4ED8</color> <!-- Azul Intenso / Psicólogo -->
-    <color name="role_docente_bg">#D97706</color> <!-- Naranja Ámbar / Docente -->
-    <color name="role_estudiante_bg">#059669</color> <!-- Verde Esmeralda / Estudiante -->
-    <color name="status_active_bg">#16A34A</color> <!-- Verde Vivo / Activo -->
-    <color name="status_inactive_bg">#4B5563</color> <!-- Gris Pizarra / Inactivo -->
+<!-- PÃºrpura / Admin -->
+<!-- Azul Intenso / PsicÃ³logo -->
+<!-- Naranja Ãmbar / Docente -->
+<!-- Verde Esmeralda / Estudiante -->
+<!-- Verde Vivo / Activo -->
+<!-- Gris Pizarra / Inactivo -->
 
-    <!-- RIESGO CRÍTICO -->
+    <!-- RIESGO CRÃTICO -->
     <!-- ============================================ -->
-    <color name="risk_critical_bg">#B91C1C</color> <!-- Rojo Carmesí Crítico -->
+    <color name="risk_critical_bg">#B91C1C</color> <!-- Rojo CarmesÃ­ CrÃ­tico -->
 
     <!-- SKELETON LOADING -->
-    <color name="skeleton_color">#E5E7EB</color>
     <color name="skeleton_shimmer">#F3F4F6</color>
-    <color name="skeleton_surface">#F8F9FA</color>
 
     <color name="risk_critical_text">#DC2626</color>
-    <color name="risk_high_bg_night">#B91C1C</color>
-    <color name="risk_medium_bg_night">#FFC857</color>
-    <color name="risk_low_bg_night">#059669</color>
-    <color name="info_bg_night">#E0F2FE</color>
-    <color name="success_bg_night">#D1FAE5</color>
-    <color name="warning_bg_night">#FFC857</color>
-    <color name="error_bg_night">#FEE2E2</color>
-    <color name="status_pending_bg_night">#FEF3C7</color>
-    <color name="status_confirmed_bg_night">#D1FAE5</color>
-    <color name="status_cancelled_bg_night">#FEE2E2</color>
-    <color name="status_completed_bg_night">#E0F2FE</color>
-    <color name="status_pending_text_night">#B45309</color>
-    <color name="status_confirmed_text_night">#047857</color>
-    <color name="status_cancelled_text_night">#DC2626</color>
-    <color name="status_completed_text_night">#0369A1</color>
 </resources>
