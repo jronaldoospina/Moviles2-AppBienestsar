@@ -104,7 +104,8 @@ public class StudentsFragment extends Fragment {
     private void aplicarFiltros() {
         adapter.aplicarFiltro(riesgoActual, queryActual);
         int total = adapter.getTotalFiltrado();
-        binding.txtContador.setText(total + (total == 1 ? " estudiante" : " estudiantes"));
+        binding.txtContador.setText(getResources().getQuantityString(
+                R.plurals.students_contador, total, total));
         binding.layoutEmpty.setVisibility(total == 0 ? View.VISIBLE : View.GONE);
     }
 

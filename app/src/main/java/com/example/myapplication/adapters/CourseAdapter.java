@@ -84,11 +84,13 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     public void onBindViewHolder(@NonNull CourseViewHolder holder, int position) {
         Curso curso = cursosFiltrados.get(position);
 
-        holder.txtNombre.setText(curso.getNombre() != null ? curso.getNombre() : "Sin nombre");
-        holder.txtCodigo.setText(
-                (curso.getCodigo() != null ? curso.getCodigo() : "SIN-COD") +
-                        " · " + (curso.getPeriodo() != null ? curso.getPeriodo() : "")
-        );
+        holder.txtNombre.setText(curso.getNombre() != null ? curso.getNombre()
+                : holder.itemView.getContext().getString(R.string.sin_nombre));
+        holder.txtCodigo.setText(holder.itemView.getContext().getString(
+                R.string.course_codigo_periodo,
+                curso.getCodigo() != null ? curso.getCodigo()
+                        : holder.itemView.getContext().getString(R.string.sin_codigo),
+                curso.getPeriodo() != null ? curso.getPeriodo() : ""));
         holder.txtTotalEstudiantes.setText(String.valueOf(curso.getTotalEstudiantes()));
         holder.txtTotalCortes.setText(String.valueOf(curso.getTotalCortes()));
         holder.txtPrograma.setText(curso.getPrograma() != null ? curso.getPrograma() : "-");

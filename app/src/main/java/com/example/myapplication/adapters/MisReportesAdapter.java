@@ -60,7 +60,8 @@ public class MisReportesAdapter extends RecyclerView.Adapter<MisReportesAdapter.
         Reporte r = reportes.get(position);
 
         boolean esPlan = "PLAN".equals(r.getTipo());
-        holder.txtTipo.setText(esPlan ? "PLAN DE ACCIÓN" : "REPORTE");
+        holder.txtTipo.setText(holder.itemView.getContext().getString(esPlan
+                ? R.string.reporte_tipo_plan_accion : R.string.reporte_tipo_reporte));
         holder.txtTipo.setBackgroundResource(esPlan
                 ? R.drawable.badge_success : R.drawable.badge_info);
         holder.txtTipo.setTextColor(holder.itemView.getContext()
@@ -72,30 +73,33 @@ public class MisReportesAdapter extends RecyclerView.Adapter<MisReportesAdapter.
         holder.txtEstado.setTextColor(holder.itemView.getContext()
                 .getColor(estadoFgColor(estado)));
 
-        holder.txtTitulo.setText(r.getTitulo() != null ? r.getTitulo() : "Sin título");
+        holder.txtTitulo.setText(r.getTitulo() != null ? r.getTitulo()
+                : holder.itemView.getContext().getString(R.string.sin_titulo));
         holder.txtDesc.setText(r.getDescripcion() != null
-                ? r.getDescripcion() : "Sin descripción");
+                ? r.getDescripcion()
+                : holder.itemView.getContext().getString(R.string.sin_descripcion));
         holder.txtFecha.setText(r.getFecha() > 0
                 ? FechaUtils.fechaBonitaLong(r.getFecha()) : "");
 
-        holder.txtPsicologo.setText("Por: " + (r.getPsicologoNombre() != null
-                ? r.getPsicologoNombre() : "Bienestar Univ."));
+        holder.txtPsicologo.setText(holder.itemView.getContext().getString(R.string.reporte_por,
+                r.getPsicologoNombre() != null ? r.getPsicologoNombre()
+                        : holder.itemView.getContext().getString(R.string.bienestar_univ)));
 
         String nivel = r.getNivelRiesgo() != null ? r.getNivelRiesgo() : "";
         if ("CRITICO".equals(nivel)) {
-            holder.txtRiesgo.setText("Riesgo: Crítico");
+            holder.txtRiesgo.setText(R.string.riesgo_critico);
             holder.txtRiesgo.setTextColor(holder.itemView.getContext()
                     .getColor(R.color.risk_critical_text));
         } else if ("ALTO".equals(nivel)) {
-            holder.txtRiesgo.setText("Riesgo: Alto");
+            holder.txtRiesgo.setText(R.string.riesgo_alto);
             holder.txtRiesgo.setTextColor(holder.itemView.getContext()
                     .getColor(R.color.risk_high_text));
         } else if ("MEDIO".equals(nivel)) {
-            holder.txtRiesgo.setText("Riesgo: Medio");
+            holder.txtRiesgo.setText(R.string.riesgo_medio);
             holder.txtRiesgo.setTextColor(holder.itemView.getContext()
                     .getColor(R.color.risk_medium_text));
         } else if ("BAJO".equals(nivel)) {
-            holder.txtRiesgo.setText("Riesgo: Bajo");
+            holder.txtRiesgo.setText(R.string.riesgo_bajo);
             holder.txtRiesgo.setTextColor(holder.itemView.getContext()
                     .getColor(R.color.risk_low_text));
         } else {

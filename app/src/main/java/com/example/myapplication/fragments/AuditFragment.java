@@ -79,7 +79,7 @@ public class AuditFragment extends Fragment {
 
         progress.setVisibility(View.GONE);
         if (errorMsg != null) {
-            txtEmpty.setText("No se pudieron cargar los registros.\n" + errorMsg);
+            txtEmpty.setText(getString(R.string.audit_error_carga, errorMsg));
             txtEmpty.setVisibility(View.VISIBLE);
             return;
         }

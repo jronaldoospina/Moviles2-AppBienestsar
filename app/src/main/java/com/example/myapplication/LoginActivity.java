@@ -193,7 +193,7 @@ public class LoginActivity extends AppCompatActivity {
         if (show) {
             progressLogin.setVisibility(View.VISIBLE);
             btnLogin.setEnabled(false);
-            btnLogin.setText("Iniciando sesión...");
+            btnLogin.setText(R.string.login_iniciando);
         } else {
             progressLogin.setVisibility(View.GONE);
             btnLogin.setEnabled(true);

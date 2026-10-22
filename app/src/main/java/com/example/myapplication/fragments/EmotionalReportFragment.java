@@ -159,14 +159,14 @@ public class EmotionalReportFragment extends Fragment {
                     editDescripcion.setText(r.getDescripcion());
                 }
                 pintarSelector();
-                btnSave.setText("Actualizar reporte de hoy");
+                btnSave.setText(R.string.emo_actualizar_hoy);
                 return;
             }
         }
         selectedMood = 0;
         editingId = null;
         editDescripcion.setText("");
-        btnSave.setText("Guardar reporte");
+        btnSave.setText(R.string.emo_guardar_reporte);
         pintarSelector();
     }
 
@@ -284,7 +284,7 @@ public class EmotionalReportFragment extends Fragment {
         editingId = r.getId();
         todayExists = true;
         editDescripcion.setText(r.getDescripcion() != null ? r.getDescripcion() : "");
-        btnSave.setText("Actualizar reporte de hoy");
+        btnSave.setText(R.string.emo_actualizar_hoy);
         pintarSelector();
 
         View v = getView();

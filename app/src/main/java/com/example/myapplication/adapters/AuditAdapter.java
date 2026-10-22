@@ -95,11 +95,14 @@ public class AuditAdapter extends RecyclerView.Adapter<AuditAdapter.ViewHolder> 
                 .getColor(tipoFgColor(log.getTipo())));
         holder.txtDetalle.setText(log.getDetalle() != null
                 ? log.getDetalle() : "");
-        String autor = log.getUsuarioNombre() != null ? log.getUsuarioNombre() : "Usuario";
+        String autor = log.getUsuarioNombre() != null ? log.getUsuarioNombre()
+                : holder.itemView.getContext().getString(R.string.audit_usuario);
         if (log.getRol() != null && !log.getRol().isEmpty()) {
-            autor += " (" + log.getRol() + ")";
+            autor = holder.itemView.getContext().getString(R.string.audit_autor_rol,
+                    autor, log.getRol());
         }
-        holder.txtAutor.setText("Por: " + autor);
+        holder.txtAutor.setText(holder.itemView.getContext().getString(
+                R.string.audit_autor, autor));
         holder.txtFecha.setText(log.getFecha() > 0
                 ? FechaUtils.fechaBonitaLong(log.getFecha()) : "");
     }

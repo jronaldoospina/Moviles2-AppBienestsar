@@ -177,10 +177,11 @@ public class AgendaFragment extends Fragment
     private void actualizarResumen(int visibles) {
         if (txtResumenSemana == null) return;
         if (vistaSemana) {
-            txtResumenSemana.setText("Próximos 7 días: " + visibles
-                    + (visibles == 1 ? " cita programada" : " citas programadas"));
+            txtResumenSemana.setText(getResources().getQuantityString(
+                    R.plurals.agenda_resumen_semana, visibles, visibles));
         } else {
-            txtResumenSemana.setText("Agenda completa · " + visibles + " registros");
+            txtResumenSemana.setText(getResources().getQuantityString(
+                    R.plurals.agenda_resumen_completa, visibles, visibles));
         }
     }
 

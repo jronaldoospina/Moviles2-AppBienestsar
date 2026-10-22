@@ -145,7 +145,8 @@ public class UsersFragment extends Fragment {
     private void aplicarFiltros() {
         adapter.aplicarFiltro(rolActual, queryActual);
         int total = adapter.getTotalFiltrado();
-        binding.txtContador.setText(total + (total == 1 ? " usuario" : " usuarios"));
+        binding.txtContador.setText(getResources().getQuantityString(
+                R.plurals.users_contador, total, total));
         binding.layoutEmpty.setVisibility(total == 0 ? View.VISIBLE : View.GONE);
     }
 

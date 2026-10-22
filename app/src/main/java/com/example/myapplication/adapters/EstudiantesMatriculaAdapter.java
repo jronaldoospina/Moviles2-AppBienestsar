@@ -61,10 +61,13 @@ public class EstudiantesMatriculaAdapter extends RecyclerView.Adapter<Estudiante
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position) {
         Usuario u = estudiantes.get(position);
-        String nombre = u.getNombre() != null ? u.getNombre() : "Estudiante";
-        String documento = u.getDocumento() != null && !u.getDocumento().isEmpty()
-                ? " · " + u.getDocumento() : "";
-        holder.check.setText(nombre + documento);
+        String nombre = u.getNombre() != null ? u.getNombre()
+                : holder.itemView.getContext().getString(R.string.estudiante_default);
+        boolean tieneDoc = u.getDocumento() != null && !u.getDocumento().isEmpty();
+        holder.check.setText(tieneDoc
+                ? holder.itemView.getContext().getString(R.string.matricula_nombre_doc,
+                        nombre, u.getDocumento())
+                : nombre);
         holder.check.setChecked(inscritos.contains(u.getUid()));
         holder.check.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {

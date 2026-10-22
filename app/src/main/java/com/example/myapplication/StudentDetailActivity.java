@@ -349,10 +349,13 @@ public class StudentDetailActivity extends AppCompatActivity {
                         historialEmocional.addAll(lista);
                         ReporteEmocional r = lista.get(0);
                         dotEmocional.setBackgroundResource(AnimoUtils.circle(r.getAnimo()));
-                        txtEmocionalAnimo.setText("Último reporte: " + AnimoUtils.label(r.getAnimo()));
-                        txtEmocionalFecha.setText("Fecha: " + FechaUtils.fechaBonitaConAnio(r.getFechaDia()));
+                        txtEmocionalAnimo.setText(getString(R.string.student_ultimo_reporte,
+                                AnimoUtils.label(r.getAnimo())));
+                        txtEmocionalFecha.setText(getString(R.string.student_emocional_fecha,
+                                FechaUtils.fechaBonitaConAnio(r.getFechaDia())));
                         if (r.getDescripcion() != null && !r.getDescripcion().isEmpty()) {
-                            txtEmocionalDesc.setText("\"" + r.getDescripcion() + "\"");
+                            txtEmocionalDesc.setText(getString(R.string.student_emocional_desc,
+                                    r.getDescripcion()));
                             txtEmocionalDesc.setVisibility(View.VISIBLE);
                         } else {
                             txtEmocionalDesc.setVisibility(View.GONE);
@@ -398,12 +401,14 @@ public class StudentDetailActivity extends AppCompatActivity {
                 activos++;
             }
         }
-        txtReporteCount.setText(reportes.size() + " en total · " + activos + " activos");
+        txtReporteCount.setText(getResources().getQuantityString(
+                R.plurals.student_reportes_resumen, reportes.size(),
+                reportes.size(), activos));
 
         reportesContainer.removeAllViews();
         if (reportes.isEmpty()) {
             TextView empty = new TextView(this);
-            empty.setText("Aún no hay reportes ni planes para este estudiante.");
+            empty.setText(R.string.student_sin_reportes);
             empty.setTextColor(getColor(R.color.text_secondary));
             empty.setTextSize(13f);
             reportesContainer.addView(empty);
@@ -415,18 +420,22 @@ public class StudentDetailActivity extends AppCompatActivity {
             View row = inflater.inflate(R.layout.item_reporte_card, reportesContainer, false);
 
             TextView txtTitulo = row.findViewById(R.id.txt_reporte_titulo);
-            String tipo = "PLAN".equals(r.getTipo()) ? "Plan" : "Reporte";
-            txtTitulo.setText(tipo + ": " + (r.getTitulo() != null ? r.getTitulo() : "Sin título"));
+            String tipo = getString("PLAN".equals(r.getTipo())
+                    ? R.string.reporte_tipo_plan : R.string.reporte_tipo_simple);
+            txtTitulo.setText(getString(R.string.student_reporte_titulo, tipo,
+                    r.getTitulo() != null ? r.getTitulo() : getString(R.string.sin_titulo)));
 
             TextView txtFecha = row.findViewById(R.id.txt_reporte_fecha);
             String fecha = FechaUtils.fechaBonitaLong(r.getFecha());
             String riesgo = r.getNivelRiesgo() != null ? r.getNivelRiesgo() : "-";
-            txtFecha.setText(fecha + " · Riesgo " + riesgo);
+            txtFecha.setText(getString(R.string.student_reporte_fecha_riesgo, fecha, riesgo));
 
             boolean esPlan = "PLAN".equals(r.getTipo());
             if (esPlan) {
                 int nAvances = r.getAvances() != null ? r.getAvances().size() : 0;
-                txtFecha.setText(txtFecha.getText() + " · " + nAvances + " avances");
+                txtFecha.setText(getResources().getQuantityString(
+                        R.plurals.student_reporte_avances, nAvances,
+                        txtFecha.getText(), nAvances));
             }
 
             TextView txtEstado = row.findViewById(R.id.txt_reporte_estado);
@@ -450,16 +459,16 @@ public class StudentDetailActivity extends AppCompatActivity {
     private void pintarEstadoBadge(TextView tv, Reporte r) {
         if (r.isPlanCumplido()) {
             tv.setBackgroundResource(R.drawable.badge_success);
-            tv.setText("CUMPLIDO");
+            tv.setText(R.string.estado_cumplido);
         } else if ("EN_SEGUIMIENTO".equals(r.getEstado())) {
             tv.setBackgroundResource(R.drawable.badge_risk_medium);
-            tv.setText("EN SEGUIMIENTO");
+            tv.setText(R.string.estado_en_seguimiento);
         } else if ("ATENDIDO".equals(r.getEstado())) {
             tv.setBackgroundResource(R.drawable.badge_success);
-            tv.setText("ATENDIDO");
+            tv.setText(R.string.estado_atendido);
         } else {
             tv.setBackgroundResource(R.drawable.badge_info);
-            tv.setText("ABIERTO");
+            tv.setText(R.string.estado_abierto);
         }
     }
 

@@ -144,7 +144,8 @@ public class AdminCoursesFragment extends Fragment {
     private void aplicarFiltro() {
         adapter.aplicarFiltro(queryActual);
         int total = adapter.getTotalFiltrado();
-        txtContador.setText(total + (total == 1 ? " curso" : " cursos"));
+        txtContador.setText(getResources().getQuantityString(
+                R.plurals.admin_cursos_contador, total, total));
         boolean hayBusqueda = queryActual != null && !queryActual.trim().isEmpty();
         boolean sinResultados = total == 0;
         txtEmpty.setVisibility(sinResultados ? View.VISIBLE : View.GONE);

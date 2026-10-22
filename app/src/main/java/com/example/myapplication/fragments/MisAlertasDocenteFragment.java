@@ -62,7 +62,7 @@ public class MisAlertasDocenteFragment extends Fragment {
     private void observarViewModel() {
         viewModel.getAlertas().observe(getViewLifecycleOwner(), alertas -> {
             adapter.setData(alertas);
-            txtEmpty.setText("Aún no has reportado alertas.");
+            txtEmpty.setText(R.string.mis_alertas_vacio);
             txtEmpty.setVisibility(alertas.isEmpty() ? View.VISIBLE : View.GONE);
         });
         viewModel.getLoading().observe(getViewLifecycleOwner(), cargando ->

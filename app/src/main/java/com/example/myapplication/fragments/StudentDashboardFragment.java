@@ -78,7 +78,8 @@ public class StudentDashboardFragment extends Fragment {
                     + ", " + hoy.getDayOfMonth() + " de "
                     + hoy.getMonth().getDisplayName(TextStyle.FULL, new Locale("es", "CO"))
                     + " de " + hoy.getYear();
-            txtDate.setText(fecha.substring(0, 1).toUpperCase() + fecha.substring(1));
+            String fechaCapitalizada = fecha.substring(0, 1).toUpperCase() + fecha.substring(1);
+            txtDate.setText(fechaCapitalizada);
         }
     }
 
@@ -126,7 +127,7 @@ public class StudentDashboardFragment extends Fragment {
                 txtMaterias.setText("0");
                 txtRiesgo.setText("0");
                 txtAprobadas.setText("0");
-                txtNivel.setText("Sin datos académicos");
+                txtNivel.setText(R.string.estudiante_sin_datos_academicos);
                 txtRecomendacion.setText("");
                 return;
             }
@@ -138,7 +139,8 @@ public class StudentDashboardFragment extends Fragment {
 
             semaforoCircle.setBackgroundResource(SemaforoUtils.drawableFor(resumen.promedio));
             int color = SemaforoUtils.colorFor(requireContext(), resumen.promedio);
-            txtNivel.setText("Nivel de riesgo: " + SemaforoUtils.nivelFor(resumen.promedio));
+            txtNivel.setText(getString(R.string.nivel_riesgo,
+                    SemaforoUtils.nivelFor(resumen.promedio)));
             txtNivel.setTextColor(color);
             txtRecomendacion.setTextColor(color);
             txtRecomendacion.setText(recomendacionPara(resumen.promedio, resumen.enRiesgo));

@@ -69,7 +69,8 @@ public class GradesAdapter extends RecyclerView.Adapter<GradesAdapter.ViewHolder
         String codigo = estudianteCodigos.get(position);
 
         holder.txtNombre.setText(nombre);
-        holder.txtCodigo.setText("Código: " + (codigo != null ? codigo : "-"));
+        holder.txtCodigo.setText(holder.itemView.getContext().getString(
+                R.string.grade_codigo, codigo != null ? codigo : "-"));
 
         // Cargar nota existente si existe
         Nota notaExistente = null;

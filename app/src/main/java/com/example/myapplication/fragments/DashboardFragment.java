@@ -142,7 +142,8 @@ public class DashboardFragment extends Fragment {
 
     private void pintarSaludo() {
         if (textDate != null) {
-            textDate.setText(getString(R.string.dashboard_hoy) + FechaUtils.fechaBonitaConAnio(FechaUtils.hoyIso()));
+            textDate.setText(getString(R.string.dashboard_fecha,
+                    FechaUtils.fechaBonitaConAnio(FechaUtils.hoyIso())));
         }
     }
 

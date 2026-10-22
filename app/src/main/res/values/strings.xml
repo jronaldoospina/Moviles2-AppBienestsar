@@ -99,14 +99,12 @@
     <string name="dashboard_atendidas">Atendidas</string>
     <string name="dashboard_usuarios">Usuarios</string>
     <string name="dashboard_estadisticas">Estadísticas</string>
-    <string name="dashboard_hoy">Hoy, </string>
     <string name="teacher_mis_cursos">Mis Cursos</string>
     <string name="teacher_tutorias_activas">Tutorías Activas</string>
     <string name="teacher_estudiantes">Estudiantes</string>
     <string name="teacher_cursos">Cursos</string>
     <string name="teacher_tutorias">Tutorías</string>
     <string name="teacher_alertas">Alertas</string>
-    <string name="teacher_hoy">Hoy, </string>
     <string name="agenda_min"> min</string>
     <string name="estado_confirmada">Confirmada</string>
     <string name="estado_atendida">Atendida</string>
@@ -126,6 +124,116 @@
     <string name="motivo_comportamiento">Comportamiento</string>
     <string name="motivo_otro">Otro</string>
     <string name="motivo_bajo_rendimiento">Bajo rendimiento</string>
+
+    <string name="sin_nombre">Sin nombre</string>
+    <string name="sin_titulo">Sin título</string>
+    <string name="sin_descripcion">Sin descripción</string>
+    <string name="sin_codigo">SIN-COD</string>
+    <string name="bienestar_univ">Bienestar Univ.</string>
+    <string name="reporte_por">Por: %1$s</string>
+    <string name="reporte_tipo_plan_accion">PLAN DE ACCIÓN</string>
+    <string name="reporte_tipo_reporte">REPORTE</string>
+    <string name="reporte_tipo_plan">Plan</string>
+    <string name="reporte_tipo_simple">Reporte</string>
+    <string name="riesgo_critico">Riesgo: Crítico</string>
+    <string name="riesgo_alto">Riesgo: Alto</string>
+    <string name="riesgo_medio">Riesgo: Medio</string>
+    <string name="riesgo_bajo">Riesgo: Bajo</string>
+    <string name="course_codigo_periodo">%1$s · %2$s</string>
+    <string name="grade_codigo">Código: %1$s</string>
+    <string name="msg_yo">Yo</string>
+    <string name="msg_desconocido">Desconocido</string>
+    <string name="audit_usuario">Usuario</string>
+    <string name="audit_autor">Por: %1$s</string>
+    <string name="audit_autor_rol">%1$s (%2$s)</string>
+    <string name="tutoria_default">Tutoría</string>
+    <string name="tutoria_curso_codigo">%1$s · %2$s</string>
+    <string name="tutoria_horario">%1$s · %2$s - %3$s</string>
+    <string name="tutoria_aula">Aula: %1$s</string>
+    <string name="tutoria_aula_por_confirmar">Aula por confirmar</string>
+    <string name="tutoria_estado_activa">ACTIVA</string>
+    <string name="tutoria_estado_inactiva">INACTIVA</string>
+    <plurals name="paciente_alertas">
+        <item quantity="one">%1$d alerta activa</item>
+        <item quantity="other">%1$d alertas activas</item>
+    </plurals>
+    <string name="paciente_riesgo">Riesgo %1$s</string>
+    <string name="paciente_sin_riesgo">Sin riesgo</string>
+    <string name="paciente_animo"> · Ánimo: %1$s</string>
+    <string name="paciente_sin_animo"> · Sin estado registrado</string>
+    <string name="paciente_sub">%1$s · %2$s%3$s</string>
+    <string name="semaforo_periodo">PERÍODO %1$s</string>
+    <string name="semaforo_repetida_suffix">  [REPETIDA]</string>
+    <string name="sem_sin_nota">S/N</string>
+    <string name="estudiante_default">Estudiante</string>
+    <string name="matricula_nombre_doc">%1$s · %2$s</string>
+    <string name="student_ultimo_reporte">Último reporte: %1$s</string>
+    <string name="student_emocional_fecha">Fecha: %1$s</string>
+    <string name="student_emocional_desc">\"%1$s\"</string>
+    <plurals name="student_reportes_resumen">
+        <item quantity="one">%1$d en total · %2$d activos</item>
+        <item quantity="other">%1$d en total · %2$d activos</item>
+    </plurals>
+    <string name="student_sin_reportes">Aún no hay reportes ni planes para este estudiante.</string>
+    <string name="student_reporte_titulo">%1$s: %2$s</string>
+    <string name="student_reporte_fecha_riesgo">%1$s · Riesgo %2$s</string>
+    <plurals name="student_reporte_avances">
+        <item quantity="one">%1$s · %2$d avance</item>
+        <item quantity="other">%1$s · %2$d avances</item>
+    </plurals>
+    <string name="estado_cumplido">CUMPLIDO</string>
+    <string name="estado_en_seguimiento">EN SEGUIMIENTO</string>
+    <string name="estado_atendido">ATENDIDO</string>
+    <string name="estado_abierto">ABIERTO</string>
+    <string name="semaforo_leyendo_pdf">Leyendo el PDF...</string>
+    <string name="semaforo_error_lectura">No se pudo leer el PDF: %1$s</string>
+    <string name="semaforo_documento">Documento: %1$s</string>
+    <plurals name="semaforo_contadores">
+        <item quantity="one">%1$d materia · %2$d repetidas · %3$d sin nota</item>
+        <item quantity="other">%1$d materias · %2$d repetidas · %3$d sin nota</item>
+    </plurals>
+    <string name="semaforo_leido_ok">Reporte leído correctamente.</string>
+    <string name="riesgo_prefix">Riesgo: %1$s</string>
+    <string name="corte_numero">Corte %1$d</string>
+    <string name="corte_registrada">Registrada: %1$s</string>
+    <string name="user_activo">ACTIVO</string>
+    <string name="user_inactivo">INACTIVO</string>
+    <string name="user_desactivar">Desactivar Usuario</string>
+    <string name="user_activar">Activar Usuario</string>
+    <plurals name="course_estudiantes">
+        <item quantity="one">%1$d estudiante</item>
+        <item quantity="other">%1$d estudiantes</item>
+    </plurals>
+    <string name="course_corte_nombre">Corte: %1$s</string>
+    <plurals name="agenda_resumen_semana">
+        <item quantity="one">Próximos 7 días: %1$d cita programada</item>
+        <item quantity="other">Próximos 7 días: %1$d citas programadas</item>
+    </plurals>
+    <plurals name="agenda_resumen_completa">
+        <item quantity="one">Agenda completa · %1$d registro</item>
+        <item quantity="other">Agenda completa · %1$d registros</item>
+    </plurals>
+    <string name="emo_actualizar_hoy">Actualizar reporte de hoy</string>
+    <string name="emo_guardar_reporte">Guardar reporte</string>
+    <string name="dashboard_fecha">Hoy, %1$s</string>
+    <string name="teacher_fecha">Hoy, %1$s</string>
+    <string name="estudiante_sin_datos_academicos">Sin datos académicos</string>
+    <string name="nivel_riesgo">Nivel de riesgo: %1$s</string>
+    <string name="login_iniciando">Iniciando sesión...</string>
+    <plurals name="admin_cursos_contador">
+        <item quantity="one">%1$d curso</item>
+        <item quantity="other">%1$d cursos</item>
+    </plurals>
+    <string name="audit_error_carga">No se pudieron cargar los registros.\n%1$s</string>
+    <string name="mis_alertas_vacio">Aún no has reportado alertas.</string>
+    <plurals name="students_contador">
+        <item quantity="one">%1$d estudiante</item>
+        <item quantity="other">%1$d estudiantes</item>
+    </plurals>
+    <plurals name="users_contador">
+        <item quantity="one">%1$d usuario</item>
+        <item quantity="other">%1$d usuarios</item>
+    </plurals>
 
     <!-- ============ CONTENT DESCRIPTIONS ============ -->
     <string name="cd_avatar">Avatar del usuario</string>

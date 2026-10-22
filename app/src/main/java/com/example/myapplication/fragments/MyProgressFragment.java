@@ -174,7 +174,8 @@ public class MyProgressFragment extends Fragment {
 
         semaforoCircle.setBackgroundResource(SemaforoUtils.drawableFor(promedio));
         int color = SemaforoUtils.colorFor(requireContext(), promedio);
-        txtNivel.setText("Nivel de riesgo: " + SemaforoUtils.nivelFor(promedio));
+        txtNivel.setText(getString(R.string.nivel_riesgo,
+                SemaforoUtils.nivelFor(promedio)));
         txtNivel.setTextColor(color);
     }
 

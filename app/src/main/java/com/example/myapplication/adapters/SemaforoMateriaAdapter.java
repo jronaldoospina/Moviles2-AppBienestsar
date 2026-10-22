@@ -44,7 +44,8 @@ public class SemaforoMateriaAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof PeriodoHolder) {
-            ((PeriodoHolder) holder).titulo.setText("PERÍODO " + items.get(position));
+            ((PeriodoHolder) holder).titulo.setText(holder.itemView.getContext()
+                    .getString(R.string.semaforo_periodo, items.get(position)));
         } else {
             MateriaHolder mh = (MateriaHolder) holder;
             SemaforoPdf.Materia m = (SemaforoPdf.Materia) items.get(position);
@@ -52,7 +53,10 @@ public class SemaforoMateriaAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             mh.codigo.setText(m.codigo);
 
             String nombre = m.nombre != null ? m.nombre : "";
-            if (m.repetida()) nombre = nombre + "  [REPETIDA]";
+            if (m.repetida()) {
+                nombre = nombre + holder.itemView.getContext()
+                        .getString(R.string.semaforo_repetida_suffix);
+            }
             mh.nombre.setText(nombre);
 
             if (m.definitiva != null) {
@@ -61,7 +65,8 @@ public class SemaforoMateriaAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                         holder.itemView.getContext(), m.definitiva));
             } else {
                 String nota = (m.notaTexto != null && !m.notaTexto.isEmpty())
-                        ? m.notaTexto : "S/N";
+                        ? m.notaTexto
+                        : holder.itemView.getContext().getString(R.string.sem_sin_nota);
                 mh.nota.setText(nota);
                 mh.nota.setTextColor(holder.itemView.getContext()
                         .getColor(R.color.text_secondary));

@@ -136,8 +136,11 @@ public class CourseDetailActivity extends AppCompatActivity {
 
     private void pintarInfo() {
         binding.txtCursoNombre.setText(cursoActual.getNombre());
-        binding.txtCursoCodigo.setText(cursoActual.getCodigo() + " · " + cursoActual.getPeriodo());
-        binding.txtCursoEstudiantes.setText(cursoActual.getTotalEstudiantes() + " estudiantes");
+        binding.txtCursoCodigo.setText(getString(R.string.course_codigo_periodo,
+                cursoActual.getCodigo(), cursoActual.getPeriodo()));
+        binding.txtCursoEstudiantes.setText(getResources().getQuantityString(
+                R.plurals.course_estudiantes, cursoActual.getTotalEstudiantes(),
+                cursoActual.getTotalEstudiantes()));
     }
 
     private void pintarCortes() {
@@ -463,7 +466,7 @@ private void abrirDialogoRegistroMasivo() {
                 }
             }
         }
-        txtCorte.setText("Corte: " + nombreCorte);
+        txtCorte.setText(getString(R.string.course_corte_nombre, nombreCorte));
 
         // Obtener datos de estudiantes
         List<String> estudianteIds = cursoActual != null ? cursoActual.getEstudiantesIds() : new ArrayList<>();

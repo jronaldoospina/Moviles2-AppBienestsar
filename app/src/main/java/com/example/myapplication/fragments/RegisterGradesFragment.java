@@ -122,7 +122,7 @@ public class RegisterGradesFragment extends Fragment {
                     }
                 }
             }
-            txtCorteActual.setText("Corte: " + nombreCorte);
+            txtCorteActual.setText(getString(R.string.course_corte_nombre, nombreCorte));
         }
     }
 

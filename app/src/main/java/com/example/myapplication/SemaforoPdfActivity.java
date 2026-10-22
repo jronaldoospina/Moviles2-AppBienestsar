@@ -105,7 +105,7 @@ public class SemaforoPdfActivity extends AppCompatActivity {
     private void procesarPdf(Uri uri) {
         progress.setVisibility(View.VISIBLE);
         btnAplicar.setEnabled(false);
-        txtEstado.setText("Leyendo el PDF...");
+        txtEstado.setText(R.string.semaforo_leyendo_pdf);
 
         new Thread(() -> {
             String texto = null;
@@ -125,7 +125,7 @@ public class SemaforoPdfActivity extends AppCompatActivity {
             runOnUiThread(() -> {
                 progress.setVisibility(View.GONE);
                 if (fe != null) {
-                    txtEstado.setText("No se pudo leer el PDF: " + fe);
+                    txtEstado.setText(getString(R.string.semaforo_error_lectura, fe));
                     return;
                 }
                 try {
@@ -142,7 +142,8 @@ public class SemaforoPdfActivity extends AppCompatActivity {
         semaforo = r;
 
         txtNombre.setText(r.nombres != null ? r.nombres : "-");
-        txtDocumento.setText("Documento: " + (r.documento != null ? r.documento : "-"));
+        txtDocumento.setText(getString(R.string.semaforo_documento,
+                r.documento != null ? r.documento : "-"));
         txtPrograma.setText(r.programa != null && !r.programa.isEmpty() ? r.programa : "-");
         txtPensum.setText(r.pensum != null ? r.pensum : "-");
         txtSemestre.setText(r.semestre > 0 ? String.valueOf(r.semestre) : "-");
@@ -153,9 +154,8 @@ public class SemaforoPdfActivity extends AppCompatActivity {
         circulo.setBackgroundResource(SemaforoUtils.drawableFor(r.promedioAcumulado));
 
         pintarNivel(SemaforoUtils.nivelFor(r.promedioAcumulado));
-        txtContadores.setText(r.contarMaterias() + " materias · "
-                + r.contarRepetidas() + " repetidas · "
-                + r.contarSinNota() + " sin nota");
+        txtContadores.setText(getResources().getQuantityString(R.plurals.semaforo_contadores,
+                r.contarMaterias(), r.contarMaterias(), r.contarRepetidas(), r.contarSinNota()));
 
         List<Object> items = new ArrayList<>();
         int pActual = -1;
@@ -171,7 +171,7 @@ public class SemaforoPdfActivity extends AppCompatActivity {
 
         cardSumario.setVisibility(View.VISIBLE);
         rvMaterias.setVisibility(View.VISIBLE);
-        txtEstado.setText("Reporte leído correctamente.");
+        txtEstado.setText(R.string.semaforo_leido_ok);
         btnAplicar.setEnabled(true);
     }
 

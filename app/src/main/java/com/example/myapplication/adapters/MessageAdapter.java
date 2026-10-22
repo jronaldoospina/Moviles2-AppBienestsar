@@ -68,11 +68,12 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             // Mi mensaje a la derecha
             ((LinearLayout) holder.layoutMensaje).setGravity(Gravity.END);
             holder.txtMensaje.setBackgroundResource(R.drawable.badge_circle_green_light);
-            holder.txtNombre.setText("Yo");
+            holder.txtNombre.setText(R.string.msg_yo);
         } else {
             // Mensaje de otro persona a la izquierda
             ((LinearLayout) holder.layoutMensaje).setGravity(Gravity.START);
-            holder.txtNombre.setText(message.getNombreRemitente() != null ? message.getNombreRemitente() : "Desconocido");
+            holder.txtNombre.setText(message.getNombreRemitente() != null
+                    ? message.getNombreRemitente() : holder.itemView.getContext().getString(R.string.msg_desconocido));
             holder.txtMensaje.setBackgroundResource(android.R.color.darker_gray);
         }
 

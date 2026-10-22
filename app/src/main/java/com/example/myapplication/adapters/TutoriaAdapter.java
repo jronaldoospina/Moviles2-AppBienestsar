@@ -60,17 +60,25 @@ public class TutoriaAdapter extends RecyclerView.Adapter<TutoriaAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Tutoria t = tutorias.get(position);
-        holder.txtMateria.setText(t.getMateria() != null ? t.getMateria() : "Tutoría");
-        holder.txtCurso.setText(((t.getCodigoCurso() != null ? t.getCodigoCurso() + " · " : "")
-                + (t.getCursoNombre() != null ? t.getCursoNombre() : "")));
-        holder.txtHorario.setText(diaLabel(t.getDiaSemana()) + " · "
-                + (t.getHoraInicio() != null ? t.getHoraInicio() : "--")
-                + " - " + (t.getHoraFin() != null ? t.getHoraFin() : "--"));
+        android.content.Context ctx = holder.itemView.getContext();
+        holder.txtMateria.setText(t.getMateria() != null
+                ? t.getMateria() : ctx.getString(R.string.tutoria_default));
+        String codigo = t.getCodigoCurso();
+        holder.txtCurso.setText(codigo != null
+                ? ctx.getString(R.string.tutoria_curso_codigo, codigo,
+                        t.getCursoNombre() != null ? t.getCursoNombre() : "")
+                : (t.getCursoNombre() != null ? t.getCursoNombre() : ""));
+        holder.txtHorario.setText(ctx.getString(R.string.tutoria_horario,
+                diaLabel(t.getDiaSemana()),
+                t.getHoraInicio() != null ? t.getHoraInicio() : "--",
+                t.getHoraFin() != null ? t.getHoraFin() : "--"));
         holder.txtAula.setText((t.getAula() != null && !t.getAula().isEmpty())
-                ? "Aula: " + t.getAula() : "Aula por confirmar");
+                ? ctx.getString(R.string.tutoria_aula, t.getAula())
+                : ctx.getString(R.string.tutoria_aula_por_confirmar));
 
         boolean activa = t.isActiva();
-        holder.txtEstado.setText(activa ? "ACTIVA" : "INACTIVA");
+        holder.txtEstado.setText(activa
+                ? R.string.tutoria_estado_activa : R.string.tutoria_estado_inactiva);
         holder.txtEstado.setBackgroundResource(activa
                 ? R.drawable.badge_success : R.drawable.badge_info);
         holder.txtEstado.setTextColor(holder.itemView.getContext().getColor(activa

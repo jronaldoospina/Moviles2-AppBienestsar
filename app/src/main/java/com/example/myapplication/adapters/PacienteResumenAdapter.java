@@ -66,17 +66,21 @@ public class PacienteResumenAdapter extends RecyclerView.Adapter<PacienteResumen
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         PacienteResumen p = items.get(position);
 
-        holder.txtNombre.setText(p.getNombre() != null ? p.getNombre() : "Sin nombre");
+        android.content.Context ctx = holder.itemView.getContext();
+        holder.txtNombre.setText(p.getNombre() != null ? p.getNombre()
+                : ctx.getString(R.string.sin_nombre));
         holder.txtAnimo.setText(p.getAnimo() > 0 ? String.valueOf(p.getAnimo()) : "");
         holder.txtAnimo.setBackgroundResource(AnimoUtils.circle(p.getAnimo()));
 
-        String alertas = p.getAlertasActivas() == 1
-                ? "1 alerta activa" : p.getAlertasActivas() + " alertas activas";
+        String alertas = ctx.getResources().getQuantityString(R.plurals.paciente_alertas,
+                p.getAlertasActivas(), p.getAlertasActivas());
         String riesgo = (p.getNivelRiesgo() != null && !p.getNivelRiesgo().isEmpty())
-                ? "Riesgo " + p.getNivelRiesgo() : "Sin riesgo";
+                ? ctx.getString(R.string.paciente_riesgo, p.getNivelRiesgo())
+                : ctx.getString(R.string.paciente_sin_riesgo);
         String animoLabel = p.getAnimo() > 0
-                ? " · Ánimo: " + AnimoUtils.label(p.getAnimo()) : " · Sin estado registrado";
-        holder.txtSub.setText(alertas + " · " + riesgo + animoLabel);
+                ? ctx.getString(R.string.paciente_animo, AnimoUtils.label(p.getAnimo()))
+                : ctx.getString(R.string.paciente_sin_animo);
+        holder.txtSub.setText(ctx.getString(R.string.paciente_sub, alertas, riesgo, animoLabel));
 
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) listener.onPacienteClick(p);

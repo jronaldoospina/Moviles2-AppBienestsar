@@ -90,13 +90,13 @@ public class UserDetailActivity extends AppCompatActivity {
 
         // Estado
         if (usuarioActual.isActivo()) {
-            binding.txtEstado.setText("ACTIVO");
+            binding.txtEstado.setText(R.string.user_activo);
             binding.txtEstado.setTextColor(getColor(R.color.success_text));
-            binding.btnToggleActive.setText("Desactivar Usuario");
+            binding.btnToggleActive.setText(R.string.user_desactivar);
         } else {
-            binding.txtEstado.setText("INACTIVO");
+            binding.txtEstado.setText(R.string.user_inactivo);
             binding.txtEstado.setTextColor(getColor(R.color.risk_high_text));
-            binding.btnToggleActive.setText("Activar Usuario");
+            binding.btnToggleActive.setText(R.string.user_activar);
         }
 
         // Cambio de contraseña pendiente

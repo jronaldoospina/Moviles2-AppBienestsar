@@ -192,7 +192,7 @@ public class MisCursosEstudianteFragment extends Fragment
         semaforo.setBackgroundResource(SemaforoUtils.drawableFor(promedio));
         txtPromedio.setText(SemaforoUtils.format(promedio));
         txtPromedio.setTextColor(SemaforoUtils.colorFor(requireContext(), promedio));
-        txtNivel.setText("Riesgo: " + SemaforoUtils.nivelFor(promedio));
+        txtNivel.setText(getString(R.string.riesgo_prefix, SemaforoUtils.nivelFor(promedio)));
         txtNivel.setTextColor(SemaforoUtils.colorFor(requireContext(), promedio));
 
         new MaterialAlertDialogBuilder(requireContext())
@@ -211,7 +211,7 @@ public class MisCursosEstudianteFragment extends Fragment
         TextView txtObs = row.findViewById(R.id.txt_corte_observacion);
         TextView txtFecha = row.findViewById(R.id.txt_corte_fecha);
 
-        txtNombre.setText("Corte " + indice);
+        txtNombre.setText(getString(R.string.corte_numero, indice));
         if (n == null) {
             txtValor.setText("—");
             txtValor.setBackgroundResource(R.drawable.badge_info);
@@ -241,7 +241,8 @@ public class MisCursosEstudianteFragment extends Fragment
         txtObs.setVisibility(txtObs.getText().toString().isEmpty() ? View.GONE : View.VISIBLE);
 
         if (n.getFechaRegistro() > 0) {
-            txtFecha.setText("Registrada: " + FechaUtils.fechaBonitaLong(n.getFechaRegistro()));
+            txtFecha.setText(getString(R.string.corte_registrada,
+                    FechaUtils.fechaBonitaLong(n.getFechaRegistro())));
             txtFecha.setVisibility(View.VISIBLE);
         }
         return row;
