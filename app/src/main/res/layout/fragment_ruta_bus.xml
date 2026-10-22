@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_gray">
+   >
 
     <!-- ==================== MAPA (fondo completo) ==================== -->
     <org.osmdroid.views.MapView
@@ -44,7 +44,7 @@
                 android:id="@+id/btn_menu_ruta"
                 android:layout_width="44dp"
                 android:layout_height="44dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
+               
                 android:contentDescription="Ver informacion de la ruta"
                 android:src="@android:drawable/ic_menu_sort_by_size"
                 app:tint="@color/text_primary" />
@@ -81,7 +81,7 @@
                 android:id="@+id/txt_badge_fuente"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/badge_info"
+               
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="4dp"
                 android:text="OSM"
@@ -155,7 +155,7 @@
                 android:layout_height="4dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/badge_circle_white"
+               
                 android:backgroundTint="@color/divider_color" />
 
             <!-- Barra de acciones: "Ver ruta" es la accion principal (boton

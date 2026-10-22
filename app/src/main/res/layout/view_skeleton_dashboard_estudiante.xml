@@ -6,7 +6,7 @@
     android:id="@+id/shimmer_dashboard"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/skeleton_surface"
+   
     android:visibility="gone">
 
     <androidx.core.widget.NestedScrollView
@@ -36,21 +36,21 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="90dp"
-                        android:background="@drawable/skeleton_block" />
+                        />
 
                     <View
                         android:layout_width="160dp"
                         android:layout_height="14dp"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="14dp"
-                        android:background="@drawable/skeleton_block" />
+                        />
 
                     <View
                         android:layout_width="220dp"
                         android:layout_height="12dp"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="8dp"
-                        android:background="@drawable/skeleton_block" />
+                        />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 

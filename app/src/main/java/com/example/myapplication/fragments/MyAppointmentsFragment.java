@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,13 +23,9 @@ import com.example.myapplication.repositories.AuditRepository;
 import com.example.myapplication.services.SessionManager;
 import com.example.myapplication.utils.CitaReminderScheduler;
 import com.example.myapplication.utils.FechaUtils;
+import com.example.myapplication.utils.UiUtils;
+import com.example.myapplication.viewmodels.MyAppointmentsViewModel;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
-import com.google.firebase.firestore.DocumentSnapshot;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 
 public class MyAppointmentsFragment extends Fragment implements AppointmentsAdapter.OnAppointmentListener {
 
@@ -38,8 +35,9 @@ public class MyAppointmentsFragment extends Fragment implements AppointmentsAdap
     private CircularProgressIndicator progressLoading;
     private final AppointmentsAdapter adapter = new AppointmentsAdapter();
 
-    private final AppointmentRepository appointmentRepository = new AppointmentRepository();
     private SessionManager sessionManager;
+    private MyAppointmentsViewModel viewModel;
+    private final AppointmentRepository appointmentRepository = new AppointmentRepository();
 
     @Nullable
     @Override
@@ -63,53 +61,28 @@ public class MyAppointmentsFragment extends Fragment implements AppointmentsAdap
         recycler.setAdapter(adapter);
 
         sessionManager = new SessionManager(requireContext());
-        load();
+        viewModel = new ViewModelProvider(this).get(MyAppointmentsViewModel.class);
+
+        observarViewModel();
+        viewModel.cargar(sessionManager.getUserId());
     }
 
-    private void load() {
-        String uid = sessionManager.getUserId();
-        if (uid == null) {
-            showEmpty();
-            return;
-        }
-
-        progressLoading.setVisibility(View.VISIBLE);
-        layoutEmpty.setVisibility(View.GONE);
-
-        appointmentRepository.getCitasByEstudiante(uid)
-                .addOnSuccessListener(snapshot -> {
-                    progressLoading.setVisibility(View.GONE);
-                    List<Cita> citas = new ArrayList<>();
-                    for (DocumentSnapshot doc : snapshot.getDocuments()) {
-                        Cita c = doc.toObject(Cita.class);
-                        if (c != null) {
-                            c.setId(doc.getId());
-                            citas.add(c);
-                        }
-                    }
-
-                    Collections.sort(citas, (a, b) -> {
-                        String f1 = a.getFecha() != null ? a.getFecha() : "";
-                        String f2 = b.getFecha() != null ? b.getFecha() : "";
-                        int cmp = f2.compareTo(f1);
-                        if (cmp != 0) return cmp;
-                        String h1 = a.getHora() != null ? a.getHora() : "";
-                        String h2 = b.getHora() != null ? b.getHora() : "";
-                        return h2.compareTo(h1);
-                    });
-
-                    adapter.setCitas(citas);
-                    if (citas.isEmpty()) showEmpty();
-                    for (Cita c : citas) {
-                        CitaReminderScheduler.sincronizar(requireContext(), c);
-                    }
-                })
-                .addOnFailureListener(e -> {
-                    progressLoading.setVisibility(View.GONE);
-                    Toast.makeText(requireContext(), "Error al cargar citas: " + e.getMessage(),
-                            Toast.LENGTH_LONG).show();
-                    showEmpty();
-                });
+    private void observarViewModel() {
+        viewModel.getCitas().observe(getViewLifecycleOwner(), citas -> {
+            adapter.setCitas(citas);
+            if (citas.isEmpty()) showEmpty();
+            for (Cita c : citas) {
+                CitaReminderScheduler.sincronizar(requireContext(), c);
+            }
+        });
+        viewModel.getLoading().observe(getViewLifecycleOwner(), cargando ->
+                progressLoading.setVisibility(
+                        Boolean.TRUE.equals(cargando) ? View.VISIBLE : View.GONE));
+        viewModel.getError().observe(getViewLifecycleOwner(), mensaje -> {
+            if (mensaje == null) return;
+            UiUtils.showRetry(requireView(), mensaje, viewModel::recargar);
+            viewModel.clearError();
+        });
     }
 
     private void showEmpty() {
@@ -136,7 +109,7 @@ public class MyAppointmentsFragment extends Fragment implements AppointmentsAdap
                             "Canceló su cita del " + (cita.getFecha() != null ? cita.getFecha() : "-")
                                     + " a las " + (cita.getHora() != null ? cita.getHora() : "-"),
                             sessionManager);
-                    load();
+                    viewModel.recargar();
                 })
                 .addOnFailureListener(e ->
                         Toast.makeText(requireContext(), "Error: " + e.getMessage(),

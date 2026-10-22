@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_gray"
+   
     android:fillViewport="true"
     tools:context=".fragments.DashboardFragment">
 
@@ -61,10 +61,10 @@
                         android:orientation="vertical"
                         android:padding="16dp">
 
-                        <ImageView
+                        <ImageView android:contentDescription="@null"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:background="@drawable/badge_risk_high"
+                           
                             android:padding="8dp"
                             android:src="@drawable/ic_warning"
                             app:tint="@color/badge_text" />
@@ -107,10 +107,10 @@
                         android:orientation="vertical"
                         android:padding="16dp">
 
-                        <ImageView
+                        <ImageView android:contentDescription="@null"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:background="@drawable/badge_circle_blue"
+                           
                             android:padding="8dp"
                             android:src="@drawable/ic_calendar"
                             app:tint="@color/blue_light" />
@@ -153,10 +153,10 @@
                         android:orientation="vertical"
                         android:padding="16dp">
 
-                        <ImageView
+                        <ImageView android:contentDescription="@null"
                             android:layout_width="wrap_content"
                             android:layout_height="40dp"
-                            android:background="@drawable/badge_circle_green"
+                           
                             android:padding="8dp"
                             android:src="@drawable/ic_people"
                             app:tint="@color/green_primary" />
@@ -199,10 +199,10 @@
                         android:orientation="vertical"
                         android:padding="16dp">
 
-                        <ImageView
+                        <ImageView android:contentDescription="@null"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:background="@drawable/badge_circle_green_light"
+                           
                             android:padding="8dp"
                             android:src="@drawable/ic_check"
                             app:tint="@color/success_text" />
@@ -268,7 +268,7 @@
                             android:orientation="vertical"
                             android:padding="12dp">
 
-                            <ImageView
+                            <ImageView android:contentDescription="@null"
                                 android:layout_width="32dp"
                                 android:layout_height="32dp"
                                 android:src="@drawable/ic_people"
@@ -305,7 +305,7 @@
                             android:orientation="vertical"
                             android:padding="12dp">
 
-                            <ImageView
+                            <ImageView android:contentDescription="@null"
                                 android:layout_width="32dp"
                                 android:layout_height="32dp"
                                 android:src="@drawable/ic_calendar"
@@ -342,7 +342,7 @@
                             android:orientation="vertical"
                             android:padding="12dp">
 
-                            <ImageView
+                            <ImageView android:contentDescription="@null"
                                 android:layout_width="32dp"
                                 android:layout_height="32dp"
                                 android:src="@drawable/ic_warning"
@@ -461,3 +461,10 @@
         </LinearLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
+
+
+
+
+
+
+

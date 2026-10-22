@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_gray"
+   
     android:fillViewport="true">
 
     <LinearLayout
@@ -22,7 +22,7 @@
             android:paddingEnd="24dp"
             android:paddingTop="32dp"
             android:paddingBottom="40dp"
-            android:background="@drawable/gradient_header">
+           >
 
             <TextView
                 android:layout_width="wrap_content"
@@ -84,7 +84,7 @@
                             android:id="@+id/semaforo_circle"
                             android:layout_width="48dp"
                             android:layout_height="48dp"
-                            android:background="@drawable/semaforo_circle_gray" />
+                            />
 
                         <TextView
                             android:id="@+id/txt_promedio"
@@ -252,12 +252,12 @@
                     android:gravity="center_vertical"
                     android:padding="16dp">
 
-                    <ImageView
+                    <ImageView android:contentDescription="@null"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:src="@drawable/ic_calendar"
                         app:tint="@color/blue_primary"
-                        android:background="@drawable/badge_circle_blue"
+                       
                         android:padding="8dp" />
 
                     <LinearLayout
@@ -327,7 +327,7 @@
                             android:gravity="center"
                             android:padding="12dp">
 
-                            <ImageView
+                            <ImageView android:contentDescription="@null"
                                 android:layout_width="32dp"
                                 android:layout_height="32dp"
                                 android:src="@drawable/ic_trending"
@@ -363,7 +363,7 @@
                             android:gravity="center"
                             android:padding="12dp">
 
-                            <ImageView
+                            <ImageView android:contentDescription="@null"
                                 android:layout_width="32dp"
                                 android:layout_height="32dp"
                                 android:src="@drawable/ic_calendar"
@@ -399,7 +399,7 @@
                             android:gravity="center"
                             android:padding="12dp">
 
-                            <ImageView
+                            <ImageView android:contentDescription="@null"
                                 android:layout_width="32dp"
                                 android:layout_height="32dp"
                                 android:src="@drawable/ic_warning"
@@ -434,7 +434,7 @@
                             android:gravity="center"
                             android:padding="12dp">
 
-                            <ImageView
+                            <ImageView android:contentDescription="@null"
                                 android:layout_width="32dp"
                                 android:layout_height="32dp"
                                 android:src="@drawable/ic_book"
@@ -469,7 +469,7 @@
                             android:gravity="center"
                             android:padding="12dp">
 
-                            <ImageView
+                            <ImageView android:contentDescription="@null"
                                 android:layout_width="32dp"
                                 android:layout_height="32dp"
                                 android:src="@drawable/ic_audit"
@@ -516,3 +516,9 @@
         </LinearLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
+
+
+
+
+
+

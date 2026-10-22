@@ -6,8 +6,12 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.myapplication.models.Cita;
 import com.example.myapplication.repositories.AppointmentRepository;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class MyAppointmentsViewModel extends ViewModel {
@@ -43,34 +47,35 @@ public class MyAppointmentsViewModel extends ViewModel {
         loading.setValue(true);
 
         appointmentRepository.getCitasByEstudiante(uid)
-                .addOnSuccessListener(__ -> {
+                .addOnSuccessListener(snapshot -> {
+                    if (generacion != this.generacion) return;
                     List<Cita> lista = new ArrayList<>();
-                    // snapshot processing would happen here; simplified for example
+                    if (snapshot != null) {
+                        for (DocumentSnapshot doc : snapshot.getDocuments()) {
+                            Cita c = doc.toObject(Cita.class);
+                            if (c != null) {
+                                c.setId(doc.getId());
+                                lista.add(c);
+                            }
+                        }
+                    }
+                    // Ordenar: más recientes primero (fecha desc, luego hora desc)
+                    Collections.sort(lista, (a, b) -> {
+                        String f1 = a.getFecha() != null ? a.getFecha() : "";
+                        String f2 = b.getFecha() != null ? b.getFecha() : "";
+                        int cmp = f2.compareTo(f1);
+                        if (cmp != 0) return cmp;
+                        String h1 = a.getHora() != null ? a.getHora() : "";
+                        String h2 = b.getHora() != null ? b.getHora() : "";
+                        return h2.compareTo(h1);
+                    });
                     citas.setValue(lista);
                     loading.setValue(false);
                     cargado = true;
                 })
                 .addOnFailureListener(e -> {
+                    if (generacion != this.generacion) return;
                     error.setValue("Error al cargar citas");
-                    loading.setValue(false);
-                });
-    }
-
-    public void cargarMas() {
-        if (!cargado || cargando) return;
-        generacion++;
-        cargando = true;
-        loading.setValue(true);
-
-        appointmentRepository.getCitasByEstudiante(uid)
-                .addOnSuccessListener(__ -> {
-                    List<Cita> lista = citas.getValue() != null ? new ArrayList<>(citas.getValue()) : new ArrayList<>();
-                    citas.setValue(lista);
-                    loading.setValue(false);
-                    cargado = true;
-                })
-                .addOnFailureListener(e -> {
-                    error.setValue("Error al cargar más citas");
                     loading.setValue(false);
                 });
     }
@@ -80,7 +85,7 @@ public class MyAppointmentsViewModel extends ViewModel {
         cargando = false;
         cargado = false;
         citas.setValue(new ArrayList<>());
-        cargar(uid);
+        if (uid != null) cargar(uid);
     }
 
     public void clearError() {

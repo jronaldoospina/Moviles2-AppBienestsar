@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white_card"
+   
     android:orientation="vertical"
     android:paddingStart="20dp"
     android:paddingEnd="20dp"
@@ -70,7 +70,7 @@
         android:layout_height="1dp"
         android:layout_marginTop="18dp"
         android:layout_marginBottom="18dp"
-        android:background="@color/divider_color" />
+        />
 
     <!-- Resumen del recorrido -->
     <TextView
@@ -115,13 +115,13 @@
         android:layout_height="1dp"
         android:layout_marginTop="18dp"
         android:layout_marginBottom="18dp"
-        android:background="@color/divider_color" />
+        />
 
     <!-- Origen de los datos -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/gray_light"
+       
         android:orientation="horizontal"
         android:padding="12dp">
 
@@ -144,3 +144,4 @@
             android:textStyle="bold" />
     </LinearLayout>
 </LinearLayout>
+

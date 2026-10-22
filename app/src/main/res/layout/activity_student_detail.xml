@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_gray">
+   >
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
@@ -24,7 +24,7 @@
             app:collapsedTitleTextAppearance="@style/TextAppearance.Material3.TitleMedium"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-            <ImageView
+            <ImageView android:contentDescription="@null"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
@@ -44,7 +44,7 @@
                     android:id="@+id/txt_iniciales"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
-                    android:background="@drawable/badge_circle_green_light"
+                   
                     android:gravity="center"
                     android:text="AA"
                     android:textColor="@color/green_primary_dark"
@@ -111,7 +111,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/badge_risk_low"
+                   
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="6dp"
                     android:text="BAJO"
@@ -307,7 +307,7 @@
                             android:id="@+id/dot_emocional"
                             android:layout_width="18dp"
                             android:layout_height="18dp"
-                            android:background="@drawable/mood_circle_none" />
+                            />
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -416,3 +416,4 @@
         android:visibility="gone" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+

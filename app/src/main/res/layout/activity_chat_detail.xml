@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/background_gray">
+   >
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar_chat"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/white_card"
+       
         app:navigationIcon="@drawable/ic_arrow_back"
         app:title="Conversación"
         app:titleTextColor="@color/text_primary" />
@@ -51,7 +51,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white_card"
+       
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:padding="8dp">

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_gray"
+   
     android:fillViewport="true"
     android:scrollbars="none"
     tools:context=".LoginActivity">
@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center"
-            android:background="@drawable/gradient_header"
+           
             android:paddingTop="56dp"
             android:paddingBottom="88dp"
             app:layout_constraintTop_toTopOf="parent"

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/background_gray"
+   
     tools:context=".fragments.StudentsFragment">
 
     <!-- Barra de búsqueda -->
@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp"
-        android:background="@color/white_card">
+       >
 
         <!-- Título y botón agregar -->
         <LinearLayout
@@ -174,7 +174,7 @@
         android:orientation="vertical"
         android:visibility="gone">
 
-        <ImageView
+        <ImageView android:contentDescription="@null"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:src="@drawable/ic_people"
@@ -200,3 +200,4 @@
         app:indicatorColor="@color/green_primary" />
 
 </LinearLayout>
+

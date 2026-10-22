@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_gray">
+   >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -120,7 +120,7 @@
         android:orientation="vertical"
         android:visibility="gone">
 
-        <ImageView
+        <ImageView android:contentDescription="@null"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:src="@drawable/ic_users"
@@ -157,3 +157,4 @@
         app:iconTint="@color/white_card" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+

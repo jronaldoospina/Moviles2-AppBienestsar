@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_gray">
+   >
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
@@ -24,7 +24,7 @@
             app:collapsedTitleTextAppearance="@style/TextAppearance.Material3.TitleMedium"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-            <ImageView
+            <ImageView android:contentDescription="@null"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
@@ -70,7 +70,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="0 estudiantes"
-                    android:background="@drawable/badge_info"
+                   
                     android:textColor="@color/info_text"
                     android:paddingHorizontal="12dp"
                     android:paddingVertical="4dp"
@@ -103,7 +103,7 @@
             android:paddingHorizontal="16dp"
             android:paddingVertical="8dp"
             android:scrollbars="none"
-            android:background="@color/white">
+           >
 
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/chip_group_cortes"
@@ -116,7 +116,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/divider_color" />
+            />
 
         <!-- Lista de estudiantes con notas -->
         <androidx.recyclerview.widget.RecyclerView
@@ -149,3 +149,4 @@
         app:iconTint="@color/white_card" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
