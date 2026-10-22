@@ -26,6 +26,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="@string/txt_escribir_mensaje"
+            android:inputType="textCapSentences|textMultiLine"
+            android:importantForAutofill="no"
             android:padding="8dp"
             android:background="@color/gray_light" />
 

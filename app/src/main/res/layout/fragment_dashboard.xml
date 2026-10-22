@@ -9,20 +9,13 @@
     android:fillViewport="true"
     tools:context=".fragments.DashboardFragment">
 
+    <!-- Contenedor Principal -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingBottom="24dp">
-
-        <!-- Fecha (el saludo se muestra en la barra superior) -->
-
-        <!-- Contenedor Principal -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+        android:padding="16dp"
+        android:paddingBottom="40dp">
 
             <ProgressBar
                 android:id="@+id/progress_kpis"
@@ -426,7 +419,6 @@
                 tools:listitem="@layout/item_alert_card" />
 
         </LinearLayout>
-    </LinearLayout>
 </androidx.core.widget.NestedScrollView>
 
 

@@ -8,7 +8,7 @@ plugins {
 
 android {
     namespace = "com.example.myapplication"
-    compileSdk = 35
+    compileSdk = 37
 
     // ============ FIRMA DEL RELEASE ============
     // Las credenciales NO viven en este archivo (nunca se suben a git).
@@ -39,7 +39,7 @@ android {
     defaultConfig {
         applicationId = "com.example.myapplication"
         minSdk = 26
-        targetSdk = 35
+        targetSdk = 37
         versionCode = 1
         versionName = "1.0"
 

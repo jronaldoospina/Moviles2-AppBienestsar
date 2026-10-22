@@ -565,6 +565,7 @@
     <string name="txt_buscar_por_nombre_o_codigo">Buscar por nombre o código</string>
     <string name="txt_aun_no_hay_cursos_ntoca_para_crear_el_primero">Aún no hay cursos.\nToca + para crear el primero.</string>
     <string name="cd_nuevo_curso">Nuevo curso</string>
+    <string name="cd_agregar_estudiante">Agregar estudiante</string>
     <string name="txt_buscar_estudiante">Buscar estudiante…</string>
     <string name="txt_critico">Crítico</string>
     <string name="txt_0_estudiantes">0 estudiantes</string>

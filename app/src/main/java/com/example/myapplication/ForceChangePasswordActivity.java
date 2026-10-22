@@ -1,12 +1,12 @@
 package com.example.myapplication;
 
 import android.content.Intent;
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.repositories.UserRepository;
@@ -46,13 +46,15 @@ public class ForceChangePasswordActivity extends AppCompatActivity {
         progressChange = findViewById(R.id.progress_change);
 
         btnCambiar.setOnClickListener(v -> attemptChange());
-    }
 
-    @SuppressLint("MissingSuperCall")
-    @Override
-    public void onBackPressed() {
-        // Bloqueado: no puede salir sin cambiar la contraseña
-        Toast.makeText(this, "Debes cambiar tu contraseña para continuar", Toast.LENGTH_SHORT).show();
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                Toast.makeText(ForceChangePasswordActivity.this,
+                        "Debes cambiar tu contraseña para continuar",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void attemptChange() {
