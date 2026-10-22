@@ -35,7 +35,7 @@
 
     <!-- ============ ESTUDIANTES ============ -->
     <string name="students_title">Estudiantes</string>
-    <string name="students_search_hint">Buscar estudiante...</string>
+    <string name="students_search_hint">Buscar estudiante…</string>
     <string name="students_filter_all">Todos</string>
     <string name="students_filter_critical">Crítico</string>
     <string name="students_filter_high">Alto</string>
@@ -65,7 +65,7 @@
 
     <!-- ============ CHAT ============ -->
     <string name="chat_title">Mensajes</string>
-    <string name="chat_search_hint">Buscar conversación...</string>
+    <string name="chat_search_hint">Buscar conversación…</string>
     <string name="chat_no_conversations">No tienes conversaciones</string>
 
     <!-- ============ PERFIL ============ -->
@@ -185,7 +185,7 @@
     <string name="estado_en_seguimiento">EN SEGUIMIENTO</string>
     <string name="estado_atendido">ATENDIDO</string>
     <string name="estado_abierto">ABIERTO</string>
-    <string name="semaforo_leyendo_pdf">Leyendo el PDF...</string>
+    <string name="semaforo_leyendo_pdf">Leyendo el PDF…</string>
     <string name="semaforo_error_lectura">No se pudo leer el PDF: %1$s</string>
     <string name="semaforo_documento">Documento: %1$s</string>
     <plurals name="semaforo_contadores">
@@ -219,7 +219,7 @@
     <string name="teacher_fecha">Hoy, %1$s</string>
     <string name="estudiante_sin_datos_academicos">Sin datos académicos</string>
     <string name="nivel_riesgo">Nivel de riesgo: %1$s</string>
-    <string name="login_iniciando">Iniciando sesión...</string>
+    <string name="login_iniciando">Iniciando sesión…</string>
     <plurals name="admin_cursos_contador">
         <item quantity="one">%1$d curso</item>
         <item quantity="other">%1$d cursos</item>

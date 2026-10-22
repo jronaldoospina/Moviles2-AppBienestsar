@@ -181,7 +181,7 @@ public class MisCursosEstudianteFragment extends Fragment
         int count = 0;
         for (int i = 1; i <= 3; i++) {
             Nota n = latest.get("corte" + i);
-            container.addView(buildCorteRow(i, n));
+            container.addView(buildCorteRow(i, n, container));
             if (n != null) {
                 suma += n.getValor();
                 count++;
@@ -202,9 +202,9 @@ public class MisCursosEstudianteFragment extends Fragment
                 .show();
     }
 
-    private View buildCorteRow(int indice, Nota n) {
+    private View buildCorteRow(int indice, Nota n, LinearLayout parent) {
         View row = LayoutInflater.from(requireContext())
-                .inflate(R.layout.item_curso_corte, null);
+                .inflate(R.layout.item_curso_corte, parent, false);
 
         TextView txtNombre = row.findViewById(R.id.txt_corte_nombre);
         TextView txtValor = row.findViewById(R.id.txt_corte_valor);

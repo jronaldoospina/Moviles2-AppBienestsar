@@ -89,7 +89,7 @@
                 android:paddingBottom="2dp"
                 android:text="✓ Confirmada"
                 android:textColor="@color/success_text"
-                android:textSize="10sp"
+                android:textSize="12sp"
                 android:textStyle="bold"
                 android:background="@drawable/badge_success" />
         </LinearLayout>

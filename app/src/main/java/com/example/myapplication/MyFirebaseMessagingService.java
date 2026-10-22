@@ -3,7 +3,6 @@ package com.example.myapplication;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
-import android.os.Build;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
@@ -50,20 +49,18 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            String channelId = generateChannelId(title, motivo);
-            NotificationChannel channel = new NotificationChannel(
-                    channelId,
-                    "Alertas Bienestar UPC",
-                    NotificationManager.IMPORTANCE_HIGH
-            );
-            channel.setDescription("Notificaciones de alertas de bienestar Universitario");
-            channel.setImportance(NotificationManager.IMPORTANCE_HIGH);
-            channel.enableLights(true);
-            channel.setLightColor(0xFFFFC107);
-            channel.enableVibration(true);
-            notificationManager.createNotificationChannel(channel);
-        }
+        String channelId = generateChannelId(title, motivo);
+        NotificationChannel channel = new NotificationChannel(
+                channelId,
+                "Alertas Bienestar UPC",
+                NotificationManager.IMPORTANCE_HIGH
+        );
+        channel.setDescription("Notificaciones de alertas de bienestar Universitario");
+        channel.setImportance(NotificationManager.IMPORTANCE_HIGH);
+        channel.enableLights(true);
+        channel.setLightColor(0xFFFFC107);
+        channel.enableVibration(true);
+        notificationManager.createNotificationChannel(channel);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, generateChannelId(title, motivo))
                 .setSmallIcon(R.drawable.ic_launcher_foreground)

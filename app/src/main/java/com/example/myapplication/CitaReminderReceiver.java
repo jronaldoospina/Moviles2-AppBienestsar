@@ -57,14 +57,12 @@ public class CitaReminderReceiver extends BroadcastReceiver {
     }
 
     private void crearCanal(Context context) {
-        if (Build.VERSION.SDK_INT >= 26) {
-            NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-            if (nm == null) return;
-            NotificationChannel canal = new NotificationChannel(CHANNEL_ID,
-                    "Recordatorios de citas", NotificationManager.IMPORTANCE_HIGH);
-            canal.setDescription("Aviso antes de una cita de bienestar");
-            nm.createNotificationChannel(canal);
-        }
+        NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        if (nm == null) return;
+        NotificationChannel canal = new NotificationChannel(CHANNEL_ID,
+                "Recordatorios de citas", NotificationManager.IMPORTANCE_HIGH);
+        canal.setDescription("Aviso antes de una cita de bienestar");
+        nm.createNotificationChannel(canal);
     }
 
     private static int requestCode(String citaId) {

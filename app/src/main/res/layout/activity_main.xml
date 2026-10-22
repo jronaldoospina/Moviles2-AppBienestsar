@@ -54,7 +54,7 @@
                     android:paddingHorizontal="3dp"
                     android:text="9+"
                     android:textColor="@color/white_card"
-                    android:textSize="9sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
                     android:visibility="gone" />
             </FrameLayout>

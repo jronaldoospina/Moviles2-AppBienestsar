@@ -30,6 +30,7 @@ import com.example.myapplication.utils.OsrmRouter;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.Priority;
+import android.annotation.SuppressLint;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
@@ -277,6 +278,7 @@ public class RutaBusFragment extends Fragment {
      * recorrido y listado de paradas. Se mantiene fuera del mapa para que la
      * vista del recorrido no pierda espacio.
      */
+    @SuppressLint("InflateParams")
     private void abrirInfoRuta() {
         if (!isAdded()) return;
         View sheet = LayoutInflater.from(requireContext())

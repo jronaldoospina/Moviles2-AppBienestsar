@@ -30,7 +30,7 @@
             android:layout_marginTop="2dp"
             android:text="14:30"
             android:textColor="@color/text_secondary"
-            android:textSize="10sp" />
+            android:textSize="12sp" />
     </LinearLayout>
 
     <TextView
@@ -40,5 +40,5 @@
         android:layout_marginStart="8dp"
         android:text="Yo"
         android:textColor="@color/text_secondary"
-        android:textSize="10sp" />
+        android:textSize="12sp" />
 </LinearLayout>

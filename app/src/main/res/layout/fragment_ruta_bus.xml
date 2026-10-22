@@ -86,7 +86,7 @@
                 android:paddingVertical="4dp"
                 android:text="OSM"
                 android:textColor="@color/info_text"
-                android:textSize="10sp"
+                android:textSize="12sp"
                 android:textStyle="bold" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

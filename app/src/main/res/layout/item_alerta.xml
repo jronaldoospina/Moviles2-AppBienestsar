@@ -43,7 +43,7 @@
                 android:paddingVertical="3dp"
                 android:text="PENDIENTE"
                 android:textColor="@color/background_gray"
-                android:textSize="10sp"
+                android:textSize="12sp"
                 android:textStyle="bold" />
         </LinearLayout>
 

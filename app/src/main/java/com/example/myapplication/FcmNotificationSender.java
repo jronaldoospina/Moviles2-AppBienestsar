@@ -3,7 +3,6 @@ package com.example.myapplication;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
-import android.os.Build;
 
 import com.google.firebase.messaging.FirebaseMessaging;
 
@@ -25,19 +24,17 @@ public class FcmNotificationSender {
     }
 
     public static void createNotificationChannel(NotificationManager manager) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel(
-                    CHANNEL_ID,
-                    CHANNEL_NAME,
-                    NotificationManager.IMPORTANCE_HIGH
-            );
-            channel.setDescription("Notificaciones de alertas de bienestar Universitario");
-            channel.enableLights(true);
-            channel.setLightColor(0xFFFFC107);
-            channel.enableVibration(true);
-            if (manager != null) {
-                manager.createNotificationChannel(channel);
-            }
+        NotificationChannel channel = new NotificationChannel(
+                CHANNEL_ID,
+                CHANNEL_NAME,
+                NotificationManager.IMPORTANCE_HIGH
+        );
+        channel.setDescription("Notificaciones de alertas de bienestar Universitario");
+        channel.enableLights(true);
+        channel.setLightColor(0xFFFFC107);
+        channel.enableVibration(true);
+        if (manager != null) {
+            manager.createNotificationChannel(channel);
         }
     }
 

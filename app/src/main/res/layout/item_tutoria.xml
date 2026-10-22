@@ -43,7 +43,7 @@
                 android:paddingVertical="3dp"
                 android:text="ACTIVA"
                 android:textColor="@color/success_text"
-                android:textSize="10sp"
+                android:textSize="12sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
