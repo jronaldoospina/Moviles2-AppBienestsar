@@ -115,7 +115,7 @@ public class ProfileFragment extends Fragment {
                         // Determinar nivel de riesgo
                         String nivelRiesgo = SemaforoUtils.nivelFor(promedio);
 
-                        binding.txtPromedio.setText(String.format("Prom: %.1f", promedio));
+                        binding.txtPromedio.setText(String.format(java.util.Locale.getDefault(), "Prom: %.1f", promedio));
                         binding.txtNivelRiesgo.setText(nivelRiesgo);
                         binding.txtNivelRiesgo.setTextColor(
                                 SemaforoUtils.colorFor(requireContext(), promedio));

@@ -188,8 +188,8 @@ public class Usuario {
         if (nombre == null || nombre.isEmpty()) return "??";
         String[] partes = nombre.trim().split(" ");
         if (partes.length == 1) {
-            return partes[0].substring(0, Math.min(2, partes[0].length())).toUpperCase();
+            return partes[0].substring(0, Math.min(2, partes[0].length())).toUpperCase(java.util.Locale.getDefault());
         }
-        return (partes[0].charAt(0) + "" + partes[partes.length - 1].charAt(0)).toUpperCase();
+        return (partes[0].charAt(0) + "" + partes[partes.length - 1].charAt(0)).toUpperCase(java.util.Locale.getDefault());
     }
 }

@@ -307,7 +307,7 @@ public class MisCursosEstudianteFragment extends Fragment
         try {
             java.time.DayOfWeek dw = java.time.DayOfWeek.valueOf(dia);
             String s = dw.getDisplayName(TextStyle.FULL, new Locale("es", "CO"));
-            return s.substring(0, 1).toUpperCase() + s.substring(1);
+            return s.substring(0, 1).toUpperCase(Locale.getDefault()) + s.substring(1);
         } catch (Exception e) {
             return dia;
         }

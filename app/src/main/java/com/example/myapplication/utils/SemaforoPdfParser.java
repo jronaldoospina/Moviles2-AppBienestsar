@@ -139,7 +139,7 @@ public class SemaforoPdfParser {
         for (int i = 1; i < tok.length; i++) {
             if ("NORMAL".equalsIgnoreCase(tok[i]) || "REPETIDA".equalsIgnoreCase(tok[i])) {
                 idxForma = i;
-                forma = tok[i].toUpperCase();
+                forma = tok[i].toUpperCase(java.util.Locale.ROOT);
                 break;
             }
         }

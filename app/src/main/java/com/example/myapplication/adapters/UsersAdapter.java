@@ -62,14 +62,14 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
         filtroQuery = (query != null) ? query : "";
 
         List<Usuario> nuevos = new ArrayList<>();
-        String q = filtroQuery.toLowerCase().trim();
+        String q = filtroQuery.toLowerCase(java.util.Locale.ROOT).trim();
 
         for (Usuario u : usuarios) {
             boolean coincideRol = (filtroRol.isEmpty() || filtroRol.equals(u.getRol()));
             boolean coincideTexto = q.isEmpty()
-                    || (u.getNombre() != null && u.getNombre().toLowerCase().contains(q))
-                    || (u.getEmail() != null && u.getEmail().toLowerCase().contains(q))
-                    || (u.getUsuario() != null && u.getUsuario().toLowerCase().contains(q))
+                    || (u.getNombre() != null && u.getNombre().toLowerCase(java.util.Locale.ROOT).contains(q))
+                    || (u.getEmail() != null && u.getEmail().toLowerCase(java.util.Locale.ROOT).contains(q))
+                    || (u.getUsuario() != null && u.getUsuario().toLowerCase(java.util.Locale.ROOT).contains(q))
                     || (u.getDocumento() != null && u.getDocumento().contains(q));
 
             if (coincideRol && coincideTexto) {

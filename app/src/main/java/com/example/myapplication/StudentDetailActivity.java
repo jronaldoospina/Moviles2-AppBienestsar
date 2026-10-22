@@ -329,7 +329,7 @@ public class StudentDetailActivity extends AppCompatActivity {
         txtCodigo.setText(u.getCodigo() != null && !u.getCodigo().isEmpty() ? u.getCodigo() : "-");
         txtPrograma.setText(u.getPrograma() != null && !u.getPrograma().isEmpty() ? u.getPrograma() : "-");
         txtSemestre.setText(u.getSemestre() > 0 ? String.valueOf(u.getSemestre()) : "-");
-        txtPromedio.setText(u.getPromedio() > 0 ? String.format("%.2f", u.getPromedio()) : "-");
+        txtPromedio.setText(u.getPromedio() > 0 ? String.format(java.util.Locale.getDefault(), "%.2f", u.getPromedio()) : "-");
         txtTelefono.setText(u.getTelefono() != null && !u.getTelefono().isEmpty() ? u.getTelefono() : "-");
     }
 

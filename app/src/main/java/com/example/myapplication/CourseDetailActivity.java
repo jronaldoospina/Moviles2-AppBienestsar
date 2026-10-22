@@ -487,7 +487,7 @@ private void abrirDialogoRegistroMasivo() {
                         String codigo = doc.getString("codigo");
                         if (nombre != null) estudianteNombres.add(nombre);
                         else estudianteNombres.add("Estudiante " + estId);
-                        if (codigo != null) estudianteCodigos.add(codigo.toUpperCase());
+                        if (codigo != null) estudianteCodigos.add(codigo.toUpperCase(java.util.Locale.ROOT));
                         else estudianteCodigos.add(estId);
                     }
                     int currentLoaded = cargados.incrementAndGet();
@@ -704,7 +704,7 @@ private void abrirDialogoRegistroMasivo() {
                         if (doc.exists()) {
                             String codigo = doc.getString("codigo");
                             if (codigo != null && !codigo.trim().isEmpty()) {
-                                codigoAId.put(codigo.trim().toUpperCase(), estId);
+                                codigoAId.put(codigo.trim().toUpperCase(java.util.Locale.ROOT), estId);
                             }
                         }
                         pendientes[0]--;
@@ -736,7 +736,7 @@ private void abrirDialogoRegistroMasivo() {
                 continue;
             }
             if (valor < 0.0 || valor > 5.0) continue;
-            pares.add(new Object[]{codigo.toUpperCase(), valor});
+            pares.add(new Object[]{codigo.toUpperCase(java.util.Locale.ROOT), valor});
         }
         return pares;
     }

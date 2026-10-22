@@ -154,7 +154,7 @@ public class RegisterGradesFragment extends Fragment {
                         String codigo = doc.getString("codigo");
                         if (nombre != null) estudianteNombres.add(nombre);
                         else estudianteNombres.add("Estudiante " + estId);
-                        if (codigo != null) estudianteCodigos.add(codigo.toUpperCase());
+                        if (codigo != null) estudianteCodigos.add(codigo.toUpperCase(java.util.Locale.ROOT));
                         else estudianteCodigos.add(estId);
                     }
                     // Cuando hayamos cargado todos los estudiantes

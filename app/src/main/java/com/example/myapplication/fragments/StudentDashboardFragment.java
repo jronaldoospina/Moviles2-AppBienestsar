@@ -78,7 +78,7 @@ public class StudentDashboardFragment extends Fragment {
                     + ", " + hoy.getDayOfMonth() + " de "
                     + hoy.getMonth().getDisplayName(TextStyle.FULL, new Locale("es", "CO"))
                     + " de " + hoy.getYear();
-            String fechaCapitalizada = fecha.substring(0, 1).toUpperCase() + fecha.substring(1);
+            String fechaCapitalizada = fecha.substring(0, 1).toUpperCase(Locale.getDefault()) + fecha.substring(1);
             txtDate.setText(fechaCapitalizada);
         }
     }

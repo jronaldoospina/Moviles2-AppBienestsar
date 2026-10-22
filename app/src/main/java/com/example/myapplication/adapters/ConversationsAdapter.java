@@ -64,9 +64,9 @@ public class ConversationsAdapter extends RecyclerView.Adapter<ConversationsAdap
         if (nombre == null || nombre.isEmpty()) return "??";
         String[] partes = nombre.trim().split(" ");
         if (partes.length == 1) {
-            return partes[0].substring(0, Math.min(2, partes[0].length())).toUpperCase();
+            return partes[0].substring(0, Math.min(2, partes[0].length())).toUpperCase(Locale.getDefault());
         }
-        return (partes[0].charAt(0) + "" + partes[partes.length - 1].charAt(0)).toUpperCase();
+        return (partes[0].charAt(0) + "" + partes[partes.length - 1].charAt(0)).toUpperCase(Locale.getDefault());
     }
 
     private String fechaLabel(long ms) {

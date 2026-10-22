@@ -361,7 +361,7 @@ public class AgendaFragment extends Fragment
                 int dia = Integer.parseInt(partes[2]);
                 DatePickerDialog d = new DatePickerDialog(requireContext(),
                         (dp, y, m, d2) -> {
-                            fechaSeleccionada = String.format("%04d-%02d-%02d", y, m + 1, d2);
+                            fechaSeleccionada = String.format(java.util.Locale.ROOT, "%04d-%02d-%02d", y, m + 1, d2);
                             txtFecha.setText(fechaSeleccionada);
                         }, anio, mes, dia);
                 java.util.Calendar cal = java.util.Calendar.getInstance();
@@ -383,7 +383,7 @@ public class AgendaFragment extends Fragment
             }
             TimePickerDialog t = new TimePickerDialog(requireContext(),
                     (tp, h, m) -> {
-                        horaSeleccionada = String.format("%02d:%02d", h, m);
+                        horaSeleccionada = String.format(java.util.Locale.ROOT, "%02d:%02d", h, m);
                         txtHora.setText(horaSeleccionada);
                     }, hh, mm, true);
             t.show();

@@ -195,7 +195,7 @@ public class RegisterUserActivity extends AppCompatActivity {
 
         String nombre = editNombre.getText() != null ? editNombre.getText().toString().trim() : "";
         String documento = editDocumento.getText() != null ? editDocumento.getText().toString().trim() : "";
-        String usuario = editUsuario.getText() != null ? editUsuario.getText().toString().trim().toLowerCase() : "";
+        String usuario = editUsuario.getText() != null ? editUsuario.getText().toString().trim().toLowerCase(java.util.Locale.ROOT) : "";
         String telefono = editTelefono.getText() != null ? editTelefono.getText().toString().trim() : "";
         String rol = dropdownRol.getText().toString().trim();
 

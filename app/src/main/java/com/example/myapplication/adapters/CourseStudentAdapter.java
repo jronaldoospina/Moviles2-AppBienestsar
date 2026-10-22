@@ -118,12 +118,12 @@ public class CourseStudentAdapter extends RecyclerView.Adapter<CourseStudentAdap
             // Calcular y mostrar promedio si la vista existe
             if (txtPromedio != null) {
                 double promedio = calcularPromedio(fila.notas);
-                txtPromedio.setText(String.format("Prom: %.1f", promedio));
+                txtPromedio.setText(String.format(java.util.Locale.getDefault(), "Prom: %.1f", promedio));
             }
 
             if (txtNota != null) {
                 if (fila.nota != null) {
-                    txtNota.setText(String.format("%.1f", fila.nota.getValor()));
+                    txtNota.setText(String.format(java.util.Locale.getDefault(), "%.1f", fila.nota.getValor()));
                     txtNota.setTextColor(
                             SemaforoUtils.colorFor(itemView.getContext(), fila.nota.getValor()));
                 } else {
@@ -143,9 +143,9 @@ public class CourseStudentAdapter extends RecyclerView.Adapter<CourseStudentAdap
             if (nombre == null || nombre.isEmpty()) return "?";
             String[] partes = nombre.trim().split("\\s+");
             if (partes.length >= 2) {
-                return ("" + partes[0].charAt(0) + partes[1].charAt(0)).toUpperCase();
+                return ("" + partes[0].charAt(0) + partes[1].charAt(0)).toUpperCase(java.util.Locale.getDefault());
             }
-            return ("" + partes[0].charAt(0)).toUpperCase();
+            return ("" + partes[0].charAt(0)).toUpperCase(java.util.Locale.getDefault());
         }
 
         /** Calcula el promedio a partir de una lista de notas */

@@ -79,10 +79,10 @@ public class GradesAdapter extends RecyclerView.Adapter<GradesAdapter.ViewHolder
         }
 
         if (notaExistente != null && notaExistente.getValor() > 0) {
-            holder.txtValor.setText(String.format("%.1f", notaExistente.getValor()));
+            holder.txtValor.setText(String.format(java.util.Locale.getDefault(), "%.1f", notaExistente.getValor()));
             // Cargar nota temporal si fue modificada
             if (notasTemp.containsKey(estId)) {
-                holder.txtValor.setText(String.format("%.1f", notasTemp.get(estId)));
+                holder.txtValor.setText(String.format(java.util.Locale.getDefault(), "%.1f", notasTemp.get(estId)));
             }
         } else {
             holder.txtValor.setText("--");
@@ -110,7 +110,7 @@ public class GradesAdapter extends RecyclerView.Adapter<GradesAdapter.ViewHolder
 
         // Si el campo ya tiene texto (valor temporal), configurar listener de cambio de texto
         if (notasTemp.containsKey(estId)) {
-            holder.etNota.setText(String.format("%.1f", notasTemp.get(estId)));
+            holder.etNota.setText(String.format(java.util.Locale.getDefault(), "%.1f", notasTemp.get(estId)));
         }
 
         holder.txtValor.setOnClickListener(v -> {

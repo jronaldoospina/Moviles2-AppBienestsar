@@ -37,8 +37,8 @@ public class PacienteResumen {
         if (nombre == null || nombre.trim().isEmpty()) return "?";
         String[] partes = nombre.trim().split("\\s+");
         if (partes.length == 1) {
-            return partes[0].substring(0, 1).toUpperCase();
+            return partes[0].substring(0, 1).toUpperCase(java.util.Locale.getDefault());
         }
-        return (partes[0].substring(0, 1) + partes[1].substring(0, 1)).toUpperCase();
+        return (partes[0].substring(0, 1) + partes[1].substring(0, 1)).toUpperCase(java.util.Locale.getDefault());
     }
 }

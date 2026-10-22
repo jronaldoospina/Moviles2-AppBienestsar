@@ -78,15 +78,15 @@ public class StudentsAdapter extends RecyclerView.Adapter<StudentsAdapter.Studen
         filtroQuery = (query != null) ? query : "";
 
         List<Usuario> nuevos = new ArrayList<>();
-        String q = filtroQuery.toLowerCase().trim();
+        String q = filtroQuery.toLowerCase(java.util.Locale.ROOT).trim();
 
         for (Usuario u : estudiantes) {
             boolean coincideRiesgo = filtroRiesgo.isEmpty()
                     || filtroRiesgo.equals(u.getNivelRiesgo());
 
             boolean coincideTexto = q.isEmpty()
-                    || (u.getNombre() != null && u.getNombre().toLowerCase().contains(q))
-                    || (u.getCodigo() != null && u.getCodigo().toLowerCase().contains(q))
+                    || (u.getNombre() != null && u.getNombre().toLowerCase(java.util.Locale.ROOT).contains(q))
+                    || (u.getCodigo() != null && u.getCodigo().toLowerCase(java.util.Locale.ROOT).contains(q))
                     || (u.getDocumento() != null && u.getDocumento().contains(q));
 
             if (coincideRiesgo && coincideTexto) {
@@ -139,7 +139,7 @@ public class StudentsAdapter extends RecyclerView.Adapter<StudentsAdapter.Studen
 
         // Promedio
         double prom = u.getPromedio();
-        holder.txtPromedio.setText(String.format("Prom: %.1f", prom));
+        holder.txtPromedio.setText(String.format(java.util.Locale.getDefault(), "Prom: %.1f", prom));
 
         // Nivel de riesgo con color
         String riesgo = u.getNivelRiesgo() != null ? u.getNivelRiesgo() : "BAJO";

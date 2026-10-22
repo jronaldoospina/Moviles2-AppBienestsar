@@ -41,7 +41,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     public void aplicarFiltro(String texto) {
         query = (texto != null) ? texto : "";
         List<Curso> nuevos = new ArrayList<>();
-        String q = query.trim().toLowerCase();
+        String q = query.trim().toLowerCase(java.util.Locale.ROOT);
         for (Curso c : cursos) {
             boolean ok = q.isEmpty()
                     || contiene(c.getNombre(), q)
@@ -69,7 +69,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     }
 
     private boolean contiene(String valor, String q) {
-        return valor != null && valor.toLowerCase().contains(q);
+        return valor != null && valor.toLowerCase(java.util.Locale.ROOT).contains(q);
     }
 
     @NonNull
