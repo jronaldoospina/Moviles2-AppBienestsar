@@ -55,26 +55,26 @@ public class TeacherDashboardFragment extends Fragment {
         progressKpis = view.findViewById(R.id.progress_kpis);
 
         TextView txtKpi1Label = view.findViewById(R.id.txt_kpi1_label);
-        txtKpi1Label.setText("Mis Cursos");
+        txtKpi1Label.setText(R.string.teacher_mis_cursos);
         TextView txtKpi2Label = view.findViewById(R.id.txt_kpi2_label);
-        txtKpi2Label.setText("Tutorías Activas");
+        txtKpi2Label.setText(R.string.teacher_tutorias_activas);
 
         TextView txtKpi4Label = view.findViewById(R.id.txt_kpi4_label);
         if (txtKpi4Label != null) {
-            txtKpi4Label.setText("Atendidas");
+            txtKpi4Label.setText(R.string.dashboard_atendidas);
         }
 
         TextView txtKpi3Label = view.findViewById(R.id.txt_kpi3_label);
         if (txtKpi3Label != null) {
-            txtKpi3Label.setText("Estudiantes");
+            txtKpi3Label.setText(R.string.teacher_estudiantes);
         }
 
         TextView txtAaEstudiantes = view.findViewById(R.id.txt_aa_estudiantes);
-        if (txtAaEstudiantes != null) txtAaEstudiantes.setText("Cursos");
+        if (txtAaEstudiantes != null) txtAaEstudiantes.setText(R.string.teacher_cursos);
         TextView txtAaCita = view.findViewById(R.id.txt_aa_cita);
-        if (txtAaCita != null) txtAaCita.setText("Tutorías");
+        if (txtAaCita != null) txtAaCita.setText(R.string.teacher_tutorias);
         TextView txtAaAlertas = view.findViewById(R.id.txt_aa_alertas);
-        if (txtAaAlertas != null) txtAaAlertas.setText("Alertas");
+        if (txtAaAlertas != null) txtAaAlertas.setText(R.string.teacher_alertas);
 
         RecyclerView recyclerAlertas = view.findViewById(R.id.recycler_recent_alerts);
         alertsAdapter = new AlertsAdapter();
@@ -113,7 +113,7 @@ public class TeacherDashboardFragment extends Fragment {
 
     private void pintarSaludo() {
         if (textDate != null) {
-            textDate.setText("Hoy, " + FechaUtils.fechaBonitaConAnio(FechaUtils.hoyIso()));
+            textDate.setText(getString(R.string.teacher_hoy) + FechaUtils.fechaBonitaConAnio(FechaUtils.hoyIso()));
         }
     }
 

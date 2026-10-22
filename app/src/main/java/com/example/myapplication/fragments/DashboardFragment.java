@@ -68,9 +68,9 @@ public class DashboardFragment extends Fragment {
         txtAaAlertas = view.findViewById(R.id.txt_aa_alertas);
 
         TextView txtKpi1Label = view.findViewById(R.id.txt_kpi1_label);
-        if (txtKpi1Label != null) txtKpi1Label.setText("Alertas Activas");
+        if (txtKpi1Label != null) txtKpi1Label.setText(R.string.dashboard_alertas_activas);
         TextView txtKpi4Label = view.findViewById(R.id.txt_kpi4_label);
-        if (txtKpi4Label != null) txtKpi4Label.setText("Atendidas");
+        if (txtKpi4Label != null) txtKpi4Label.setText(R.string.dashboard_atendidas);
 
         progressKpis = view.findViewById(R.id.progress_kpis);
 
@@ -142,7 +142,7 @@ public class DashboardFragment extends Fragment {
 
     private void pintarSaludo() {
         if (textDate != null) {
-            textDate.setText("Hoy, " + FechaUtils.fechaBonitaConAnio(FechaUtils.hoyIso()));
+            textDate.setText(getString(R.string.dashboard_hoy) + FechaUtils.fechaBonitaConAnio(FechaUtils.hoyIso()));
         }
     }
 
@@ -160,14 +160,14 @@ public class DashboardFragment extends Fragment {
             View viewAll = view.findViewById(R.id.text_view_all);
             if (viewAll != null) viewAll.setOnClickListener(v -> navegar(R.id.nav_psi_alerts));
         } else {
-            if (txtAaEstudiantes != null) txtAaEstudiantes.setText("Usuarios");
+            if (txtAaEstudiantes != null) txtAaEstudiantes.setText(R.string.dashboard_usuarios);
 
             View cardEstudiantes = view.findViewById(R.id.card_aa_estudiantes);
             if (cardEstudiantes != null) cardEstudiantes.setOnClickListener(v -> navegar(R.id.nav_admin_users));
 
             if (cardCita != null) cardCita.setVisibility(View.GONE);
 
-            if (txtAaAlertas != null) txtAaAlertas.setText("Estadísticas");
+            if (txtAaAlertas != null) txtAaAlertas.setText(R.string.dashboard_estadisticas);
 
             View cardAlertas = view.findViewById(R.id.card_aa_alertas);
             if (cardAlertas != null) cardAlertas.setOnClickListener(v -> navegar(R.id.nav_admin_stats));

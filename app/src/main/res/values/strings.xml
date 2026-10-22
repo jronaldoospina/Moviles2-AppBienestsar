@@ -95,6 +95,18 @@
 
     <!-- ============ MENSAJES ============ -->
     <string name="error_citas">Error al cargar citas</string>
+    <string name="dashboard_alertas_activas">Alertas Activas</string>
+    <string name="dashboard_atendidas">Atendidas</string>
+    <string name="dashboard_usuarios">Usuarios</string>
+    <string name="dashboard_estadisticas">Estadísticas</string>
+    <string name="dashboard_hoy">Hoy, </string>
+    <string name="teacher_mis_cursos">Mis Cursos</string>
+    <string name="teacher_tutorias_activas">Tutorías Activas</string>
+    <string name="teacher_estudiantes">Estudiantes</string>
+    <string name="teacher_cursos">Cursos</string>
+    <string name="teacher_tutorias">Tutorías</string>
+    <string name="teacher_alertas">Alertas</string>
+    <string name="teacher_hoy">Hoy, </string>
     <string name="msg_error_generic">Ocurrió un error. Intenta de nuevo.</string>
     <string name="msg_no_internet">Sin conexión a internet</string>
     <string name="msg_saved_success">Guardado exitosamente</string>
