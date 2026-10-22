@@ -1,6 +1,5 @@
 [versions]
 agp = "9.4.1"
-kotlin = "2.4.21"
 googleServices = "4.5.0"
 coreKtx = "1.19.1"
 appcompat = "1.8.0"
@@ -64,5 +63,4 @@ androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-co
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
