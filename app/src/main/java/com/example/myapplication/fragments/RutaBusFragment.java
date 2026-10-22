@@ -1,6 +1,7 @@
 package com.example.myapplication.fragments;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -99,9 +100,7 @@ public class RutaBusFragment extends Fragment {
                                                 + "cuál parada te queda más cerca.\n"
                                                 + "Puedes ver la ruta completa igual.");
                             }
-                            Toast.makeText(requireContext(),
-                                    "Permiso denegado: activa la ubicacion en ajustes",
-                                    Toast.LENGTH_LONG).show();
+                            mostrarToast("Permiso denegado: activa la ubicacion en ajustes");
                         }
                     });
 
@@ -565,38 +564,46 @@ private void pedirPermisoYLocalizar() {
         }
     }
 
+    /** Muestra un aviso solo si el fragmento sigue vivo (callbacks async). */
+    private void mostrarToast(String mensaje) {
+        Context ctx = getContext();
+        if (ctx != null) {
+            Toast.makeText(ctx, mensaje, Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private void localizar() {
         if (fused == null) {
             try {
                 fused = LocationServices.getFusedLocationProviderClient(requireContext());
             } catch (Exception e) {
-                Toast.makeText(requireContext(), "GPS no disponible",
-                        Toast.LENGTH_SHORT).show();
+                mostrarToast("GPS no disponible");
                 return;
             }
         }
         try {
             fused.getCurrentLocation(Priority.PRIORITY_BALANCED_POWER_ACCURACY, null)
                     .addOnSuccessListener(loc -> {
+                        if (!isAdded()) return;
                         if (loc != null) {
                             onUbicacion(loc.getLatitude(), loc.getLongitude());
                         } else {
                             fused.getLastLocation().addOnSuccessListener(last -> {
+                                if (!isAdded()) return;
                                 if (last != null) {
                                     onUbicacion(last.getLatitude(), last.getLongitude());
                                 } else {
-                                    Toast.makeText(requireContext(),
-                                            "No se pudo obtener tu ubicación",
-                                            Toast.LENGTH_SHORT).show();
+                                    mostrarToast("No se pudo obtener tu ubicación");
                                 }
                             });
                         }
                     })
-                    .addOnFailureListener(e -> Toast.makeText(requireContext(),
-                            "Error ubicación: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                    .addOnFailureListener(e -> {
+                        if (!isAdded()) return;
+                        mostrarToast("Error ubicación: " + e.getMessage());
+                    });
         } catch (SecurityException e) {
-            Toast.makeText(requireContext(), "Sin permiso de ubicación",
-                    Toast.LENGTH_SHORT).show();
+            mostrarToast("Sin permiso de ubicación");
         }
     }
 
