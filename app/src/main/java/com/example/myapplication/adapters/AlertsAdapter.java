@@ -1,5 +1,6 @@
 package com.example.myapplication.adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,17 +60,17 @@ public class AlertsAdapter extends RecyclerView.Adapter<AlertsAdapter.ViewHolder
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Alerta a = alertas.get(position);
         holder.txtEstudiante.setText(a.getEstudianteNombre() != null
-                ? a.getEstudianteNombre() : "Estudiante");
+                ? a.getEstudianteNombre() : holder.itemView.getContext().getString(R.string.alerta_estudiante_desconocido));
         holder.txtCurso.setText(a.getCursoNombre() != null ? a.getCursoNombre() : "");
-        holder.txtMotivo.setText(motivoLabel(a.getMotivo()));
+        holder.txtMotivo.setText(motivoLabel(holder.itemView.getContext(), a.getMotivo()));
         holder.txtDesc.setText(a.getDescripcion() != null ? a.getDescripcion() : "");
         holder.txtFecha.setText(a.getFecha() > 0
                 ? FechaUtils.fechaBonitaLong(a.getFecha()) : "");
-        holder.txtDocente.setText("Reportado por: " +
-                (a.getDocenteNombre() != null ? a.getDocenteNombre() : "Docente"));
+        holder.txtDocente.setText(holder.itemView.getContext().getString(R.string.alerta_reportado_por,
+                a.getDocenteNombre() != null ? a.getDocenteNombre() : holder.itemView.getContext().getString(R.string.alerta_docente_desconocido)));
 
-        holder.txtEstado.setText(a.getEstado() != null ? a.getEstado() : "PENDIENTE");
-        String estado = a.getEstado() != null ? a.getEstado() : "PENDIENTE";
+        String estado = a.getEstado() != null ? a.getEstado() : holder.itemView.getContext().getString(R.string.estado_pendiente);
+        holder.txtEstado.setText(estado);
         boolean atendida = estado.equals("ATENDIDA");
         boolean revisada = estado.equals("REVISADA");
         holder.txtEstado.setBackgroundResource(atendida
@@ -86,13 +87,13 @@ public class AlertsAdapter extends RecyclerView.Adapter<AlertsAdapter.ViewHolder
         });
     }
 
-    private String motivoLabel(String motivo) {
+    private String motivoLabel(Context ctx, String motivo) {
         if (motivo == null) return "";
         switch (motivo) {
-            case "INASISTENCIA":   return "Inasistencia";
-            case "COMPORTAMIENTO": return "Comportamiento";
-            case "OTRO":           return "Otro";
-            default:               return "Bajo rendimiento";
+            case "INASISTENCIA":   return ctx.getString(R.string.motivo_inasistencia);
+            case "COMPORTAMIENTO": return ctx.getString(R.string.motivo_comportamiento);
+            case "OTRO":           return ctx.getString(R.string.motivo_otro);
+            default:               return ctx.getString(R.string.motivo_bajo_rendimiento);
         }
     }
 

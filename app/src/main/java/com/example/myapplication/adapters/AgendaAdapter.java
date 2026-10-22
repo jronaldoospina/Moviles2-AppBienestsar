@@ -1,5 +1,6 @@
 package com.example.myapplication.adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,12 +65,17 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.ViewHolder
 
         String nombre = c.getEstudianteNombre() != null ? c.getEstudianteNombre() : "";
         String hora = c.getHora() != null ? c.getHora() : "";
-        holder.txtTimePsicologo.setText(
-                (hora.isEmpty() ? "" : hora + " · ") + (nombre.isEmpty() ? "" : nombre));
+        Context ctx = holder.itemView.getContext();
+        String separador = ctx.getString(R.string.agenda_separator);
+        String textoTiempoNombre = ctx.getString(R.string.agenda_time_name_format,
+                hora.isEmpty() ? "" : hora,
+                (hora.isEmpty() || nombre.isEmpty()) ? "" : ctx.getString(R.string.agenda_separator),
+                nombre);
+        holder.txtTimePsicologo.setText(textoTiempoNombre);
 
         holder.txtMotivo.setText(c.getMotivo() != null ? c.getMotivo() : "");
         if (c.getDuracionMinutos() > 0) {
-            holder.txtMotivo.append(" · " + c.getDuracionMinutos() + " min");
+            holder.txtMotivo.append(" · " + c.getDuracionMinutos() + holder.itemView.getContext().getString(R.string.agenda_min));
         }
 
         String estado = c.getEstado() != null ? c.getEstado() : "PENDIENTE";
@@ -90,23 +96,23 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.ViewHolder
             case "CONFIRMADA":
                 bg = R.drawable.badge_success;
                 fg = R.color.success_text;
-                texto = "Confirmada";
+                texto = tv.getContext().getString(R.string.estado_confirmada);
                 break;
             case "ATENDIDA":
                 bg = R.drawable.badge_info;
                 fg = R.color.info_text;
-                texto = "Atendida";
+                texto = tv.getContext().getString(R.string.estado_atendida);
                 break;
             case "CANCELADA":
                 bg = R.drawable.badge_risk_high;
                 fg = R.color.risk_high_text;
-                texto = "Cancelada";
+                texto = tv.getContext().getString(R.string.estado_cancelada);
                 break;
             case "PENDIENTE":
             default:
                 bg = R.drawable.badge_risk_medium;
                 fg = R.color.risk_medium_text;
-                texto = "Pendiente";
+                texto = tv.getContext().getString(R.string.estado_pendiente);
                 break;
         }
         tv.setBackgroundResource(bg);

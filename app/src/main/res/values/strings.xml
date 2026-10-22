@@ -107,10 +107,25 @@
     <string name="teacher_tutorias">Tutorías</string>
     <string name="teacher_alertas">Alertas</string>
     <string name="teacher_hoy">Hoy, </string>
+    <string name="agenda_min"> min</string>
+    <string name="estado_confirmada">Confirmada</string>
+    <string name="estado_atendida">Atendida</string>
+    <string name="estado_cancelada">Cancelada</string>
+    <string name="estado_pendiente">Pendiente</string>
+    <string name="agenda_time_name_format">%1$s%2$s%3$s</string>
+    <string name="agenda_separator"> · </string>
     <string name="msg_error_generic">Ocurrió un error. Intenta de nuevo.</string>
     <string name="msg_no_internet">Sin conexión a internet</string>
     <string name="msg_saved_success">Guardado exitosamente</string>
     <string name="msg_deleted_success">Eliminado exitosamente</string>
+
+    <string name="alerta_estudiante_desconocido">Estudiante</string>
+    <string name="alerta_docente_desconocido">Docente</string>
+    <string name="alerta_reportado_por">Reportado por: %1$s</string>
+    <string name="motivo_inasistencia">Inasistencia</string>
+    <string name="motivo_comportamiento">Comportamiento</string>
+    <string name="motivo_otro">Otro</string>
+    <string name="motivo_bajo_rendimiento">Bajo rendimiento</string>
 
     <!-- ============ CONTENT DESCRIPTIONS ============ -->
     <string name="cd_avatar">Avatar del usuario</string>
