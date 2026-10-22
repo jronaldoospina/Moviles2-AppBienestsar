@@ -9,19 +9,15 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.myapplication.R;
 import com.example.myapplication.models.Alerta;
 import com.example.myapplication.models.Cita;
 import com.example.myapplication.models.Tutoria;
 import com.example.myapplication.models.Usuario;
-import com.example.myapplication.repositories.AlertRepository;
-import com.example.myapplication.repositories.AppointmentRepository;
-import com.example.myapplication.repositories.CourseRepository;
-import com.example.myapplication.repositories.ReportRepository;
-import com.example.myapplication.repositories.TutoriaRepository;
-import com.example.myapplication.repositories.UserRepository;
 import com.example.myapplication.services.SessionManager;
+import com.example.myapplication.viewmodels.StatsViewModel;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -34,7 +30,6 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
-import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.ArrayList;
 
@@ -44,16 +39,7 @@ public class StatsFragment extends Fragment {
     private BarChart barChartBienestar;
     private PieChart pieChartAcademico;
 
-    private UserRepository userRepository;
-    private AppointmentRepository appointmentRepository;
-    private AlertRepository alertRepository;
-    private CourseRepository courseRepository;
-    private TutoriaRepository tutoriaRepository;
-    private ReportRepository reportRepository;
-
-    private int countCitasTotal = 0, countCitasAtendidas = 0;
-    private int countAlertasTotal = 0, countAlertasPendientes = 0, countAlertasAtendidas = 0;
-    private int countCursos = 0, countTutoriasActivas = 0, countReportes = 0;
+    private StatsViewModel viewModel;
 
     @Nullable
     @Override
@@ -71,15 +57,30 @@ public class StatsFragment extends Fragment {
         barChartBienestar = view.findViewById(R.id.bar_chart_bienestar);
         pieChartAcademico = view.findViewById(R.id.pie_chart_academico);
 
-        userRepository = new UserRepository();
-        appointmentRepository = new AppointmentRepository();
-        alertRepository = new AlertRepository();
-        courseRepository = new CourseRepository();
-        tutoriaRepository = new TutoriaRepository();
-        reportRepository = new ReportRepository();
+        viewModel = new ViewModelProvider(this).get(StatsViewModel.class);
 
         configurarGraficos();
-        cargarDatos();
+        observarViewModel();
+        viewModel.cargar();
+    }
+
+    private void observarViewModel() {
+        viewModel.getEstado().observe(getViewLifecycleOwner(), estado -> {
+            if (estado == null) return;
+            actualizarGraficoUsuarios(estado.usuariosEstudiantes, estado.usuariosDocentes,
+                    estado.usuariosPsicologos, estado.usuariosAdmins);
+            intentarActualizarBarChart(estado.citasTotal, estado.citasAtendidas,
+                    estado.alertasTotal, estado.alertasPendientes, estado.alertasAtendidas);
+            intentarActualizarPieAcademico(estado.cursosTotal, estado.tutoriasActivas, estado.reportesTotal);
+        });
+        viewModel.getLoading().observe(getViewLifecycleOwner(), cargando -> {
+            // Optional: show/hide progress if you have a progress bar in layout
+        });
+        viewModel.getError().observe(getViewLifecycleOwner(), mensaje -> {
+            if (mensaje != null) {
+                // Show error toast or snackbar
+            }
+        });
     }
 
     private void configurarGraficos() {
@@ -112,34 +113,6 @@ public class StatsFragment extends Fragment {
         pieChartAcademico.getLegend().setWordWrapEnabled(true);
     }
 
-    private void cargarDatos() {
-        cargarUsuarios();
-        cargarBienestar();
-        cargarAcademico();
-    }
-
-    private void cargarUsuarios() {
-        userRepository.getAllUsers().addOnSuccessListener(snap -> {
-            if (!isAdded()) return;
-            int estudiantes = 0, docentes = 0, psicologos = 0, admins = 0;
-            for (DocumentSnapshot doc : snap.getDocuments()) {
-                Usuario u = doc.toObject(Usuario.class);
-                if (u == null) continue;
-                String rol = u.getRol();
-                if (SessionManager.ROLE_ESTUDIANTE.equals(rol)) {
-                    estudiantes++;
-                } else if (SessionManager.ROLE_DOCENTE.equals(rol)) {
-                    docentes++;
-                } else if (SessionManager.ROLE_PSICOLOGO.equals(rol)) {
-                    psicologos++;
-                } else if (SessionManager.ROLE_ADMIN.equals(rol)) {
-                    admins++;
-                }
-            }
-            actualizarGraficoUsuarios(estudiantes, docentes, psicologos, admins);
-        });
-    }
-
     private void actualizarGraficoUsuarios(int est, int doc, int psi, int adm) {
         ArrayList<PieEntry> entries = new ArrayList<>();
         if (est > 0) entries.add(new PieEntry(est, "Estudiantes"));
@@ -163,52 +136,24 @@ public class StatsFragment extends Fragment {
         pieChartUsers.invalidate();
     }
 
-    private void cargarBienestar() {
-        // Se cargan Citas y Alertas para unirlas en el BarChart
-        appointmentRepository.getAllCitas().addOnSuccessListener(snap -> {
-            if (!isAdded()) return;
-            countCitasTotal = snap.size();
-            for (DocumentSnapshot doc : snap.getDocuments()) {
-                Cita c = doc.toObject(Cita.class);
-                if (c != null && "ATENDIDA".equals(c.getEstado())) {
-                    countCitasAtendidas++;
-                }
-            }
-            intentarActualizarBarChart();
-        });
-
-        alertRepository.getAllAlertas().addOnSuccessListener(snap -> {
-            if (!isAdded()) return;
-            countAlertasTotal = snap.size();
-            for (DocumentSnapshot doc : snap.getDocuments()) {
-                Alerta a = doc.toObject(Alerta.class);
-                if (a == null) continue;
-                if ("PENDIENTE".equals(a.getEstado())) countAlertasPendientes++;
-                if ("ATENDIDA".equals(a.getEstado())) countAlertasAtendidas++;
-            }
-            intentarActualizarBarChart();
-        });
-    }
-
-    private void intentarActualizarBarChart() {
-        // Se llama cada vez que termina de cargar Citas o Alertas
-        // Se actualiza la gráfica con los últimos valores disponibles
+    private void intentarActualizarBarChart(int citasTotal, int citasAtendidas,
+                                           int alertasTotal, int alertasPendientes, int alertasAtendidas) {
         ArrayList<BarEntry> entries = new ArrayList<>();
         ArrayList<String> labels = new ArrayList<>();
 
-        entries.add(new BarEntry(0, countCitasTotal));
+        entries.add(new BarEntry(0, citasTotal));
         labels.add("Citas Total");
         
-        entries.add(new BarEntry(1, countCitasAtendidas));
+        entries.add(new BarEntry(1, citasAtendidas));
         labels.add("Citas Atend.");
         
-        entries.add(new BarEntry(2, countAlertasTotal));
+        entries.add(new BarEntry(2, alertasTotal));
         labels.add("Alertas Total");
         
-        entries.add(new BarEntry(3, countAlertasPendientes));
+        entries.add(new BarEntry(3, alertasPendientes));
         labels.add("Alerta Pend.");
         
-        entries.add(new BarEntry(4, countAlertasAtendidas));
+        entries.add(new BarEntry(4, alertasAtendidas));
         labels.add("Alerta Atend.");
 
         BarDataSet dataSet = new BarDataSet(entries, "Gestión");
@@ -230,34 +175,11 @@ public class StatsFragment extends Fragment {
         barChartBienestar.invalidate();
     }
 
-    private void cargarAcademico() {
-        courseRepository.getAllCursos().addOnSuccessListener(snap -> {
-            if (!isAdded()) return;
-            countCursos = snap.size();
-            intentarActualizarPieAcademico();
-        });
-
-        tutoriaRepository.getAllTutorias().addOnSuccessListener(snap -> {
-            if (!isAdded()) return;
-            for (DocumentSnapshot doc : snap.getDocuments()) {
-                Tutoria t = doc.toObject(Tutoria.class);
-                if (t != null && t.isActiva()) countTutoriasActivas++;
-            }
-            intentarActualizarPieAcademico();
-        });
-
-        reportRepository.getAllReportes().addOnSuccessListener(snap -> {
-            if (!isAdded()) return;
-            countReportes = snap.size();
-            intentarActualizarPieAcademico();
-        });
-    }
-
-    private void intentarActualizarPieAcademico() {
+    private void intentarActualizarPieAcademico(int cursosTotal, int tutoriasActivas, int reportesTotal) {
         ArrayList<PieEntry> entries = new ArrayList<>();
-        if (countCursos > 0) entries.add(new PieEntry(countCursos, "Cursos"));
-        if (countTutoriasActivas > 0) entries.add(new PieEntry(countTutoriasActivas, "Tutorías (Activas)"));
-        if (countReportes > 0) entries.add(new PieEntry(countReportes, "Reportes"));
+        if (cursosTotal > 0) entries.add(new PieEntry(cursosTotal, "Cursos"));
+        if (tutoriasActivas > 0) entries.add(new PieEntry(tutoriasActivas, "Tutorías (Activas)"));
+        if (reportesTotal > 0) entries.add(new PieEntry(reportesTotal, "Reportes"));
 
         if (entries.isEmpty()) return;
 

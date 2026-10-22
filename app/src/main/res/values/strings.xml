@@ -94,7 +94,7 @@
     <string name="action_notifications">Notificaciones</string>
 
     <!-- ============ MENSAJES ============ -->
-    <string name="msg_loading">Cargando...</string>
+    <string name="error_citas">Error al cargar citas</string>
     <string name="msg_error_generic">Ocurrió un error. Intenta de nuevo.</string>
     <string name="msg_no_internet">Sin conexión a internet</string>
     <string name="msg_saved_success">Guardado exitosamente</string>
