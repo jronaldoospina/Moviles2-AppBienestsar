@@ -68,9 +68,9 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
         String psi = c.getPsicologoNombre() != null && !c.getPsicologoNombre().isEmpty()
                 ? c.getPsicologoNombre() : "";
         if (psi.isEmpty()) {
-            holder.layoutDoctor.setVisibility(View.GONE);
+            holder.txtPsicologoName.setVisibility(View.GONE);
         } else {
-            holder.layoutDoctor.setVisibility(View.VISIBLE);
+            holder.txtPsicologoName.setVisibility(View.VISIBLE);
             holder.txtPsicologoName.setText(psi);
         }
 
@@ -125,7 +125,6 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
 
     static class CitaViewHolder extends RecyclerView.ViewHolder {
         TextView txtDate, txtStatus, txtTimePsicologo, txtPsicologoName, txtMotivo;
-        View layoutDoctor;
         MaterialButton btnCancel;
 
         CitaViewHolder(@NonNull View itemView) {
@@ -133,9 +132,8 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
             txtDate = itemView.findViewById(R.id.txt_date);
             txtStatus = itemView.findViewById(R.id.txt_status);
             txtTimePsicologo = itemView.findViewById(R.id.txt_time_psicologo);
-            txtPsicologoName = itemView.findViewById(R.id.txt_psicologo_name);
-            layoutDoctor = itemView.findViewById(R.id.layout_doctor);
-            txtMotivo = itemView.findViewById(R.id.txt_motivo);
+        txtPsicologoName = itemView.findViewById(R.id.txt_psicologo_name);
+        txtMotivo = itemView.findViewById(R.id.txt_motivo);
             btnCancel = itemView.findViewById(R.id.btn_cancel);
         }
     }

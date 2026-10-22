@@ -93,33 +93,22 @@
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <!-- Estado vacío -->
-    <LinearLayout
+    <TextView
         android:id="@+id/layout_empty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:gravity="center"
-        android:orientation="vertical"
+        app:drawableTopCompat="@drawable/ic_people_80"
+        android:drawablePadding="12dp"
+        app:drawableTint="@color/text_secondary"
+        android:text="@string/txt_no_hay_usuarios"
+        android:textColor="@color/text_secondary"
+        android:textSize="16sp"
         android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <ImageView android:contentDescription="@null"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/ic_people"
-            app:tint="@color/text_secondary" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="@string/txt_no_hay_usuarios"
-            android:textColor="@color/text_secondary"
-            android:textSize="16sp" />
-    </LinearLayout>
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- ProgressBar -->
     <com.google.android.material.progressindicator.CircularProgressIndicator

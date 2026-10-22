@@ -261,29 +261,18 @@
                         app:cardCornerRadius="16dp"
                         app:cardElevation="2dp">
 
-                        <LinearLayout
+                        <TextView
+                            android:id="@+id/txt_aa_estudiantes"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
-                            android:orientation="vertical"
-                            android:padding="12dp">
-
-                            <ImageView android:contentDescription="@null"
-                                android:layout_width="32dp"
-                                android:layout_height="32dp"
-                                android:src="@drawable/ic_people"
-                                app:tint="@color/green_primary" />
-
-                            <TextView
-                                android:id="@+id/txt_aa_estudiantes"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:gravity="center"
-                                android:text="@string/txt_estudiantes"
-                                android:textColor="@color/text_primary"
-                                android:textSize="12sp" />
-                        </LinearLayout>
+                            android:padding="12dp"
+                            app:drawableTopCompat="@drawable/ic_people_32"
+                            android:drawablePadding="8dp"
+                            app:drawableTint="@color/green_primary"
+                            android:text="@string/txt_estudiantes"
+                            android:textColor="@color/text_primary"
+                            android:textSize="12sp" />
                     </com.google.android.material.card.MaterialCardView>
 
                     <!-- Acceso: Nueva Cita -->
@@ -298,29 +287,18 @@
                         app:cardCornerRadius="16dp"
                         app:cardElevation="2dp">
 
-                        <LinearLayout
+                        <TextView
+                            android:id="@+id/txt_aa_cita"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
-                            android:orientation="vertical"
-                            android:padding="12dp">
-
-                            <ImageView android:contentDescription="@null"
-                                android:layout_width="32dp"
-                                android:layout_height="32dp"
-                                android:src="@drawable/ic_calendar"
-                                app:tint="@color/blue_primary" />
-
-                            <TextView
-                                android:id="@+id/txt_aa_cita"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:gravity="center"
-                                android:text="@string/txt_cita"
-                                android:textColor="@color/text_primary"
-                                android:textSize="12sp" />
-                        </LinearLayout>
+                            android:padding="12dp"
+                            app:drawableTopCompat="@drawable/ic_calendar_32"
+                            android:drawablePadding="8dp"
+                            app:drawableTint="@color/blue_primary"
+                            android:text="@string/txt_cita"
+                            android:textColor="@color/text_primary"
+                            android:textSize="12sp" />
                     </com.google.android.material.card.MaterialCardView>
 
                     <!-- Acceso: Alertas -->
@@ -335,29 +313,18 @@
                         app:cardCornerRadius="16dp"
                         app:cardElevation="2dp">
 
-                        <LinearLayout
+                        <TextView
+                            android:id="@+id/txt_aa_alertas"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
-                            android:orientation="vertical"
-                            android:padding="12dp">
-
-                            <ImageView android:contentDescription="@null"
-                                android:layout_width="32dp"
-                                android:layout_height="32dp"
-                                android:src="@drawable/ic_warning"
-                                app:tint="@color/badge_notification" />
-
-                            <TextView
-                                android:id="@+id/txt_aa_alertas"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:gravity="center"
-                                android:text="@string/txt_alertas"
-                                android:textColor="@color/text_primary"
-                                android:textSize="12sp" />
-                        </LinearLayout>
+                            android:padding="12dp"
+                            app:drawableTopCompat="@drawable/ic_warning_32"
+                            android:drawablePadding="8dp"
+                            app:drawableTint="@color/badge_notification"
+                            android:text="@string/txt_alertas"
+                            android:textColor="@color/text_primary"
+                            android:textSize="12sp" />
                     </com.google.android.material.card.MaterialCardView>
 
                 </LinearLayout>

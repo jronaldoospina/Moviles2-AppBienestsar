@@ -71,76 +71,45 @@
             android:orientation="vertical">
 
             <!-- Hora -->
-            <LinearLayout
+            <TextView
+                android:id="@+id/txt_time_psicologo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_marginBottom="8dp"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="8dp">
-
-                <ImageView android:contentDescription="@null"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_marginEnd="10dp"
-                    android:src="@drawable/ic_clock_outline"
-                    app:tint="@color/text_hint" />
-
-                <TextView
-                    android:id="@+id/txt_time_psicologo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/txt_10_00_am"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="14sp" />
-            </LinearLayout>
+                app:drawableStartCompat="@drawable/ic_clock_outline_16"
+                android:drawablePadding="10dp"
+                app:drawableTint="@color/text_hint"
+                android:text="@string/txt_10_00_am"
+                android:textColor="@color/text_secondary"
+                android:textSize="14sp" />
 
             <!-- Psicólogo -->
-            <LinearLayout
-                android:id="@+id/layout_doctor"
+            <TextView
+                android:id="@+id/txt_psicologo_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_marginBottom="8dp"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="8dp">
-
-                <ImageView android:contentDescription="@null"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_marginEnd="10dp"
-                    android:src="@drawable/ic_doctor"
-                    app:tint="@color/text_hint" />
-
-                <TextView
-                    android:id="@+id/txt_psicologo_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/txt_dra_ana_torres"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="14sp" />
-            </LinearLayout>
+                app:drawableStartCompat="@drawable/ic_doctor_16"
+                android:drawablePadding="10dp"
+                app:drawableTint="@color/text_hint"
+                android:text="@string/txt_dra_ana_torres"
+                android:textColor="@color/text_secondary"
+                android:textSize="14sp" />
 
             <!-- Motivo -->
-            <LinearLayout
+            <TextView
+                android:id="@+id/txt_motivo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
-
-                <ImageView android:contentDescription="@null"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_marginEnd="10dp"
-                    android:src="@drawable/ic_chat"
-                    app:tint="@color/text_hint" />
-
-                <TextView
-                    android:id="@+id/txt_motivo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/txt_seguimiento_psicologico"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="14sp" />
-            </LinearLayout>
+                android:gravity="center_vertical"
+                app:drawableStartCompat="@drawable/ic_chat_16"
+                android:drawablePadding="10dp"
+                app:drawableTint="@color/text_hint"
+                android:text="@string/txt_seguimiento_psicologico"
+                android:textColor="@color/text_secondary"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <!-- Botón cancelar -->

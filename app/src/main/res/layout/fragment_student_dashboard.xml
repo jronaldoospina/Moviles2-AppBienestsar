@@ -320,28 +320,17 @@
                         android:clickable="true"
                         android:focusable="true">
 
-                        <LinearLayout
+                        <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:orientation="vertical"
                             android:gravity="center"
-                            android:padding="12dp">
-
-                            <ImageView android:contentDescription="@null"
-                                android:layout_width="32dp"
-                                android:layout_height="32dp"
-                                android:src="@drawable/ic_trending"
-                                app:tint="@color/green_primary" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:text="@string/txt_mi_progreso"
-                                android:textColor="@color/text_primary"
-                                android:textSize="12sp"
-                                android:gravity="center" />
-                        </LinearLayout>
+                            android:padding="12dp"
+                            app:drawableTopCompat="@drawable/ic_trending_32"
+                            android:drawablePadding="8dp"
+                            app:drawableTint="@color/green_primary"
+                            android:text="@string/txt_mi_progreso"
+                            android:textColor="@color/text_primary"
+                            android:textSize="12sp" />
                     </com.google.android.material.card.MaterialCardView>
 
                     <com.google.android.material.card.MaterialCardView
@@ -356,28 +345,17 @@
                         android:clickable="true"
                         android:focusable="true">
 
-                        <LinearLayout
+                        <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:orientation="vertical"
                             android:gravity="center"
-                            android:padding="12dp">
-
-                            <ImageView android:contentDescription="@null"
-                                android:layout_width="32dp"
-                                android:layout_height="32dp"
-                                android:src="@drawable/ic_calendar"
-                                app:tint="@color/blue_primary" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:text="@string/txt_mis_citas"
-                                android:textColor="@color/text_primary"
-                                android:textSize="12sp"
-                                android:gravity="center" />
-                        </LinearLayout>
+                            android:padding="12dp"
+                            app:drawableTopCompat="@drawable/ic_calendar_32"
+                            android:drawablePadding="8dp"
+                            app:drawableTint="@color/blue_primary"
+                            android:text="@string/txt_mis_citas"
+                            android:textColor="@color/text_primary"
+                            android:textSize="12sp" />
                     </com.google.android.material.card.MaterialCardView>
 
                     <com.google.android.material.card.MaterialCardView
@@ -392,28 +370,17 @@
                         android:clickable="true"
                         android:focusable="true">
 
-                        <LinearLayout
+                        <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:orientation="vertical"
                             android:gravity="center"
-                            android:padding="12dp">
-
-                            <ImageView android:contentDescription="@null"
-                                android:layout_width="32dp"
-                                android:layout_height="32dp"
-                                android:src="@drawable/ic_warning"
-                                app:tint="@color/orange_primary" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:text="@string/txt_reporte_emoc"
-                                android:textColor="@color/text_primary"
-                                android:textSize="12sp"
-                                android:gravity="center" />
-                        </LinearLayout>
+                            android:padding="12dp"
+                            app:drawableTopCompat="@drawable/ic_warning_32"
+                            android:drawablePadding="8dp"
+                            app:drawableTint="@color/orange_primary"
+                            android:text="@string/txt_reporte_emoc"
+                            android:textColor="@color/text_primary"
+                            android:textSize="12sp" />
                     </com.google.android.material.card.MaterialCardView>
 
                     <com.google.android.material.card.MaterialCardView
@@ -427,28 +394,17 @@
                         android:clickable="true"
                         android:focusable="true">
 
-                        <LinearLayout
+                        <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:orientation="vertical"
                             android:gravity="center"
-                            android:padding="12dp">
-
-                            <ImageView android:contentDescription="@null"
-                                android:layout_width="32dp"
-                                android:layout_height="32dp"
-                                android:src="@drawable/ic_book"
-                                app:tint="@color/blue_primary" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:text="@string/txt_mis_cursos"
-                                android:textColor="@color/text_primary"
-                                android:textSize="12sp"
-                                android:gravity="center" />
-                        </LinearLayout>
+                            android:padding="12dp"
+                            app:drawableTopCompat="@drawable/ic_book_32"
+                            android:drawablePadding="8dp"
+                            app:drawableTint="@color/blue_primary"
+                            android:text="@string/txt_mis_cursos"
+                            android:textColor="@color/text_primary"
+                            android:textSize="12sp" />
                     </com.google.android.material.card.MaterialCardView>
 
                     <com.google.android.material.card.MaterialCardView
@@ -462,28 +418,17 @@
                         android:clickable="true"
                         android:focusable="true">
 
-                        <LinearLayout
+                        <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:orientation="vertical"
                             android:gravity="center"
-                            android:padding="12dp">
-
-                            <ImageView android:contentDescription="@null"
-                                android:layout_width="32dp"
-                                android:layout_height="32dp"
-                                android:src="@drawable/ic_audit"
-                                app:tint="@color/green_primary" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:text="@string/txt_mi_bienestar"
-                                android:textColor="@color/text_primary"
-                                android:textSize="12sp"
-                                android:gravity="center" />
-                        </LinearLayout>
+                            android:padding="12dp"
+                            app:drawableTopCompat="@drawable/ic_audit_32"
+                            android:drawablePadding="8dp"
+                            app:drawableTint="@color/green_primary"
+                            android:text="@string/txt_mi_bienestar"
+                            android:textColor="@color/text_primary"
+                            android:textSize="12sp" />
                     </com.google.android.material.card.MaterialCardView>
 
                 </LinearLayout>

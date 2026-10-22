@@ -166,28 +166,18 @@
         tools:listitem="@layout/item_student_card" />
 
     <!-- Texto cuando no hay resultados -->
-    <LinearLayout
+    <TextView
         android:id="@+id/layout_empty"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="vertical"
-        android:visibility="gone">
-
-        <ImageView android:contentDescription="@null"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/ic_people"
-            app:tint="@color/text_secondary" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="@string/txt_no_se_encontraron_estudiantes"
-            android:textColor="@color/text_secondary"
-            android:textSize="16sp" />
-    </LinearLayout>
+        app:drawableTopCompat="@drawable/ic_people_80"
+        android:drawablePadding="12dp"
+        app:drawableTint="@color/text_secondary"
+        android:text="@string/txt_no_se_encontraron_estudiantes"
+        android:textColor="@color/text_secondary"
+        android:textSize="16sp"
+        android:visibility="gone" />
 
     <!-- ProgressBar -->
     <com.google.android.material.progressindicator.CircularProgressIndicator

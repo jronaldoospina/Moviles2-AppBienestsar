@@ -42,28 +42,17 @@
                 app:cardCornerRadius="12dp"
                 app:cardElevation="0dp">
 
-                <LinearLayout
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    app:drawableStartCompat="@drawable/ic_info"
+                    android:drawablePadding="12dp"
+                    app:drawableTint="@color/info_text"
+                    android:gravity="center_vertical"
                     android:padding="12dp"
-                    android:gravity="center_vertical">
-
-                    <ImageView android:contentDescription="@null"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_info"
-                        app:tint="@color/info_text" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginStart="12dp"
-                        android:text="@string/txt_el_usuario_sera_la_parte_antes_del_la_contrasena"
-                        android:textColor="@color/info_text"
-                        android:textSize="12sp" />
-                </LinearLayout>
+                    android:text="@string/txt_el_usuario_sera_la_parte_antes_del_la_contrasena"
+                    android:textColor="@color/info_text"
+                    android:textSize="12sp" />
             </com.google.android.material.card.MaterialCardView>
 
             <!-- Selector de Rol (solo Admin lo ve) -->
