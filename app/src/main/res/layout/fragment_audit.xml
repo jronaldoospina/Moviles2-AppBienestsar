@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Sin registros de actividad por el momento"
+        android:text="@string/txt_sin_registros_de_actividad_por_el_momento"
         android:textAlignment="center"
         android:textColor="@color/text_secondary"
         android:textSize="15sp"

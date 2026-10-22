@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="Aún no hay mensajes.\nEscribe el primero para empezar."
+            android:text="@string/txt_aun_no_hay_mensajes_nescribe_el_primero_para_emp"
             android:textColor="@color/text_secondary"
             android:textSize="14sp" />
 
@@ -60,7 +60,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Escribe un mensaje"
+            android:hint="@string/txt_escribe_un_mensaje"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText

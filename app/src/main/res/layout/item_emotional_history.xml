@@ -51,7 +51,7 @@
             android:id="@+id/btn_edit_day"
             android:layout_width="wrap_content"
             android:layout_height="32dp"
-            android:text="Actualizar"
+            android:text="@string/txt_actualizar"
             android:textSize="12sp"
             android:insetTop="0dp"
             android:insetBottom="0dp"

@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Reportar Alerta de Bienestar"
+        android:text="@string/txt_reportar_alerta_de_bienestar"
         android:textColor="@color/text_primary"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
-        android:hint="Descripción del motivo">
+        android:hint="@string/txt_descripcion_del_motivo">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_alerta_desc"
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:checkable="true"
-            android:text="Bajo rendimiento" />
+            android:text="@string/txt_bajo_rendimiento" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_inasistencia"
@@ -50,7 +50,7 @@
             android:layout_weight="1"
             android:checkable="true"
             android:layout_marginStart="4dp"
-            android:text="Inasistencia" />
+            android:text="@string/txt_inasistencia" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_comportamiento"
@@ -59,7 +59,7 @@
             android:layout_weight="1"
             android:checkable="true"
             android:layout_marginStart="4dp"
-            android:text="Comportamiento" />
+            android:text="@string/txt_comportamiento" />
     </LinearLayout>
 
     <com.google.android.material.chip.Chip
@@ -67,5 +67,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Otro" />
+        android:text="@string/txt_otro" />
 </LinearLayout>

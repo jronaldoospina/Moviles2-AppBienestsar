@@ -24,14 +24,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="📚"
+            android:text="@string/txt_texto_3"
             android:textSize="40sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Aún no estás inscrito en ningún curso."
+            android:text="@string/txt_aun_no_estas_inscrito_en_ningun_curso"
             android:textAlignment="center"
             android:textColor="@color/text_secondary"
             android:textSize="15sp" />

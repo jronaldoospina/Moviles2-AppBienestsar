@@ -37,7 +37,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="15 de septiembre"
+                android:text="@string/txt_15_de_septiembre"
                 android:textColor="@color/text_primary"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -50,7 +50,7 @@
                 android:paddingEnd="12dp"
                 android:paddingTop="4dp"
                 android:paddingBottom="4dp"
-                android:text="Pendiente"
+                android:text="@string/txt_pendiente"
                 android:textColor="@color/risk_medium_text"
                 android:textSize="12sp"
                 android:textStyle="bold"
@@ -89,7 +89,7 @@
                     android:id="@+id/txt_time_psicologo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="10:00 AM"
+                    android:text="@string/txt_10_00_am"
                     android:textColor="@color/text_secondary"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -114,7 +114,7 @@
                     android:id="@+id/txt_psicologo_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dra. Ana Torres"
+                    android:text="@string/txt_dra_ana_torres"
                     android:textColor="@color/text_secondary"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -137,7 +137,7 @@
                     android:id="@+id/txt_motivo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Seguimiento psicológico"
+                    android:text="@string/txt_seguimiento_psicologico"
                     android:textColor="@color/text_secondary"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -150,7 +150,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Cancelar cita"
+            android:text="@string/txt_cancelar_cita"
             android:textColor="@color/risk_high_text"
             app:strokeColor="@color/risk_high_bg"
             app:rippleColor="#20DC2626"

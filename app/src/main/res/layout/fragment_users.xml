@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
             android:layout_marginTop="12dp"
-            android:hint="Buscar por nombre, usuario o documento"
+            android:hint="@string/txt_buscar_por_nombre_usuario_o_documento"
             app:startIconDrawable="@drawable/ic_search"
             app:boxCornerRadiusBottomEnd="12dp"
             app:boxCornerRadiusBottomStart="12dp"
@@ -56,7 +56,7 @@
                     style="@style/Widget.Material3.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Todos"
+                    android:text="@string/txt_todos"
                     android:checked="true" />
 
                 <com.google.android.material.chip.Chip
@@ -64,28 +64,28 @@
                     style="@style/Widget.Material3.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Admin" />
+                    android:text="@string/txt_admin" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_psicologo"
                     style="@style/Widget.Material3.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Psicólogo" />
+                    android:text="@string/txt_psicologo" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_docente"
                     style="@style/Widget.Material3.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Docente" />
+                    android:text="@string/txt_docente" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_estudiante"
                     style="@style/Widget.Material3.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Estudiante" />
+                    android:text="@string/txt_estudiante" />
             </com.google.android.material.chip.ChipGroup>
         </HorizontalScrollView>
 
@@ -96,7 +96,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="8dp"
-            android:text="0 usuarios"
+            android:text="@string/txt_0_usuarios"
             android:textColor="@color/text_secondary"
             android:textSize="12sp" />
 
@@ -130,7 +130,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="No hay usuarios que coincidan"
+            android:text="@string/txt_no_hay_usuarios_que_coincidan"
             android:textColor="@color/text_secondary"
             android:textSize="14sp" />
     </LinearLayout>
@@ -150,7 +150,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        android:text="Registrar"
+        android:text="@string/txt_registrar"
         android:textColor="@color/white_card"
         app:backgroundTint="@color/green_primary"
         app:icon="@drawable/ic_add"

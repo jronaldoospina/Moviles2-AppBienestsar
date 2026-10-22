@@ -5,18 +5,18 @@
     <item
         android:id="@+id/action_registrar_nota_individual"
         android:icon="@drawable/ic_edit"
-        android:title="Registrar nota"
+        android:title="@string/title_registrar_nota"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_registro_masivo"
         android:icon="@drawable/ic_add"
-        android:title="Registro masivo"
+        android:title="@string/title_registro_masivo"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_reporte_alerta"
         android:icon="@drawable/ic_warning"
-        android:title="Reportar alerta"
+        android:title="@string/title_reportar_alerta"
         app:showAsAction="ifRoom" />
 </menu>

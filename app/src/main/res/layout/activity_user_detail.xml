@@ -46,7 +46,7 @@
                     android:layout_height="70dp"
                    
                     android:gravity="center"
-                    android:text="AA"
+                    android:text="@string/txt_aa"
                     android:textColor="@color/green_primary_dark"
                     android:textSize="24sp"
                     android:textStyle="bold"
@@ -57,7 +57,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:text="Nombre"
+                    android:text="@string/txt_nombre"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -71,7 +71,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="email@unicesar.edu.co"
+                    android:text="@string/txt_email_unicesar_edu_co"
                     android:textColor="@color/white"
                     android:alpha="0.9"
                     android:textSize="14sp" />
@@ -114,7 +114,7 @@
                    
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="6dp"
-                    android:text="ADMIN"
+                    android:text="@string/txt_admin"
                     android:textColor="@color/info_text"
                     android:textSize="13sp"
                     android:textStyle="bold" />
@@ -124,7 +124,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
-                    android:text="ACTIVO"
+                    android:text="@string/txt_activo"
                    
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="6dp"
@@ -138,7 +138,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:text="⚠️ Este usuario requiere un cambio de contraseña en el próximo inicio de sesión."
+                android:text="@string/txt_este_usuario_requiere_un_cambio_de_contrasena_en"
                 android:textColor="@color/warning_text"
                 android:textSize="13sp"
                 android:textAlignment="center"
@@ -163,7 +163,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Información General"
+                        android:text="@string/txt_informacion_general"
                         android:textColor="@color/text_primary"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -177,7 +177,7 @@
                         <TextView
                             android:layout_width="120dp"
                             android:layout_height="wrap_content"
-                            android:text="Usuario:"
+                            android:text="@string/txt_usuario"
                             android:textColor="@color/text_secondary"
                             android:textSize="14sp" />
 
@@ -186,7 +186,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="-"
+                            android:text="@string/txt_texto_2"
                             android:textColor="@color/text_primary"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -200,7 +200,7 @@
                         <TextView
                             android:layout_width="120dp"
                             android:layout_height="wrap_content"
-                            android:text="Documento:"
+                            android:text="@string/txt_documento"
                             android:textColor="@color/text_secondary"
                             android:textSize="14sp" />
 
@@ -209,7 +209,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="-"
+                            android:text="@string/txt_texto_2"
                             android:textColor="@color/text_primary"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -223,7 +223,7 @@
                         <TextView
                             android:layout_width="120dp"
                             android:layout_height="wrap_content"
-                            android:text="Teléfono:"
+                            android:text="@string/txt_telefono"
                             android:textColor="@color/text_secondary"
                             android:textSize="14sp" />
 
@@ -232,7 +232,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="-"
+                            android:text="@string/txt_texto_2"
                             android:textColor="@color/text_primary"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -260,7 +260,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Datos Académicos"
+                        android:text="@string/txt_datos_academicos"
                         android:textColor="@color/text_primary"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -274,7 +274,7 @@
                         <TextView
                             android:layout_width="120dp"
                             android:layout_height="wrap_content"
-                            android:text="Código:"
+                            android:text="@string/txt_codigo"
                             android:textColor="@color/text_secondary"
                             android:textSize="14sp" />
 
@@ -283,7 +283,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="-"
+                            android:text="@string/txt_texto_2"
                             android:textColor="@color/text_primary"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -297,7 +297,7 @@
                         <TextView
                             android:layout_width="120dp"
                             android:layout_height="wrap_content"
-                            android:text="Programa:"
+                            android:text="@string/txt_programa"
                             android:textColor="@color/text_secondary"
                             android:textSize="14sp" />
 
@@ -306,7 +306,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="-"
+                            android:text="@string/txt_texto_2"
                             android:textColor="@color/text_primary"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -320,7 +320,7 @@
                         <TextView
                             android:layout_width="120dp"
                             android:layout_height="wrap_content"
-                            android:text="Semestre:"
+                            android:text="@string/txt_semestre"
                             android:textColor="@color/text_secondary"
                             android:textSize="14sp" />
 
@@ -329,7 +329,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="-"
+                            android:text="@string/txt_texto_2"
                             android:textColor="@color/text_primary"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -344,7 +344,7 @@
                         <TextView
                             android:layout_width="120dp"
                             android:layout_height="wrap_content"
-                            android:text="Riesgo:"
+                            android:text="@string/txt_riesgo"
                             android:textColor="@color/text_secondary"
                             android:textSize="14sp" />
 
@@ -352,7 +352,7 @@
                             android:id="@+id/txt_nivel_riesgo"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="-"
+                            android:text="@string/txt_texto_2"
                             android:textColor="@color/text_primary"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -370,7 +370,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="8dp"
-                android:text="Acciones de Administrador"
+                android:text="@string/txt_acciones_de_administrador"
                 android:textColor="@color/text_secondary"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -380,7 +380,7 @@
                 style="@style/Widget.Material3.Button.OutlinedButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Editar Información"
+                android:text="@string/txt_editar_informacion"
                 app:icon="@drawable/ic_edit"
                 app:iconTint="@color/green_primary"
                 android:textColor="@color/green_primary"
@@ -393,7 +393,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Resetear Contraseña"
+                android:text="@string/txt_resetear_contrasena"
                 app:icon="@drawable/ic_lock"
                 app:iconTint="@color/warning_text"
                 android:textColor="@color/warning_text"
@@ -406,7 +406,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="40dp"
-                android:text="Desactivar Usuario"
+                android:text="@string/txt_desactivar_usuario"
                 android:textColor="@color/white_card"
                 app:backgroundTint="@color/risk_high_text"
                 app:icon="@drawable/ic_warning"

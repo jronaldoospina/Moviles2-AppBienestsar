@@ -21,7 +21,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="¿Cómo te sientes hoy?"
+                android:text="@string/txt_como_te_sientes_hoy"
                 android:textColor="@color/text_primary"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="Selecciona tu estado de ánimo del día. Se registrará una vez por día."
+                android:text="@string/txt_selecciona_tu_estado_de_animo_del_dia_se_registr"
                 android:textColor="@color/text_secondary"
                 android:textSize="13sp" />
 
@@ -52,7 +52,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tu estado de ánimo de hoy"
+                        android:text="@string/txt_tu_estado_de_animo_de_hoy"
                         android:textColor="@color/text_primary"
                         android:textSize="14sp"
                         android:textStyle="bold" />
@@ -77,7 +77,7 @@
                                 android:layout_height="48dp"
                                
                                 android:gravity="center"
-                                android:text="1"
+                                android:text="@string/txt_1"
                                 android:textColor="@color/text_hint"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
@@ -87,7 +87,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
-                                android:text="Muy mal"
+                                android:text="@string/txt_muy_mal"
                                 android:textColor="@color/text_secondary"
                                 android:textSize="11sp" />
                         </LinearLayout>
@@ -105,7 +105,7 @@
                                 android:layout_height="48dp"
                                
                                 android:gravity="center"
-                                android:text="2"
+                                android:text="@string/txt_2"
                                 android:textColor="@color/text_hint"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
@@ -115,7 +115,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
-                                android:text="Mal"
+                                android:text="@string/txt_mal"
                                 android:textColor="@color/text_secondary"
                                 android:textSize="11sp" />
                         </LinearLayout>
@@ -133,7 +133,7 @@
                                 android:layout_height="48dp"
                                
                                 android:gravity="center"
-                                android:text="3"
+                                android:text="@string/txt_3"
                                 android:textColor="@color/text_hint"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
@@ -143,7 +143,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
-                                android:text="Regular"
+                                android:text="@string/txt_regular"
                                 android:textColor="@color/text_secondary"
                                 android:textSize="11sp" />
                         </LinearLayout>
@@ -161,7 +161,7 @@
                                 android:layout_height="48dp"
                                
                                 android:gravity="center"
-                                android:text="4"
+                                android:text="@string/txt_4"
                                 android:textColor="@color/text_hint"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
@@ -171,7 +171,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
-                                android:text="Bien"
+                                android:text="@string/txt_bien"
                                 android:textColor="@color/text_secondary"
                                 android:textSize="11sp" />
                         </LinearLayout>
@@ -189,7 +189,7 @@
                                 android:layout_height="48dp"
                                
                                 android:gravity="center"
-                                android:text="5"
+                                android:text="@string/txt_5"
                                 android:textColor="@color/text_hint"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
@@ -199,7 +199,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
-                                android:text="Muy bien"
+                                android:text="@string/txt_muy_bien"
                                 android:textColor="@color/text_secondary"
                                 android:textSize="11sp" />
                         </LinearLayout>
@@ -209,7 +209,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:hint="¿Quieres contarnos algo más? (opcional)"
+                        android:hint="@string/txt_quieres_contarnos_algo_mas_opcional"
                         style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -226,7 +226,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:text="Guardar reporte"
+                        android:text="@string/txt_guardar_reporte"
                         android:textColor="@color/white_card"
                         app:backgroundTint="@color/green_primary"
                         app:cornerRadius="12dp" />
@@ -235,7 +235,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Esta información solo la verá el psicólogo de Bienestar Universitario."
+                        android:text="@string/txt_esta_informacion_solo_la_vera_el_psicologo_de_bi"
                         android:textColor="@color/text_hint"
                         android:textSize="11sp" />
 
@@ -262,7 +262,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tu evolución"
+                        android:text="@string/txt_tu_evolucion"
                         android:textColor="@color/text_primary"
                         android:textSize="14sp"
                         android:textStyle="bold" />
@@ -271,7 +271,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:text="Estado de ánimo en los últimos días"
+                        android:text="@string/txt_estado_de_animo_en_los_ultimos_dias"
                         android:textColor="@color/text_secondary"
                         android:textSize="12sp" />
 
@@ -288,7 +288,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="Tu historial"
+                android:text="@string/txt_tu_historial"
                 android:textColor="@color/text_primary"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -298,7 +298,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Aún no has registrado tu estado de ánimo."
+                android:text="@string/txt_aun_no_has_registrado_tu_estado_de_animo"
                 android:textColor="@color/text_secondary"
                 android:textSize="13sp" />
 

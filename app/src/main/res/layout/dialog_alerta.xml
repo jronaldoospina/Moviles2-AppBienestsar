@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Se notificará al equipo de bienestar para hacer seguimiento al estudiante."
+        android:text="@string/txt_se_notificara_al_equipo_de_bienestar_para_hacer"
         android:textColor="@color/text_secondary"
         android:textSize="13sp" />
 
@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:hint="Descripción (opcional)">
+        android:hint="@string/txt_descripcion_opcional">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_alerta_desc"

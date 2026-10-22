@@ -31,7 +31,7 @@
                 android:layout_height="48dp"
                 android:background="@drawable/badge_circle_green_light"
                 android:gravity="center"
-                android:text="📚"
+                android:text="@string/txt_texto_3"
                 android:textSize="20sp" />
 
             <LinearLayout
@@ -45,7 +45,7 @@
                     android:id="@+id/txt_nombre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Cálculo Diferencial"
+                    android:text="@string/txt_calculo_diferencial"
                     android:textColor="@color/text_primary"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -57,7 +57,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="IS-901 · 2025-1"
+                    android:text="@string/txt_is_901_2025_1"
                     android:textColor="@color/text_secondary"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -92,7 +92,7 @@
                     android:id="@+id/txt_total_estudiantes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="25"
+                    android:text="@string/txt_25"
                     android:textColor="@color/green_primary"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -100,7 +100,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Estudiantes"
+                    android:text="@string/txt_estudiantes"
                     android:textColor="@color/text_secondary"
                     android:textSize="11sp" />
             </LinearLayout>
@@ -116,7 +116,7 @@
                     android:id="@+id/txt_total_cortes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="3"
+                    android:text="@string/txt_3"
                     android:textColor="@color/info_text"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -124,7 +124,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Cortes"
+                    android:text="@string/txt_cortes"
                     android:textColor="@color/text_secondary"
                     android:textSize="11sp" />
             </LinearLayout>
@@ -140,7 +140,7 @@
                     android:id="@+id/txt_programa"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ing. Sistemas"
+                    android:text="@string/txt_ing_sistemas"
                     android:textColor="@color/warning_text"
                     android:textSize="14sp"
                     android:textStyle="bold"
@@ -150,7 +150,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Programa"
+                    android:text="@string/txt_programa_2"
                     android:textColor="@color/text_secondary"
                     android:textSize="11sp" />
             </LinearLayout>

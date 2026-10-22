@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Aún no tienes reportes ni planes de acompañamiento.\nTu psicólogo puede crear uno para ti."
+        android:text="@string/txt_aun_no_tienes_reportes_ni_planes_de_acompanamien"
         android:textAlignment="center"
         android:textColor="@color/text_secondary"
         android:textSize="15sp"

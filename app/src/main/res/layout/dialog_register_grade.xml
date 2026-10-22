@@ -10,7 +10,7 @@
         android:id="@+id/txt_estudiante_nombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Estudiante"
+        android:text="@string/txt_estudiante"
         android:textColor="@color/text_primary"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -25,7 +25,7 @@
         app:boxCornerRadiusBottomStart="12dp"
         app:boxCornerRadiusBottomEnd="12dp"
         app:startIconDrawable="@drawable/ic_edit"
-        android:hint="Nota (0.0 - 5.0)">
+        android:hint="@string/txt_nota_0_0_5_0">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_nota_valor"
@@ -53,7 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textCapSentences"
-            android:hint="Observación (opcional)" />
+            android:hint="@string/txt_observacion_opcional" />
     </com.google.android.material.textfield.TextInputLayout>
 
 </LinearLayout>

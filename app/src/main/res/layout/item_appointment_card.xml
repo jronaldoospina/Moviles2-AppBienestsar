@@ -28,7 +28,7 @@
                 android:id="@+id/appointment_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="10:00"
+                android:text="@string/txt_10_00"
                 android:textColor="@color/text_primary"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -37,7 +37,7 @@
                 android:id="@+id/appointment_ampm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="AM"
+                android:text="@string/txt_am"
                 android:textColor="@color/text_secondary"
                 android:textSize="11sp" />
         </LinearLayout>
@@ -62,7 +62,7 @@
                 android:id="@+id/appointment_student"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ana Torres"
+                android:text="@string/txt_ana_torres"
                 android:textColor="@color/text_primary"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -73,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="Seguimiento psicológico"
+                android:text="@string/txt_seguimiento_psicologico"
                 android:textColor="@color/text_secondary"
                 android:textSize="12sp" />
 
@@ -87,7 +87,7 @@
                 android:paddingEnd="8dp"
                 android:paddingTop="2dp"
                 android:paddingBottom="2dp"
-                android:text="✓ Confirmada"
+                android:text="@string/txt_confirmada"
                 android:textColor="@color/success_text"
                 android:textSize="12sp"
                 android:textStyle="bold"
@@ -101,7 +101,7 @@
             android:layout_height="32dp"
             android:src="@drawable/ic_more"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Opciones"
+            android:contentDescription="@string/cd_opciones"
             app:tint="@color/text_secondary" />
 
     </LinearLayout>

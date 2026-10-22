@@ -9,7 +9,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Título"
+        android:hint="@string/txt_titulo"
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="Tipo"
+        android:text="@string/txt_tipo"
         android:textColor="@color/text_secondary"
         android:textSize="12sp" />
 
@@ -39,7 +39,7 @@
             android:layout_width="0dp"
             android:layout_height="44dp"
             android:layout_weight="1"
-            android:text="Reporte"
+            android:text="@string/txt_reporte"
             android:textSize="13sp"
             android:insetTop="0dp"
             android:insetBottom="0dp"
@@ -51,7 +51,7 @@
             android:layout_height="44dp"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:text="Plan de acción"
+            android:text="@string/txt_plan_de_accion"
             android:textSize="13sp"
             android:insetTop="0dp"
             android:insetBottom="0dp"
@@ -63,7 +63,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="Nivel de riesgo"
+        android:text="@string/txt_nivel_de_riesgo"
         android:textColor="@color/text_secondary"
         android:textSize="12sp" />
 
@@ -78,7 +78,7 @@
             android:layout_width="0dp"
             android:layout_height="44dp"
             android:layout_weight="1"
-            android:text="BAJO"
+            android:text="@string/txt_bajo"
             android:textSize="12sp"
             android:insetTop="0dp"
             android:insetBottom="0dp"
@@ -91,7 +91,7 @@
             android:layout_height="44dp"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:text="MEDIO"
+            android:text="@string/txt_medio"
             android:textSize="12sp"
             android:insetTop="0dp"
             android:insetBottom="0dp"
@@ -104,7 +104,7 @@
             android:layout_height="44dp"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:text="ALTO"
+            android:text="@string/txt_alto"
             android:textSize="12sp"
             android:insetTop="0dp"
             android:insetBottom="0dp"
@@ -116,7 +116,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:hint="Descripción / recomendaciones"
+        android:hint="@string/txt_descripcion_recomendaciones"
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText

@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ingresa tu nuevo número de teléfono"
+        android:text="@string/txt_ingresa_tu_nuevo_numero_de_telefono"
         android:textColor="@color/text_secondary"
         android:textSize="13sp" />
 
@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:hint="Teléfono"
+        android:hint="@string/txt_telefono_2"
         app:startIconDrawable="@drawable/ic_phone"
         app:startIconTint="@color/text_secondary">
 

@@ -74,7 +74,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="23"
+                            android:text="@string/txt_23"
                             android:textColor="@color/text_primary"
                             android:textSize="28sp"
                             android:textStyle="bold" />
@@ -83,7 +83,7 @@
                             android:id="@+id/txt_kpi1_label"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="En Riesgo"
+                            android:text="@string/txt_en_riesgo"
                             android:textColor="@color/text_secondary"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -120,7 +120,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="8"
+                            android:text="@string/txt_8"
                             android:textColor="@color/text_primary"
                             android:textSize="28sp"
                             android:textStyle="bold" />
@@ -129,7 +129,7 @@
                             android:id="@+id/txt_kpi2_label"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Citas Hoy"
+                            android:text="@string/txt_citas_hoy"
                             android:textColor="@color/text_secondary"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -166,7 +166,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="156"
+                            android:text="@string/txt_156"
                             android:textColor="@color/text_primary"
                             android:textSize="28sp"
                             android:textStyle="bold" />
@@ -175,7 +175,7 @@
                             android:id="@+id/txt_kpi3_label"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Estudiantes"
+                            android:text="@string/txt_estudiantes"
                             android:textColor="@color/text_secondary"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -212,7 +212,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="68%"
+                            android:text="@string/txt_68"
                             android:textColor="@color/text_primary"
                             android:textSize="28sp"
                             android:textStyle="bold" />
@@ -221,7 +221,7 @@
                             android:id="@+id/txt_kpi4_label"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Mejora"
+                            android:text="@string/txt_mejora"
                             android:textColor="@color/text_secondary"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -234,7 +234,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="12dp"
-                android:text="Accesos Rápidos"
+                android:text="@string/txt_accesos_rapidos"
                 android:textColor="@color/text_primary"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -280,7 +280,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
                                 android:gravity="center"
-                                android:text="Estudiantes"
+                                android:text="@string/txt_estudiantes"
                                 android:textColor="@color/text_primary"
                                 android:textSize="12sp" />
                         </LinearLayout>
@@ -317,7 +317,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
                                 android:gravity="center"
-                                android:text="Cita"
+                                android:text="@string/txt_cita"
                                 android:textColor="@color/text_primary"
                                 android:textSize="12sp" />
                         </LinearLayout>
@@ -354,7 +354,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
                                 android:gravity="center"
-                                android:text="Alertas"
+                                android:text="@string/txt_alertas"
                                 android:textColor="@color/text_primary"
                                 android:textSize="12sp" />
                         </LinearLayout>
@@ -382,7 +382,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Pacientes en seguimiento"
+                        android:text="@string/txt_pacientes_en_seguimiento"
                         android:textColor="@color/text_primary"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -394,7 +394,7 @@
                         android:clickable="true"
                         android:focusable="true"
                         android:padding="4dp"
-                        android:text="Ver todos"
+                        android:text="@string/txt_ver_todos"
                         android:textColor="@color/green_primary"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -406,7 +406,7 @@
                     android:layout_marginTop="8dp"
                     android:gravity="center"
                     android:padding="12dp"
-                    android:text="Sin pacientes con alertas activas."
+                    android:text="@string/txt_sin_pacientes_con_alertas_activas"
                     android:textColor="@color/text_secondary"
                     android:textSize="14sp"
                     android:visibility="gone" />
@@ -432,7 +432,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Alertas Recientes"
+                    android:text="@string/txt_alertas_recientes"
                     android:textColor="@color/text_primary"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -444,7 +444,7 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:padding="4dp"
-                    android:text="Ver todas"
+                    android:text="@string/txt_ver_todas"
                     android:textColor="@color/green_primary"
                     android:textSize="14sp" />
             </LinearLayout>

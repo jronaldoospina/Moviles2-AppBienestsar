@@ -27,7 +27,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Cálculo Diferencial"
+                android:text="@string/txt_calculo_diferencial"
                 android:textColor="@color/text_primary"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -41,7 +41,7 @@
                 android:background="@drawable/badge_success"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="3dp"
-                android:text="ACTIVA"
+                android:text="@string/txt_activa"
                 android:textColor="@color/success_text"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -51,7 +51,7 @@
             android:id="@+id/txt_tutoria_curso"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="IS-901 · Programación II"
+            android:text="@string/txt_is_901_programacion_ii"
             android:textColor="@color/text_secondary"
             android:textSize="11sp" />
 
@@ -60,7 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:text="Martes · 10:00 - 11:00"
+            android:text="@string/txt_martes_10_00_11_00"
             android:textColor="@color/green_primary"
             android:textSize="13sp"
             android:textStyle="bold" />
@@ -70,7 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:text="Aula: B-204"
+            android:text="@string/txt_aula_b_204"
             android:textColor="@color/text_secondary"
             android:textSize="12sp" />
     </LinearLayout>

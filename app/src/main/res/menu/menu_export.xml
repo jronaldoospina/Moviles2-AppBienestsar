@@ -5,6 +5,6 @@
     <item
         android:id="@+id/action_export_pdf"
         android:icon="@drawable/ic_export"
-        android:title="Exportar PDF"
+        android:title="@string/title_exportar_pdf"
         app:showAsAction="always" />
 </menu>

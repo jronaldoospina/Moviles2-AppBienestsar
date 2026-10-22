@@ -27,7 +27,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Juan Pérez"
+                android:text="@string/txt_juan_perez"
                 android:textColor="@color/text_primary"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -41,7 +41,7 @@
                 android:background="@drawable/badge_risk_high"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="3dp"
-                android:text="PENDIENTE"
+                android:text="@string/txt_pendiente"
                 android:textColor="@color/background_gray"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -51,7 +51,7 @@
             android:id="@+id/txt_alerta_curso"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Programación II"
+            android:text="@string/txt_programacion_ii"
             android:textColor="@color/text_secondary"
             android:textSize="11sp" />
 
@@ -60,7 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Descripción de la alerta"
+            android:text="@string/txt_descripcion_de_la_alerta"
             android:textColor="@color/text_primary"
             android:textSize="13sp" />
 
@@ -76,7 +76,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Bajo rendimiento"
+                android:text="@string/txt_bajo_rendimiento"
                 android:textColor="@color/risk_medium_text"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -85,7 +85,7 @@
                 android:id="@+id/txt_alerta_fecha"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="12 sep 2026"
+                android:text="@string/txt_12_sep_2026"
                 android:textColor="@color/risk_high_text"
                 android:textSize="11sp" />
         </LinearLayout>
@@ -95,7 +95,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Reportado por: Prof. García"
+            android:text="@string/txt_reportado_por_prof_garcia"
             android:textColor="@color/text_secondary"
             android:textSize="11sp" />
     </LinearLayout>

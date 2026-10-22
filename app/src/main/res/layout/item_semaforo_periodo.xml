@@ -6,7 +6,7 @@
    
     android:paddingHorizontal="12dp"
     android:paddingVertical="8dp"
-    android:text="PERÍODO 1"
+    android:text="@string/txt_periodo_1"
     android:textColor="@color/text_primary"
     android:textSize="12sp"
     android:textStyle="bold" />

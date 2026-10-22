@@ -15,7 +15,7 @@
         android:layout_marginTop="12dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
-        android:hint="Buscar por nombre o código"
+        android:hint="@string/txt_buscar_por_nombre_o_codigo"
         app:startIconDrawable="@drawable/ic_search"
         app:startIconTint="@color/gray_medium">
         <com.google.android.material.textfield.TextInputEditText
@@ -64,7 +64,7 @@
                 android:id="@+id/txt_courses_empty_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="📚"
+                android:text="@string/txt_texto_3"
                 android:textSize="40sp" />
 
             <TextView
@@ -72,7 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Aún no hay cursos.\nToca + para crear el primero."
+                android:text="@string/txt_aun_no_hay_cursos_ntoca_para_crear_el_primero"
                 android:textAlignment="center"
                 android:textColor="@color/text_secondary"
                 android:textSize="15sp" />
@@ -92,7 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="20dp"
-            android:contentDescription="Nuevo curso"
+            android:contentDescription="@string/cd_nuevo_curso"
             android:src="@drawable/ic_add"
             app:backgroundTint="@color/green_primary"
             app:tint="@color/white_card" />

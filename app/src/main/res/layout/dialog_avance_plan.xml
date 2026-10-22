@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="¿Qué avance alcanzaste hoy?"
+        android:text="@string/txt_que_avance_alcanzaste_hoy"
         android:textColor="@color/text_primary"
         android:textSize="13sp"
         android:textStyle="bold" />
@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:hint="Avance del plan">
+        android:hint="@string/txt_avance_del_plan">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_avance"

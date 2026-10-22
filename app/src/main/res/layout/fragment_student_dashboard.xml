@@ -27,7 +27,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Bienvenido"
+                android:text="@string/txt_bienvenido"
                 android:textColor="@color/white"
                 android:textSize="28sp"
                 android:textStyle="bold" />
@@ -68,7 +68,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="TU ESTADO ACADÉMICO"
+                        android:text="@string/txt_tu_estado_academico"
                         android:textColor="@color/text_secondary"
                         android:textSize="12sp"
                         android:textStyle="bold" />
@@ -91,7 +91,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
-                            android:text="--"
+                            android:text="@string/txt_texto"
                             android:textColor="@color/text_primary"
                             android:textSize="42sp"
                             android:textStyle="bold" />
@@ -102,7 +102,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
-                        android:text="Cargando..."
+                        android:text="@string/txt_cargando"
                         android:textColor="@color/text_secondary"
                         android:textSize="14sp"
                         android:textStyle="bold" />
@@ -149,7 +149,7 @@
                             android:id="@+id/txt_materias"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0"
+                            android:text="@string/txt_0"
                             android:textColor="@color/text_primary"
                             android:textSize="26sp"
                             android:textStyle="bold" />
@@ -157,7 +157,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Materias"
+                            android:text="@string/txt_materias"
                             android:textColor="@color/text_secondary"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -185,7 +185,7 @@
                             android:id="@+id/txt_riesgo"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0"
+                            android:text="@string/txt_0"
                             android:textColor="@color/error_text"
                             android:textSize="26sp"
                             android:textStyle="bold" />
@@ -193,7 +193,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="En riesgo"
+                            android:text="@string/txt_en_riesgo"
                             android:textColor="@color/text_secondary"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -221,7 +221,7 @@
                             android:id="@+id/txt_aprobadas"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0"
+                            android:text="@string/txt_0"
                             android:textColor="@color/success_text"
                             android:textSize="26sp"
                             android:textStyle="bold" />
@@ -229,7 +229,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Aprobadas"
+                            android:text="@string/txt_aprobadas"
                             android:textColor="@color/text_secondary"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -270,7 +270,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Próxima cita"
+                            android:text="@string/txt_proxima_cita"
                             android:textColor="@color/text_secondary"
                             android:textSize="12sp" />
 
@@ -279,7 +279,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:text="Cargando..."
+                            android:text="@string/txt_cargando"
                             android:textColor="@color/text_primary"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -293,7 +293,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="12dp"
-                android:text="Accesos Rápidos"
+                android:text="@string/txt_accesos_rapidos"
                 android:textColor="@color/text_primary"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -337,7 +337,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
-                                android:text="Mi Progreso"
+                                android:text="@string/txt_mi_progreso"
                                 android:textColor="@color/text_primary"
                                 android:textSize="12sp"
                                 android:gravity="center" />
@@ -373,7 +373,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
-                                android:text="Mis Citas"
+                                android:text="@string/txt_mis_citas"
                                 android:textColor="@color/text_primary"
                                 android:textSize="12sp"
                                 android:gravity="center" />
@@ -409,7 +409,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
-                                android:text="Reporte Emoc."
+                                android:text="@string/txt_reporte_emoc"
                                 android:textColor="@color/text_primary"
                                 android:textSize="12sp"
                                 android:gravity="center" />
@@ -444,7 +444,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
-                                android:text="Mis Cursos"
+                                android:text="@string/txt_mis_cursos"
                                 android:textColor="@color/text_primary"
                                 android:textSize="12sp"
                                 android:gravity="center" />
@@ -479,7 +479,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
-                                android:text="Mi Bienestar"
+                                android:text="@string/txt_mi_bienestar"
                                 android:textColor="@color/text_primary"
                                 android:textSize="12sp"
                                 android:gravity="center" />
@@ -508,7 +508,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:gravity="center"
-                android:text="Aún no tienes notas registradas. Cuando tus docentes las registren verás aquí tu estado académico."
+                android:text="@string/txt_aun_no_tienes_notas_registradas_cuando_tus_docen"
                 android:textColor="@color/text_secondary"
                 android:textSize="14sp"
                 android:visibility="gone" />

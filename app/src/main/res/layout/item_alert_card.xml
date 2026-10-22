@@ -40,7 +40,7 @@
                 android:id="@+id/alert_student_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Juan Pérez"
+                android:text="@string/txt_juan_perez"
                 android:textColor="@color/text_primary"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -52,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="Ingeniería de Sistemas"
+                android:text="@string/txt_ingenieria_de_sistemas"
                 android:textColor="@color/text_secondary"
                 android:textSize="13sp" />
 
@@ -72,7 +72,7 @@
                     android:paddingEnd="8dp"
                     android:paddingTop="3dp"
                     android:paddingBottom="3dp"
-                    android:text="🔴 Riesgo Alto"
+                    android:text="@string/txt_riesgo_alto"
                     android:textColor="@color/background_gray"
                     android:textSize="11sp"
                     android:textStyle="bold"
@@ -88,7 +88,7 @@
                     android:paddingEnd="8dp"
                     android:paddingTop="3dp"
                     android:paddingBottom="3dp"
-                    android:text="Matemáticas"
+                    android:text="@string/txt_matematicas"
                     android:textColor="@color/info_text"
                     android:textSize="11sp"
                     android:background="@drawable/badge_info" />
@@ -103,7 +103,7 @@
             android:layout_height="40dp"
             android:src="@drawable/ic_more"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Acciones"
+            android:contentDescription="@string/cd_acciones"
             app:tint="@color/text_secondary" />
 
     </LinearLayout>

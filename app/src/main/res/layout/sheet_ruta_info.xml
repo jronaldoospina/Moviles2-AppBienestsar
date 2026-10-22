@@ -17,7 +17,7 @@
         style="@style/TituloSeccion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Horarios" />
+        android:text="@string/txt_horarios" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,14 +35,14 @@
                 style="@style/EtiquetaSeccion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="RECOGIDA" />
+                android:text="@string/txt_recogida" />
 
             <TextView
                 android:id="@+id/txt_horario_recogida_menu"
                 style="@style/ValorSeccion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="05:00 A.M. / 01:00 P.M." />
+                android:text="@string/txt_05_00_a_m_01_00_p_m" />
         </LinearLayout>
 
         <LinearLayout
@@ -55,14 +55,14 @@
                 style="@style/EtiquetaSeccion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="SALIDA UPC" />
+                android:text="@string/txt_salida_upc" />
 
             <TextView
                 android:id="@+id/txt_horario_salida_menu"
                 style="@style/ValorSeccion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="12:00 M. / 06:00 P.M." />
+                android:text="@string/txt_12_00_m_06_00_p_m" />
         </LinearLayout>
     </LinearLayout>
 
@@ -78,7 +78,7 @@
         style="@style/TituloSeccion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Recorrido" />
+        android:text="@string/txt_recorrido" />
 
     <TextView
         android:id="@+id/txt_resumen_ruta"
@@ -86,7 +86,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="9 paradas hasta la sede UPC" />
+        android:text="@string/txt_9_paradas_hasta_la_sede_upc" />
 
     <!-- Paradas -->
     <TextView
@@ -94,7 +94,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
-        android:text="Paradas" />
+        android:text="@string/txt_paradas" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -108,7 +108,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:lineSpacingExtra="4dp"
-            android:text="Cargando paradas..." />
+            android:text="@string/txt_cargando_paradas" />
     </LinearLayout>
 
     <View
@@ -130,7 +130,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Mapa y ruta sobre OpenStreetMap. Sin API key ni costo."
+            android:text="@string/txt_mapa_y_ruta_sobre_openstreetmap_sin_api_key_ni_c"
             android:textColor="@color/text_hint"
             android:textSize="11sp" />
 
@@ -139,7 +139,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="OSM"
+            android:text="@string/txt_osm"
             android:textColor="@color/info_text"
             android:textSize="12sp"
             android:textStyle="bold" />

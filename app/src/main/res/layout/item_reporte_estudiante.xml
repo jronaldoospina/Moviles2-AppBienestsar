@@ -29,7 +29,7 @@
                 android:background="@drawable/badge_info"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="3dp"
-                android:text="REPORTE"
+                android:text="@string/txt_reporte"
                 android:textColor="@color/info_text"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -42,7 +42,7 @@
                 android:background="@drawable/badge_risk_high"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="3dp"
-                android:text="ABIERTO"
+                android:text="@string/txt_abierto"
                 android:textColor="@color/risk_high_text"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"
-                android:text="12 sep 2026"
+                android:text="@string/txt_12_sep_2026"
                 android:textColor="@color/text_secondary"
                 android:textSize="11sp"
                 android:gravity="end" />
@@ -64,7 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Título del registro"
+            android:text="@string/txt_titulo_del_registro"
             android:textColor="@color/text_primary"
             android:textSize="15sp"
             android:textStyle="bold"
@@ -76,7 +76,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Descripción del registro"
+            android:text="@string/txt_descripcion_del_registro"
             android:textColor="@color/text_primary"
             android:textSize="13sp"
             android:maxLines="3"
@@ -94,7 +94,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Por: Dra. Martínez"
+                android:text="@string/txt_por_dra_martinez"
                 android:textColor="@color/text_secondary"
                 android:textSize="11sp" />
 
@@ -102,7 +102,7 @@
                 android:id="@+id/txt_reporte_riesgo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Riesgo: Bajo"
+                android:text="@string/txt_riesgo_bajo"
                 android:textColor="@color/risk_low_text"
                 android:textSize="11sp"
                 android:textStyle="bold" />

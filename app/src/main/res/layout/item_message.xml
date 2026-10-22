@@ -19,7 +19,7 @@
             android:id="@+id/txtMensaje"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Mensaje de prueba"
+            android:text="@string/txt_mensaje_de_prueba"
             android:textColor="@color/text_primary"
             android:textSize="14sp" />
 
@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:text="14:30"
+            android:text="@string/txt_14_30"
             android:textColor="@color/text_secondary"
             android:textSize="12sp" />
     </LinearLayout>
@@ -38,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Yo"
+        android:text="@string/txt_yo"
         android:textColor="@color/text_secondary"
         android:textSize="12sp" />
 </LinearLayout>

@@ -20,7 +20,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Mis Citas"
+            android:text="@string/txt_mis_citas"
             android:textColor="@color/white"
             android:textSize="26sp"
             android:textStyle="bold" />
@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Tus sesiones y seguimientos con Bienestar"
+            android:text="@string/txt_tus_sesiones_y_seguimientos_con_bienestar"
             android:textColor="@color/green_light"
             android:textSize="14sp" />
     </LinearLayout>
@@ -68,7 +68,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sin citas agendadas"
+                android:text="@string/txt_sin_citas_agendadas"
                 android:textColor="@color/text_primary"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -79,7 +79,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Aún no tienes citas registradas. Cuando solicites una cita con Bienestar Universitario, aparecerá aquí."
+                android:text="@string/txt_aun_no_tienes_citas_registradas_cuando_solicites"
                 android:textColor="@color/text_secondary"
                 android:textSize="14sp" />
         </LinearLayout>

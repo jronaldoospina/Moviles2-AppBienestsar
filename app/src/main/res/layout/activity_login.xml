@@ -43,7 +43,7 @@
                     android:layout_height="match_parent"
                     android:padding="16dp"
                     android:src="@drawable/logo"
-                    android:contentDescription="Logo UPC" />
+                    android:contentDescription="@string/cd_logo_upc" />
             </com.google.android.material.card.MaterialCardView>
 
             <!-- Título de bienvenida -->
@@ -52,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Bienvenido"
+                android:text="@string/txt_bienvenido"
                 android:textColor="@color/white_card"
                 android:textSize="28sp"
                 android:textStyle="bold"
@@ -65,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Inicia sesión para continuar"
+                android:text="@string/txt_inicia_sesion_para_continuar"
                 android:textColor="#E6FFFFFF"
                 android:textSize="14sp" />
         </LinearLayout>
@@ -221,7 +221,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="bienestar@unicesar.edu.co"
+                android:text="@string/txt_bienestar_unicesar_edu_co"
                 android:textColor="@color/green_primary"
                 android:textSize="13sp"
                 android:textStyle="bold" />

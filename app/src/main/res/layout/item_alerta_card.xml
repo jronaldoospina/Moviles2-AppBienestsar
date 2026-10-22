@@ -16,7 +16,7 @@
             android:id="@+id/txtTitulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nueva alerta"
+            android:text="@string/txt_nueva_alerta"
             android:textColor="@color/text_primary"
             android:textStyle="bold"
             android:textSize="15sp" />
@@ -32,7 +32,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Estudiante"
+                android:text="@string/txt_estudiante"
                 android:textColor="@color/text_secondary"
                 android:textSize="13sp" />
 
@@ -40,7 +40,7 @@
                 android:id="@+id/txtFecha"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="hace 2h"
+                android:text="@string/txt_hace_2h"
                 android:textColor="@color/text_secondary"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -50,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Motivo: Bajo rendimiento"
+            android:text="@string/txt_motivo_bajo_rendimiento"
             android:textColor="@color/green_primary"
             android:textStyle="italic"
             android:textSize="13sp" />
@@ -60,7 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="El estudiante presenta bajo rendimiento en las asignaturas."
+            android:text="@string/txt_el_estudiante_presenta_bajo_rendimiento_en_las_a"
             android:textColor="@color/text_primary"
             android:textSize="13sp" />
     </LinearLayout>

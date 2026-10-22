@@ -28,7 +28,7 @@
                 android:layout_height="48dp"
                 android:background="@drawable/badge_circle_green_light"
                 android:gravity="center"
-                android:text="AA"
+                android:text="@string/txt_aa"
                 android:textColor="@color/green_primary_dark"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -55,7 +55,7 @@
                 android:id="@+id/txt_nombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nombre Estudiante"
+                android:text="@string/txt_nombre_estudiante"
                 android:textColor="@color/text_primary"
                 android:textSize="15sp"
                 android:textStyle="bold"
@@ -67,7 +67,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="Ingeniería de Sistemas · Semestre 9"
+                android:text="@string/txt_ingenieria_de_sistemas_semestre_9"
                 android:textColor="@color/text_secondary"
                 android:textSize="12sp"
                 android:maxLines="1"
@@ -88,7 +88,7 @@
                     android:background="@drawable/badge_risk_low"
                     android:paddingHorizontal="8dp"
                     android:paddingVertical="2dp"
-                    android:text="BAJO"
+                    android:text="@string/txt_bajo"
                     android:textColor="@color/white_card"
                     android:textSize="12sp"
                     android:textStyle="bold" />
@@ -98,7 +98,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="Prom: 3.9"
+                    android:text="@string/txt_prom_3_9"
                     android:textColor="@color/black"
                     android:textSize="11sp" />
             </LinearLayout>
@@ -111,7 +111,7 @@
             android:layout_height="24dp"
             android:src="@drawable/ic_chevron_right"
             app:tint="@color/text_secondary"
-            android:contentDescription="Ver detalle" />
+            android:contentDescription="@string/cd_ver_detalle" />
 
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

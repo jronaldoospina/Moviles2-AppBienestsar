@@ -14,7 +14,7 @@
         android:layout_height="40dp"
         android:layout_marginEnd="12dp"
        
-        android:contentDescription="Iniciales"
+        android:contentDescription="@string/cd_iniciales"
         android:gravity="center"
         android:scaleType="centerInside"/>
 
@@ -28,7 +28,7 @@
             android:id="@+id/txt_nombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nombre Estudiante"
+            android:text="@string/txt_nombre_estudiante"
             android:textColor="@color/text_primary"
             android:textSize="15sp"
             android:textStyle="bold"/>
@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:text="Código: XX-1234"
+            android:text="@string/txt_codigo_xx_1234"
             android:textColor="@color/text_secondary"
             android:textSize="12sp"/>
     </LinearLayout>
@@ -53,7 +53,7 @@
             android:id="@+id/txt_valor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="--"
+            android:text="@string/txt_texto"
             android:textColor="@color/text_primary"
             android:textSize="16sp"
             android:textStyle="bold"/>
@@ -63,7 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:hint="Nueva nota">
+            android:hint="@string/txt_nueva_nota">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_nota"

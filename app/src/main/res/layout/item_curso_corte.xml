@@ -17,7 +17,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Corte 1"
+            android:text="@string/txt_corte_1"
             android:textColor="@color/text_primary"
             android:textSize="14sp"
             android:textStyle="bold" />
@@ -30,7 +30,7 @@
             android:paddingEnd="10dp"
             android:paddingTop="3dp"
             android:paddingBottom="3dp"
-            android:text="4.5"
+            android:text="@string/txt_4_5"
             android:textColor="@color/success_text"
             android:textSize="12sp"
             android:textStyle="bold"

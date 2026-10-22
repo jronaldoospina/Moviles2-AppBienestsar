@@ -33,7 +33,7 @@
                     android:layout_height="80dp"
                    
                     android:gravity="center"
-                    android:text="AA"
+                    android:text="@string/txt_aa"
                     android:textColor="@color/green_primary_dark"
                     android:textSize="28sp"
                     android:textStyle="bold" />
@@ -43,7 +43,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:text="Nombre Usuario"
+                    android:text="@string/txt_nombre_usuario"
                     android:textColor="@color/text_primary"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -53,7 +53,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="usuario@unicesar.edu.co"
+                    android:text="@string/txt_usuario_unicesar_edu_co"
                     android:textColor="@color/text_secondary"
                     android:textSize="14sp" />
 
@@ -65,7 +65,7 @@
                    
                     android:paddingHorizontal="12dp"
                     android:paddingVertical="4dp"
-                    android:text="ADMIN"
+                    android:text="@string/txt_admin"
                     android:textColor="@color/info_text"
                     android:textSize="12sp"
                     android:textStyle="bold" />
@@ -91,7 +91,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Información"
+                    android:text="@string/txt_informacion"
                     android:textColor="@color/text_primary"
                     android:textSize="15sp"
                     android:textStyle="bold" />
@@ -105,7 +105,7 @@
                     <TextView
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        android:text="Usuario:"
+                        android:text="@string/txt_usuario"
                         android:textColor="@color/text_secondary"
                         android:textSize="13sp" />
 
@@ -114,7 +114,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="jperez"
+                        android:text="@string/txt_jperez"
                         android:textColor="@color/text_primary"
                         android:textSize="13sp" />
                 </LinearLayout>
@@ -128,7 +128,7 @@
                     <TextView
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        android:text="Documento:"
+                        android:text="@string/txt_documento"
                         android:textColor="@color/text_secondary"
                         android:textSize="13sp" />
 
@@ -137,7 +137,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="1002353355"
+                        android:text="@string/txt_1002353355"
                         android:textColor="@color/text_primary"
                         android:textSize="13sp" />
                 </LinearLayout>
@@ -151,7 +151,7 @@
                     <TextView
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        android:text="Teléfono:"
+                        android:text="@string/txt_telefono"
                         android:textColor="@color/text_secondary"
                         android:textSize="13sp" />
 
@@ -160,7 +160,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="-"
+                        android:text="@string/txt_texto_2"
                         android:textColor="@color/text_primary"
                         android:textSize="13sp" />
                 </LinearLayout>
@@ -176,7 +176,7 @@
                     <TextView
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        android:text="Promedio:"
+                        android:text="@string/txt_promedio"
                         android:textColor="@color/text_secondary"
                         android:textSize="13sp" />
 
@@ -185,7 +185,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="--"
+                        android:text="@string/txt_texto"
                         android:textColor="@color/text_primary"
                         android:textSize="13sp" />
                 </LinearLayout>
@@ -201,7 +201,7 @@
                     <TextView
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        android:text="Riesgo:"
+                        android:text="@string/txt_riesgo"
                         android:textColor="@color/text_secondary"
                         android:textSize="13sp" />
 
@@ -210,7 +210,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="--"
+                        android:text="@string/txt_texto"
                         android:textColor="@color/risk_high_text"
                         android:textSize="13sp" />
                 </LinearLayout>
@@ -225,7 +225,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Editar Telefono"
+            android:text="@string/txt_editar_telefono"
             app:icon="@drawable/ic_phone"
             app:cornerRadius="12dp" />
 
@@ -235,7 +235,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Cambiar Contraseña"
+            android:text="@string/txt_cambiar_contrasena"
             app:icon="@drawable/ic_lock"
             app:cornerRadius="12dp" />
 
@@ -244,7 +244,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Cerrar Sesión"
+            android:text="@string/txt_cerrar_sesion"
             android:textColor="@color/white_card"
             app:backgroundTint="@color/risk_high_text"
             app:icon="@drawable/ic_logout"

@@ -30,7 +30,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="TU PROMEDIO GENERAL"
+                    android:text="@string/txt_tu_promedio_general"
                     android:textColor="@color/text_secondary"
                     android:textSize="12sp"
                     android:textStyle="bold" />
@@ -53,7 +53,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
-                        android:text="--"
+                        android:text="@string/txt_texto"
                         android:textColor="@color/text_primary"
                         android:textSize="42sp"
                         android:textStyle="bold" />
@@ -64,7 +64,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
-                    android:text="Cargando..."
+                    android:text="@string/txt_cargando"
                     android:textColor="@color/text_secondary"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -92,7 +92,7 @@
                             android:id="@+id/txt_count_cursos"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0"
+                            android:text="@string/txt_0"
                             android:textColor="@color/text_primary"
                             android:textSize="20sp"
                             android:textStyle="bold" />
@@ -100,7 +100,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Materias"
+                            android:text="@string/txt_materias"
                             android:textColor="@color/text_secondary"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -121,7 +121,7 @@
                             android:id="@+id/txt_count_riesgo"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0"
+                            android:text="@string/txt_0"
                             android:textColor="@color/error_text"
                             android:textSize="20sp"
                             android:textStyle="bold" />
@@ -129,7 +129,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="En riesgo"
+                            android:text="@string/txt_en_riesgo"
                             android:textColor="@color/text_secondary"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -150,7 +150,7 @@
                             android:id="@+id/txt_count_aprobadas"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0"
+                            android:text="@string/txt_0"
                             android:textColor="@color/success_text"
                             android:textSize="20sp"
                             android:textStyle="bold" />
@@ -158,7 +158,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Aprobadas"
+                            android:text="@string/txt_aprobadas"
                             android:textColor="@color/text_secondary"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -184,7 +184,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Promedio por materia"
+                    android:text="@string/txt_promedio_por_materia"
                     android:textColor="@color/text_primary"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -218,7 +218,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="≥ 4.0"
+                            android:text="@string/txt_4_0"
                             android:textColor="@color/text_secondary"
                             android:textSize="11sp" />
                     </LinearLayout>
@@ -239,7 +239,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="3.0 - 3.9"
+                            android:text="@string/txt_3_0_3_9"
                             android:textColor="@color/text_secondary"
                             android:textSize="11sp" />
                     </LinearLayout>
@@ -260,7 +260,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="&lt; 3.0"
+                            android:text="@string/txt_lt_3_0"
                             android:textColor="@color/text_secondary"
                             android:textSize="11sp" />
                     </LinearLayout>
@@ -274,7 +274,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginStart="4dp"
-            android:text="Detalle por materia"
+            android:text="@string/txt_detalle_por_materia"
             android:textColor="@color/text_primary"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -294,7 +294,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:gravity="center"
-            android:text="Aún no tienes notas registradas.\nPídele a tus docentes que registren tus calificaciones."
+            android:text="@string/txt_aun_no_tienes_notas_registradas_npidele_a_tus_do"
             android:textColor="@color/text_secondary"
             android:textSize="14sp"
             android:visibility="gone" />

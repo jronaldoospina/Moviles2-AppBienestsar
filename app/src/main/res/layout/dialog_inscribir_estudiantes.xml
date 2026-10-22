@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:paddingHorizontal="16dp"
         android:paddingVertical="8dp"
-        android:text="Selecciona los estudiantes inscritos"
+        android:text="@string/txt_selecciona_los_estudiantes_inscritos"
         android:textColor="@color/text_secondary"
         android:textSize="13sp" />
 
@@ -37,7 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="No hay estudiantes registrados."
+        android:text="@string/txt_no_hay_estudiantes_registrados"
         android:textColor="@color/text_secondary"
         android:textSize="13sp" />
 </LinearLayout>

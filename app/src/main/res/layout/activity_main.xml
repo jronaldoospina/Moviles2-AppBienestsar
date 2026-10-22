@@ -20,7 +20,8 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/topAppBar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="?attr/actionBarSize"
+
             app:title="@string/app_name"
             app:titleTextColor="@color/text_primary"
             app:titleTextAppearance="@style/ToolbarTitleStyle">
@@ -40,7 +41,7 @@
                     android:src="@drawable/ic_notifications"
                    
                     app:tint="@color/text_primary"
-                    android:contentDescription="Notificaciones" />
+                    android:contentDescription="@string/cd_notificaciones" />
 
                 <TextView
                     android:id="@+id/badge_notifications"
@@ -52,7 +53,7 @@
                     android:minWidth="16dp"
                     android:minHeight="16dp"
                     android:paddingHorizontal="3dp"
-                    android:text="9+"
+                    android:text="@string/txt_9"
                     android:textColor="@color/white_card"
                     android:textSize="12sp"
                     android:textStyle="bold"

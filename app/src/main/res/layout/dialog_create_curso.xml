@@ -14,7 +14,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nombre del curso"
+            android:hint="@string/txt_nombre_del_curso"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -35,14 +35,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="Código"
+                android:hint="@string/txt_codigo_2"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txt_curso_codigo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="IS-901" />
+                    android:hint="@string/txt_is_901" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginStart="12dp"
-                android:hint="Créditos"
+                android:hint="@string/txt_creditos"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -58,7 +58,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
-                    android:text="3" />
+                    android:text="@string/txt_3" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
@@ -73,14 +73,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="Programa"
+                android:hint="@string/txt_programa_2"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txt_curso_programa"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Ing. Sistemas" />
+                    android:text="@string/txt_ing_sistemas" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -88,14 +88,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginStart="12dp"
-                android:hint="Periodo"
+                android:hint="@string/txt_periodo"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txt_curso_periodo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="2025-2" />
+                    android:text="@string/txt_2025_2" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
@@ -103,7 +103,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:hint="Semestre"
+            android:hint="@string/txt_semestre_2"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
             <com.google.android.material.textfield.MaterialAutoCompleteTextView
@@ -117,7 +117,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:hint="Docente asignado"
+            android:hint="@string/txt_docente_asignado"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
             <com.google.android.material.textfield.MaterialAutoCompleteTextView

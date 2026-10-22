@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:hint="Buscar usuario..."
+        android:hint="@string/txt_buscar_usuario"
         app:startIconDrawable="@drawable/ic_search"
         app:startIconTint="@color/text_secondary"
         app:boxBackgroundColor="@color/white_card"
@@ -49,35 +49,35 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:text="Todos" />
+                android:text="@string/txt_todos" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_estudiante"
                 style="@style/Widget.Material3.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Estudiantes" />
+                android:text="@string/txt_estudiantes" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_docente"
                 style="@style/Widget.Material3.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Docentes" />
+                android:text="@string/txt_docentes" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_psicologo"
                 style="@style/Widget.Material3.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Psicólogos" />
+                android:text="@string/txt_psicologos" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_admin"
                 style="@style/Widget.Material3.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Admins" />
+                android:text="@string/txt_admins" />
 
         </com.google.android.material.chip.ChipGroup>
     </HorizontalScrollView>
@@ -116,7 +116,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="No hay usuarios"
+            android:text="@string/txt_no_hay_usuarios"
             android:textColor="@color/text_secondary"
             android:textSize="16sp" />
     </LinearLayout>
@@ -140,7 +140,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="Registrar"
+        android:text="@string/txt_registrar"
         android:textColor="@color/white_card"
         app:backgroundTint="@color/green_primary"
         app:icon="@drawable/ic_add"

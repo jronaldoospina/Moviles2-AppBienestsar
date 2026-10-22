@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Mis Alertas"
+        android:text="@string/txt_mis_alertas"
         android:textColor="@color/text_primary"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -26,7 +26,7 @@
         android:id="@+id/txt_alerts_empty"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="No hay alertas registradas"
+        android:text="@string/txt_no_hay_alertas_registradas"
         android:textColor="@color/text_secondary"
         android:textSize="16sp"
         android:visibility="gone"

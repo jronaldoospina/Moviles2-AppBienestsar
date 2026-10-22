@@ -4,25 +4,25 @@
     <item
         android:id="@+id/nav_est_home"
         android:icon="@drawable/ic_home"
-        android:title="Inicio" />
+        android:title="@string/title_inicio" />
 
     <item
         android:id="@+id/nav_est_progress"
         android:icon="@drawable/ic_trending"
-        android:title="Mi Progreso" />
+        android:title="@string/title_mi_progreso" />
 
     <item
         android:id="@+id/nav_est_appointments"
         android:icon="@drawable/ic_calendar"
-        android:title="Citas" />
+        android:title="@string/title_citas" />
 
     <item
         android:id="@+id/nav_est_ruta"
         android:icon="@drawable/ic_bus"
-        android:title="Ruta" />
+        android:title="@string/title_ruta" />
 
     <item
         android:id="@+id/nav_est_profile"
         android:icon="@drawable/ic_person"
-        android:title="Perfil" />
+        android:title="@string/title_perfil" />
 </menu>
