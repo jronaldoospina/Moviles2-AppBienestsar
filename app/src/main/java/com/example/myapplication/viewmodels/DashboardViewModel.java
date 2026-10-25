@@ -13,7 +13,9 @@ import com.example.myapplication.repositories.AlertRepository;
 import com.example.myapplication.repositories.AppointmentRepository;
 import com.example.myapplication.repositories.EmotionalReportRepository;
 import com.example.myapplication.repositories.UserRepository;
+import com.example.myapplication.utils.Resource;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -52,7 +54,7 @@ public class DashboardViewModel extends ViewModel {
     private final UserRepository userRepository = new UserRepository();
     private final EmotionalReportRepository emotionalRepository = new EmotionalReportRepository();
 
-    private final MutableLiveData<Resumen> resumen = new MutableLiveData<>();
+    private final MutableLiveData<Resource<Resumen>> resumen = new MutableLiveData<>();
     private final MutableLiveData<Boolean> loading = new MutableLiveData<>(false);
     private final MutableLiveData<String> error = new MutableLiveData<>();
 
@@ -74,7 +76,7 @@ public class DashboardViewModel extends ViewModel {
     private boolean citasCargadas = false;
     private boolean cargandoDatos = false;
 
-    public LiveData<Resumen> getResumen() {
+    public LiveData<Resource<Resumen>> getResumen() {
         return resumen;
     }
 
@@ -126,7 +128,7 @@ public class DashboardViewModel extends ViewModel {
     private void cargarDatosPuntuales() {
         if (cargandoDatos) return;
         cargandoDatos = true;
-        loading.setValue(true);
+        resumen.setValue(Resource.loading(resumen.getValue() != null ? resumen.getValue().data : null));
 
         if (!estudiantesCargados) {
             userRepository.getAllEstudiantes()
@@ -177,14 +179,13 @@ public class DashboardViewModel extends ViewModel {
     private void alTerminarCarga() {
         if (estudiantesCargados && citasCargadas) {
             cargandoDatos = false;
-            loading.setValue(false);
             emitir();
             if (esPsicologo) recomputarPacientes();
         }
     }
 
     private void onAlertas(QuerySnapshot snapshot,
-                           com.google.firebase.firestore.FirebaseFirestoreException e) {
+                           FirebaseFirestoreException e) {
         if (e != null) {
             error.setValue("No se pudieron cargar las alertas");
             return;
@@ -271,7 +272,7 @@ public class DashboardViewModel extends ViewModel {
     private void emitir() {
         int porcentaje = totalAlertas > 0
                 ? (int) Math.round(alertasAtendidas * 100.0 / totalAlertas) : -1;
-        resumen.setValue(new Resumen(alertasPendientes, citasHoy, estudiantes.size(),
-                porcentaje, new ArrayList<>(recientes), new ArrayList<>(pacientes)));
+        resumen.setValue(Resource.success(new Resumen(alertasPendientes, citasHoy, estudiantes.size(),
+                porcentaje, new ArrayList<>(recientes), new ArrayList<>(pacientes))));
     }
 }

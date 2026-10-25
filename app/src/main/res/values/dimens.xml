@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ============================================ -->
+    <!-- ESCALA DE DENSIDAD (dial density = 5)        -->
+    <!-- ============================================ -->
+    <dimen name="space_1">4dp</dimen>
+    <dimen name="space_2">8dp</dimen>
+    <dimen name="space_3">12dp</dimen>
+    <dimen name="space_4">16dp</dimen>
+    <dimen name="space_6">24dp</dimen>
+    <dimen name="space_8">32dp</dimen>
+
+    <!-- ============================================ -->
+    <!-- FORMAS                                        -->
+    <!-- ============================================ -->
+    <dimen name="radius_sm">8dp</dimen>
+    <dimen name="radius_md">14dp</dimen>
+    <dimen name="radius_lg">16dp</dimen>
+    <dimen name="radius_xl">20dp</dimen>
+    <dimen name="radius_header">32dp</dimen>
+
+    <!-- ============================================ -->
+    <!-- MOVIMIENTO (dial motion = 5)                  -->
+    <!-- ============================================ -->
+    <integer name="motion_short">180</integer>
+    <integer name="motion_medium">260</integer>
+    <integer name="motion_long">350</integer>
+</resources>

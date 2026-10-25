@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-   
+    android:fitsSystemWindows="true"
     android:fillViewport="true"
     android:scrollbars="none"
     tools:context=".LoginActivity">
@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="@string/txt_bienvenido"
-                android:textColor="@color/white_card"
+                android:textColor="@color/black"
                 android:textSize="28sp"
                 android:textStyle="bold"
                 android:fontFamily="sans-serif-medium"
@@ -173,7 +173,7 @@
                     android:text="@string/login_button"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:textColor="@color/white_card"
+                    android:textColor="@color/on_green"
                     android:fontFamily="sans-serif-medium"
                     android:letterSpacing="0.04"
                     app:backgroundTint="@color/green_primary"

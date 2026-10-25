@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-   
+    android:fitsSystemWindows="true"
     tools:context=".RegisterUserActivity">
 
     <!-- Toolbar -->
@@ -287,19 +287,20 @@
                 android:text="@string/txt_registrar_usuario"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="@color/white_card"
+                android:textColor="@color/on_green"
                 app:backgroundTint="@color/green_primary"
                 app:cornerRadius="12dp" />
 
             <!-- Botón Cancelar -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_cancel"
-                style="@style/Widget.Material3.Button.TextButton"
+                style="@style/Widget.Material3.Button.OutlinedButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/txt_cancelar"
-                android:textColor="@color/text_secondary" />
+                android:textColor="@color/text_secondary"
+                app:strokeColor="@color/border_surface_1" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

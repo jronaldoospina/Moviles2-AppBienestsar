@@ -18,6 +18,7 @@ import com.example.myapplication.R;
 import com.example.myapplication.models.Cita;
 import com.example.myapplication.services.SessionManager;
 import com.example.myapplication.utils.FechaUtils;
+import com.example.myapplication.utils.Resource;
 import com.example.myapplication.utils.SemaforoUtils;
 import com.example.myapplication.viewmodels.StudentDashboardViewModel;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
@@ -115,44 +116,50 @@ public class StudentDashboardFragment extends Fragment {
     }
 
     private void observarViewModel() {
-        viewModel.getLoading().observe(getViewLifecycleOwner(), cargando ->
-                progressLoading.setVisibility(
-                        Boolean.TRUE.equals(cargando) ? View.VISIBLE : View.GONE));
+        viewModel.getResumen().observe(getViewLifecycleOwner(), resource -> {
+            if (resource == null) return;
+            
+            // Actualizar loader según estado
+            progressLoading.setVisibility(resource.status == Resource.Status.LOADING ? View.VISIBLE : View.GONE);
+            
+            if (resource.status == Resource.Status.SUCCESS && resource.data != null) {
+                StudentDashboardViewModel.Resumen resumen = resource.data;
+                txtEmpty.setVisibility(resumen.sinDatos ? View.VISIBLE : View.GONE);
+                if (resumen.sinDatos) {
+                    txtPromedio.setText("--");
+                    txtMaterias.setText("0");
+                    txtRiesgo.setText("0");
+                    txtAprobadas.setText("0");
+                    txtNivel.setText(R.string.estudiante_sin_datos_academicos);
+                    txtRecomendacion.setText("");
+                    return;
+                }
 
-        viewModel.getResumen().observe(getViewLifecycleOwner(), resumen -> {
-            if (resumen == null) return;
-            txtEmpty.setVisibility(resumen.sinDatos ? View.VISIBLE : View.GONE);
-            if (resumen.sinDatos) {
-                txtPromedio.setText("--");
-                txtMaterias.setText("0");
-                txtRiesgo.setText("0");
-                txtAprobadas.setText("0");
-                txtNivel.setText(R.string.estudiante_sin_datos_academicos);
-                txtRecomendacion.setText("");
-                return;
+                txtPromedio.setText(SemaforoUtils.format(resumen.promedio));
+                txtMaterias.setText(String.valueOf(resumen.materias));
+                txtRiesgo.setText(String.valueOf(resumen.enRiesgo));
+                txtAprobadas.setText(String.valueOf(resumen.aprobadas));
+
+                semaforoCircle.setBackgroundResource(SemaforoUtils.drawableFor(resumen.promedio));
+                int color = SemaforoUtils.colorFor(requireContext(), resumen.promedio);
+                txtNivel.setText(getString(R.string.nivel_riesgo,
+                        SemaforoUtils.nivelFor(resumen.promedio)));
+                txtNivel.setTextColor(color);
+                txtRecomendacion.setTextColor(color);
+                txtRecomendacion.setText(recomendacionPara(resumen.promedio, resumen.enRiesgo));
+            } else if (resource.status == Resource.Status.ERROR) {
+                Toast.makeText(requireContext(), resource.message, Toast.LENGTH_LONG).show();
             }
-
-            txtPromedio.setText(SemaforoUtils.format(resumen.promedio));
-            txtMaterias.setText(String.valueOf(resumen.materias));
-            txtRiesgo.setText(String.valueOf(resumen.enRiesgo));
-            txtAprobadas.setText(String.valueOf(resumen.aprobadas));
-
-            semaforoCircle.setBackgroundResource(SemaforoUtils.drawableFor(resumen.promedio));
-            int color = SemaforoUtils.colorFor(requireContext(), resumen.promedio);
-            txtNivel.setText(getString(R.string.nivel_riesgo,
-                    SemaforoUtils.nivelFor(resumen.promedio)));
-            txtNivel.setTextColor(color);
-            txtRecomendacion.setTextColor(color);
-            txtRecomendacion.setText(recomendacionPara(resumen.promedio, resumen.enRiesgo));
         });
 
-        viewModel.getProximaCita().observe(getViewLifecycleOwner(), cita ->
-                txtProximaCita.setText(textoCita(cita)));
-
-        viewModel.getError().observe(getViewLifecycleOwner(), mensaje -> {
-            if (mensaje == null) return;
-            Toast.makeText(requireContext(), mensaje, Toast.LENGTH_LONG).show();
-            viewModel.clearError();
+        viewModel.getProximaCita().observe(getViewLifecycleOwner(), resource -> {
+            if (resource == null || resource.status != Resource.Status.SUCCESS) {
+                if (resource != null && resource.status == Resource.Status.ERROR) {
+                    Toast.makeText(requireContext(), resource.message, Toast.LENGTH_LONG).show();
+                }
+                return;
+            }
+            txtProximaCita.setText(textoCita(resource.data));
         });
     }
 

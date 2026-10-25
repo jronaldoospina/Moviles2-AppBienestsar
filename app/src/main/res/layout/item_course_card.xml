@@ -9,9 +9,11 @@
     android:clickable="true"
     android:focusable="true"
     android:foreground="?attr/selectableItemBackground"
-    app:cardBackgroundColor="@color/white_card"
+    app:cardBackgroundColor="@color/bg_surface_1"
     app:cardCornerRadius="14dp"
-    app:cardElevation="2dp">
+    app:cardElevation="0dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="@color/border_surface_1">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -93,7 +95,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/txt_25"
-                    android:textColor="@color/green_primary"
+                    android:textColor="@color/upc_green_primary"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -117,7 +119,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/txt_3"
-                    android:textColor="@color/info_text"
+                    android:textColor="@color/role_psychologist_light"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -141,7 +143,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/txt_ing_sistemas"
-                    android:textColor="@color/warning_text"
+                    android:textColor="@color/text_primary"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     android:maxLines="1"

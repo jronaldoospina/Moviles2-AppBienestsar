@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/txt_mis_citas"
-            android:textColor="@color/white"
+            android:textColor="@color/text_primary"
             android:textSize="26sp"
             android:textStyle="bold" />
 
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="@string/txt_tus_sesiones_y_seguimientos_con_bienestar"
-            android:textColor="@color/green_light"
+            android:textColor="@color/upc_green_primary"
             android:textSize="14sp" />
     </LinearLayout>
 

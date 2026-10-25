@@ -23,6 +23,7 @@ import com.example.myapplication.adapters.AlertsAdapter;
 import com.example.myapplication.adapters.PacienteResumenAdapter;
 import com.example.myapplication.services.SessionManager;
 import com.example.myapplication.utils.FechaUtils;
+import com.example.myapplication.utils.Resource;
 import com.example.myapplication.utils.UiUtils;
 import com.example.myapplication.viewmodels.DashboardViewModel;
 
@@ -110,33 +111,34 @@ public class DashboardFragment extends Fragment {
     }
 
     private void observarViewModel() {
-        viewModel.getResumen().observe(getViewLifecycleOwner(), resumen -> {
-            if (textRiskCount != null) textRiskCount.setText(String.valueOf(resumen.alertasPendientes));
-            if (textAppointmentsToday != null) textAppointmentsToday.setText(String.valueOf(resumen.citasHoy));
-            if (textTotalStudents != null) textTotalStudents.setText(String.valueOf(resumen.totalEstudiantes));
-            if (textImprovement != null) {
-                textImprovement.setText(resumen.porcentajeAtendidas >= 0
-                        ? resumen.porcentajeAtendidas + "%" : "--");
-            }
-            if (alertsAdapter != null) alertsAdapter.setData(resumen.recientes);
-            if (esPsicologo && pacientesAdapter != null) {
-                pacientesAdapter.setData(resumen.pacientes);
-                boolean vacio = resumen.pacientes.isEmpty();
-                if (layoutPacientes != null) {
-                    layoutPacientes.setVisibility(vacio ? View.GONE : View.VISIBLE);
+        viewModel.getResumen().observe(getViewLifecycleOwner(), resource -> {
+            if (resource == null) return;
+            
+            progressKpis.setVisibility(resource.status == Resource.Status.LOADING ? View.VISIBLE : View.GONE);
+            
+            if (resource.status == Resource.Status.SUCCESS && resource.data != null) {
+                DashboardViewModel.Resumen resumen = resource.data;
+                if (textRiskCount != null) textRiskCount.setText(String.valueOf(resumen.alertasPendientes));
+                if (textAppointmentsToday != null) textAppointmentsToday.setText(String.valueOf(resumen.citasHoy));
+                if (textTotalStudents != null) textTotalStudents.setText(String.valueOf(resumen.totalEstudiantes));
+                if (textImprovement != null) {
+                    textImprovement.setText(resumen.porcentajeAtendidas >= 0
+                            ? resumen.porcentajeAtendidas + "%" : "--");
                 }
-                if (txtPacientesEmpty != null) {
-                    txtPacientesEmpty.setVisibility(vacio ? View.VISIBLE : View.GONE);
+                if (alertsAdapter != null) alertsAdapter.setData(resumen.recientes);
+                if (esPsicologo && pacientesAdapter != null) {
+                    pacientesAdapter.setData(resumen.pacientes);
+                    boolean vacio = resumen.pacientes.isEmpty();
+                    if (layoutPacientes != null) {
+                        layoutPacientes.setVisibility(vacio ? View.GONE : View.VISIBLE);
+                    }
+                    if (txtPacientesEmpty != null) {
+                        txtPacientesEmpty.setVisibility(vacio ? View.VISIBLE : View.GONE);
+                    }
                 }
+            } else if (resource.status == Resource.Status.ERROR) {
+                UiUtils.showRetry(requireView(), resource.message, viewModel::reintentar);
             }
-        });
-        viewModel.getLoading().observe(getViewLifecycleOwner(), cargando ->
-                progressKpis.setVisibility(Boolean.TRUE.equals(cargando)
-                        ? View.VISIBLE : View.GONE));
-        viewModel.getError().observe(getViewLifecycleOwner(), mensaje -> {
-            if (mensaje == null) return;
-            UiUtils.showRetry(requireView(), mensaje, viewModel::reintentar);
-            viewModel.clearError();
         });
     }
 

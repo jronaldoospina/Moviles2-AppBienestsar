@@ -6,9 +6,11 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="16dp"
     android:layout_marginVertical="4dp"
-    app:cardBackgroundColor="@color/white_card"
+    app:cardBackgroundColor="@color/bg_surface_1"
     app:cardCornerRadius="10dp"
-    app:cardElevation="1dp">
+    app:cardElevation="0dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="@color/border_surface_1">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -81,7 +83,7 @@
             android:layout_height="48dp"
             android:gravity="center"
             android:text="@string/txt_4_5"
-            android:textColor="@color/green_primary"
+            android:textColor="@color/upc_green_primary"
             android:textSize="16sp"
             android:textStyle="bold" />
 

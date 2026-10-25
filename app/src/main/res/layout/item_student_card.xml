@@ -6,9 +6,11 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="12dp"
     android:layout_marginVertical="6dp"
-    app:cardBackgroundColor="@color/white_card"
+    app:cardBackgroundColor="@color/bg_surface_1"
     app:cardCornerRadius="12dp"
-    app:cardElevation="2dp">
+    app:cardElevation="0dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="@color/border_surface_1">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -87,9 +89,9 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/badge_risk_low"
                     android:paddingHorizontal="8dp"
-                    android:paddingVertical="2dp"
+                    android:paddingVertical="4dp"
                     android:text="@string/txt_bajo"
-                    android:textColor="@color/white_card"
+                    android:textColor="@color/risk_low_text"
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
@@ -99,7 +101,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:text="@string/txt_prom_3_9"
-                    android:textColor="@color/black"
+                    android:textColor="@color/text_primary"
                     android:textSize="11sp" />
             </LinearLayout>
 

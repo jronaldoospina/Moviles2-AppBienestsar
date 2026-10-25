@@ -11,6 +11,8 @@ import com.example.myapplication.repositories.AppointmentRepository;
 import com.example.myapplication.repositories.CourseRepository;
 import com.example.myapplication.repositories.GradeRepository;
 import com.example.myapplication.utils.SemaforoUtils;
+import com.example.myapplication.utils.Resource;
+import com.example.myapplication.utils.SemaforoUtils;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -47,37 +49,29 @@ public class StudentDashboardViewModel extends ViewModel {
     private final CourseRepository courseRepository = new CourseRepository();
     private final AppointmentRepository appointmentRepository = new AppointmentRepository();
 
-    private final MutableLiveData<Resumen> resumen = new MutableLiveData<>();
-    private final MutableLiveData<Cita> proximaCita = new MutableLiveData<>();
-    private final MutableLiveData<Boolean> loading = new MutableLiveData<>(false);
-    private final MutableLiveData<String> error = new MutableLiveData<>();
+    private final MutableLiveData<Resource<Resumen>> resumen = new MutableLiveData<>();
+    private final MutableLiveData<Resource<Cita>> proximaCita = new MutableLiveData<>();
 
     private String uid;
-    private boolean cargado = false;
-    private boolean cargando = false;
     private int generacion = 0;
 
-    public LiveData<Resumen> getResumen() {
+    public LiveData<Resource<Resumen>> getResumen() {
         return resumen;
     }
 
-    public LiveData<Cita> getProximaCita() {
+    public LiveData<Resource<Cita>> getProximaCita() {
         return proximaCita;
     }
 
-    public LiveData<Boolean> getLoading() {
-        return loading;
-    }
-
-    public LiveData<String> getError() {
-        return error;
-    }
-
     public void cargar(String uid) {
-        if (cargando || cargado) return;
+        if (this.uid != null && this.uid.equals(uid)) {
+            // Ya está cargado o cargando
+            return;
+        }
+
         if (uid == null) {
-            resumen.setValue(Resumen.vacio());
-            proximaCita.setValue(null);
+            resumen.setValue(Resource.success(Resumen.vacio()));
+            proximaCita.setValue(Resource.success(null));
             return;
         }
 
@@ -90,34 +84,26 @@ public class StudentDashboardViewModel extends ViewModel {
     public void recargar() {
         if (uid == null) return;
         generacion++;
-        cargando = false;
-        cargado = false;
-        cargar(uid);
-    }
-
-    public void clearError() {
-        error.setValue(null);
+        cargarResumen(generacion, uid);
+        cargarProximaCita(generacion, uid);
     }
 
     private void cargarResumen(int gen, String uid) {
-        cargando = true;
-        loading.setValue(true);
+        resumen.setValue(Resource.loading(null));
 
         gradeRepository.getNotasByEstudiante(uid)
                 .addOnSuccessListener(snapshot -> {
                     if (gen != generacion) return;
                     List<Nota> notas = snapshot != null ? snapshot.toObjects(Nota.class) : null;
                     if (notas == null || notas.isEmpty()) {
-                        resumen.setValue(Resumen.vacio());
-                        finalizarCarga();
+                        resumen.setValue(Resource.success(Resumen.vacio()));
                         return;
                     }
                     cargarCursos(gen, notas);
                 })
                 .addOnFailureListener(e -> {
                     if (gen != generacion) return;
-                    finalizarCarga();
-                    error.setValue("Error al cargar notas: " + e.getMessage());
+                    resumen.setValue(Resource.error("Error al cargar notas: " + e.getMessage(), null));
                 });
     }
 
@@ -153,17 +139,17 @@ public class StudentDashboardViewModel extends ViewModel {
             }
             items.sort((a, b) -> a.nombre.compareToIgnoreCase(b.nombre));
 
-            resumen.setValue(new Resumen(
+            resumen.setValue(Resource.success(new Resumen(
                     SemaforoUtils.promedioGeneral(items),
                     items.size(),
                     SemaforoUtils.enRiesgo(items),
                     SemaforoUtils.aprobadas(items),
-                    false));
-            finalizarCarga();
+                    false)));
         });
     }
 
     private void cargarProximaCita(int gen, String uid) {
+        proximaCita.setValue(Resource.loading(null));
         appointmentRepository.getCitasByEstudiante(uid)
                 .addOnSuccessListener(snapshot -> {
                     if (gen != generacion) return;
@@ -186,18 +172,12 @@ public class StudentDashboardViewModel extends ViewModel {
                             proxima = c;
                         }
                     }
-                    proximaCita.setValue(proxima);
+                    proximaCita.setValue(Resource.success(proxima));
                 })
                 .addOnFailureListener(e -> {
                     if (gen != generacion) return;
-                    proximaCita.setValue(null);
+                    proximaCita.setValue(Resource.error("Error al cargar citas", null));
                 });
-    }
-
-    private void finalizarCarga() {
-        cargando = false;
-        cargado = true;
-        loading.setValue(false);
     }
 
     private static boolean esAntes(Cita a, Cita b) {

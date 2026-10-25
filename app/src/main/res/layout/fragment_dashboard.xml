@@ -41,9 +41,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
-                    app:cardBackgroundColor="@color/white_card"
+                    app:cardBackgroundColor="@color/bg_surface_1"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="2dp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="@color/border_surface_1"
+                    app:strokeWidth="1dp"
                     app:layout_columnWeight="1"
                     app:layout_rowWeight="1">
 
@@ -57,10 +59,9 @@
                         <ImageView android:contentDescription="@null"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                           
                             android:padding="8dp"
                             android:src="@drawable/ic_warning"
-                            app:tint="@color/badge_text" />
+                            app:tint="@color/risk_high_text" />
 
                         <TextView
                             android:id="@+id/text_risk_count"
@@ -87,9 +88,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
-                    app:cardBackgroundColor="@color/white_card"
+                    app:cardBackgroundColor="@color/bg_surface_1"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="2dp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="@color/border_surface_1"
+                    app:strokeWidth="1dp"
                     app:layout_columnWeight="1"
                     app:layout_rowWeight="1">
 
@@ -103,10 +106,9 @@
                         <ImageView android:contentDescription="@null"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                           
                             android:padding="8dp"
                             android:src="@drawable/ic_calendar"
-                            app:tint="@color/blue_light" />
+                            app:tint="@color/role_psychologist_light" />
 
                         <TextView
                             android:id="@+id/text_appointments_today"
@@ -133,9 +135,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
-                    app:cardBackgroundColor="@color/white_card"
+                    app:cardBackgroundColor="@color/bg_surface_1"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="2dp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="@color/border_surface_1"
+                    app:strokeWidth="1dp"
                     app:layout_columnWeight="1"
                     app:layout_rowWeight="1">
 
@@ -147,12 +151,11 @@
                         android:padding="16dp">
 
                         <ImageView android:contentDescription="@null"
-                            android:layout_width="wrap_content"
+                            android:layout_width="40dp"
                             android:layout_height="40dp"
-                           
                             android:padding="8dp"
                             android:src="@drawable/ic_people"
-                            app:tint="@color/green_primary" />
+                            app:tint="@color/upc_green_primary" />
 
                         <TextView
                             android:id="@+id/text_total_students"
@@ -179,9 +182,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
-                    app:cardBackgroundColor="@color/white_card"
+                    app:cardBackgroundColor="@color/bg_surface_1"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="2dp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="@color/border_surface_1"
+                    app:strokeWidth="1dp"
                     app:layout_columnWeight="1"
                     app:layout_rowWeight="1">
 
@@ -195,10 +200,9 @@
                         <ImageView android:contentDescription="@null"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                           
                             android:padding="8dp"
                             android:src="@drawable/ic_check"
-                            app:tint="@color/success_text" />
+                            app:tint="@color/risk_low_text" />
 
                         <TextView
                             android:id="@+id/text_improvement"
@@ -250,9 +254,11 @@
                         android:layout_marginEnd="12dp"
                         android:clickable="true"
                         android:focusable="true"
-                        app:cardBackgroundColor="@color/white_card"
+                        app:cardBackgroundColor="@color/bg_surface_1"
                         app:cardCornerRadius="16dp"
-                        app:cardElevation="2dp">
+                        app:cardElevation="0dp"
+                        app:strokeColor="@color/border_surface_1"
+                        app:strokeWidth="1dp">
 
                         <TextView
                             android:id="@+id/txt_aa_estudiantes"
@@ -262,7 +268,7 @@
                             android:padding="12dp"
                             app:drawableTopCompat="@drawable/ic_people_32"
                             android:drawablePadding="8dp"
-                            app:drawableTint="@color/green_primary"
+                            app:drawableTint="@color/upc_green_primary"
                             android:text="@string/txt_estudiantes"
                             android:textColor="@color/text_primary"
                             android:textSize="12sp" />
@@ -276,9 +282,11 @@
                         android:layout_marginEnd="12dp"
                         android:clickable="true"
                         android:focusable="true"
-                        app:cardBackgroundColor="@color/white_card"
+                        app:cardBackgroundColor="@color/bg_surface_1"
                         app:cardCornerRadius="16dp"
-                        app:cardElevation="2dp">
+                        app:cardElevation="0dp"
+                        app:strokeColor="@color/border_surface_1"
+                        app:strokeWidth="1dp">
 
                         <TextView
                             android:id="@+id/txt_aa_cita"
@@ -288,7 +296,7 @@
                             android:padding="12dp"
                             app:drawableTopCompat="@drawable/ic_calendar_32"
                             android:drawablePadding="8dp"
-                            app:drawableTint="@color/blue_primary"
+                            app:drawableTint="@color/role_psychologist_light"
                             android:text="@string/txt_cita"
                             android:textColor="@color/text_primary"
                             android:textSize="12sp" />
@@ -302,9 +310,11 @@
                         android:layout_marginEnd="12dp"
                         android:clickable="true"
                         android:focusable="true"
-                        app:cardBackgroundColor="@color/white_card"
+                        app:cardBackgroundColor="@color/bg_surface_1"
                         app:cardCornerRadius="16dp"
-                        app:cardElevation="2dp">
+                        app:cardElevation="0dp"
+                        app:strokeColor="@color/border_surface_1"
+                        app:strokeWidth="1dp">
 
                         <TextView
                             android:id="@+id/txt_aa_alertas"
@@ -314,7 +324,7 @@
                             android:padding="12dp"
                             app:drawableTopCompat="@drawable/ic_warning_32"
                             android:drawablePadding="8dp"
-                            app:drawableTint="@color/badge_notification"
+                            app:drawableTint="@color/risk_high_text"
                             android:text="@string/txt_alertas"
                             android:textColor="@color/text_primary"
                             android:textSize="12sp" />
@@ -355,7 +365,7 @@
                         android:focusable="true"
                         android:padding="4dp"
                         android:text="@string/txt_ver_todos"
-                        android:textColor="@color/green_primary"
+                        android:textColor="@color/upc_green_primary"
                         android:textSize="14sp" />
                 </LinearLayout>
 
@@ -405,7 +415,7 @@
                     android:focusable="true"
                     android:padding="4dp"
                     android:text="@string/txt_ver_todas"
-                    android:textColor="@color/green_primary"
+                    android:textColor="@color/upc_green_primary"
                     android:textSize="14sp" />
             </LinearLayout>
 

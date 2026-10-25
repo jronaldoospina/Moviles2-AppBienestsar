@@ -1,159 +1,215 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- ============================================ -->
-    <!-- MARCA: VERDE ESMERALDA (bienestar acadÃ©mico)  -->
+    <!-- 1. PALETA INSTITUCIONAL UPC (Logo Oficial)   -->
     <!-- ============================================ -->
-    <color name="green_primary">#059669</color>
-    <color name="green_primary_dark">#047857</color>
-    <color name="green_light">#D1FAE5</color>
-    <color name="green_container">#D1FAE5</color>
-    <color name="on_primary_container">#053B2A</color>
-    <color name="white_card">#FFFFFF</color>
+    <!-- Cara derecha del cubo / Headers / Hover -->
+    <color name="upc_green_dark">#0A743B</color>
+
+    <!-- Cara superior "P" / Acción Principal (CTA) -->
+    <color name="upc_green_primary">#169B39</color>
+
+    <!-- Cara izquierda "U" / Acentos suaves / Gráficos -->
+    <color name="upc_green_light">#73C167</color>
+
+    <!-- Fondos de selección / Badges institucionales -->
+    <color name="upc_green_tint_light">#E8F5E9</color>
+    <!-- rgba(22, 155, 57, 0.15) -->
+    <color name="upc_green_tint_dark">#26169B39</color>
+
+    <!-- Bisel del cubo / REGLA: Solo micro-interacciones (líneas 2px, bordes avatares) -->
+    <color name="upc_yellow_accent">#F7D117</color>
 
     <!-- ============================================ -->
-    <!-- FONDOS Y SUPERFICIES -->
+    <!-- 2. SUPERFICIES NEUTRAS Y TIPOGRAFÍA          -->
+    <!-- LIGHT MODE (Institucional Limpio)            -->
     <!-- ============================================ -->
-    <color name="background_gray">#F6F7F9</color>
-    <color name="surface_container_low">#F8FAFC</color>
-    <color name="surface_container">#EFF2F5</color>
-    <color name="surface_container_high">#E7EAEE</color>
-    <color name="surface_container_highest">#DEE2E8</color>
+    <color name="bg_canvas_light">#F4F6F5</color>
+    <color name="bg_surface_1_light">#FFFFFF</color>
+    <color name="border_surface_1_light">#E2E8F0</color>
+    <color name="bg_surface_2_light">#F8FAFC</color>
+
+    <color name="text_primary_light">#18181B</color>
+    <color name="text_secondary_light">#52525B</color>
+    <color name="text_muted_light">#71717A</color>
+
+    <!-- DARK MODE (Neutros Oscuros)                  -->
+    <!-- ============================================ -->
+    <color name="bg_canvas_dark">#18181B</color>
+    <color name="bg_surface_1_dark">#232326</color>
+    <color name="border_surface_1_dark">#3F3F46</color>
+    <color name="bg_surface_2_dark">#2E2E32</color>
+
+    <color name="text_primary_dark">#F4F4F5</color>
+    <color name="text_secondary_dark">#A1A1AA</color>
+    <color name="text_muted_dark">#71717A</color>
+
+    <!-- ============================================ -->
+    <!-- 3. SEMÁNTICA DE RIESGOS (Fórmula de 3 capas) -->
+    <!-- ============================================ -->
+    <!-- Riesgo Bajo (Estable / Óptimo) - Teal        -->
+    <color name="risk_low_text_light">#0D9488</color>
+    <color name="risk_low_bg_light">#F0FDFA</color>
+    <color name="risk_low_border_light">#99F6E4</color>
+
+    <color name="risk_low_text_dark">#2DD4BF</color>
+    <!-- rgba(20, 184, 166, 0.12) -->
+    <color name="risk_low_bg_dark">#1F14B8A6</color>
+    <!-- rgba(20, 184, 166, 0.3) -->
+    <color name="risk_low_border_dark">#4D14B8A6</color>
+
+    <!-- Riesgo Medio (Observación) - Ámbar           -->
+    <color name="risk_medium_text_light">#B45309</color>
+    <color name="risk_medium_bg_light">#FFFBEB</color>
+    <color name="risk_medium_border_light">#FDE68A</color>
+
+    <color name="risk_medium_text_dark">#FBBF24</color>
+    <!-- rgba(245, 158, 11, 0.12) -->
+    <color name="risk_medium_bg_dark">#1FF59E0B</color>
+    <!-- rgba(245, 158, 11, 0.3) -->
+    <color name="risk_medium_border_dark">#4DF59E0B</color>
+
+    <!-- Riesgo Alto (Intervención Prioritaria) - Naranja -->
+    <color name="risk_high_text_light">#C2410C</color>
+    <color name="risk_high_bg_light">#FFF7ED</color>
+    <color name="risk_high_border_light">#FED7AA</color>
+
+    <color name="risk_high_text_dark">#FB923C</color>
+    <!-- rgba(249, 115, 22, 0.12) -->
+    <color name="risk_high_bg_dark">#1FF97316</color>
+    <!-- rgba(249, 115, 22, 0.3) -->
+    <color name="risk_high_border_dark">#4DF97316</color>
+
+    <!-- Riesgo Crítico (Urgencia Inmediata) - Rojo   -->
+    <color name="risk_critical_text_light">#BE123C</color>
+    <color name="risk_critical_bg_light">#FFF1F2</color>
+    <color name="risk_critical_border_light">#FECDD3</color>
+
+    <color name="risk_critical_text_dark">#FB7185</color>
+    <!-- rgba(225, 29, 72, 0.15) -->
+    <color name="risk_critical_bg_dark">#26E11D48</color>
+    <!-- rgba(225, 29, 72, 0.4) -->
+    <color name="risk_critical_border_dark">#66E11D48</color>
+
+    <!-- Extra: Borde adicional / punto pulsante para riesgo crítico -->
+    <color name="risk_critical_accent">#E11D48</color>
+
+    <!-- ============================================ -->
+    <!-- 4. DIFERENCIACIÓN VISUAL POR ROLES           -->
+    <!-- (Role Accent Tokens)                         -->
+    <!-- ============================================ -->
+    <!-- Estudiante (Acento Institucional) -->
+    <color name="role_student">#169B39</color> <!-- upc_green_primary -->
+
+    <!-- Psicólogo (Bienestar - Cian/Teal Clínico) -->
+    <color name="role_psychologist_light">#0284C7</color>
+    <color name="role_psychologist_dark">#0EA5E9</color>
+
+    <!-- Docente (Acento Académico Índigo) -->
+    <color name="role_teacher_light">#4F46E5</color>
+    <color name="role_teacher_dark">#6366F1</color>
+
+    <!-- Admin (Slate / Sobrio) -->
+    <color name="role_admin_light">#334155</color>
+    <color name="role_admin_dark">#64748B</color>
+
+    <!-- ============================================ -->
+    <!-- 5. SEMÁNTICA PARA USO DIRECTO EN TEMAS       -->
+    <!-- (Alias al modo claro por defecto)            -->
+    <!-- ============================================ -->
+    <!-- Nota: Para Android nativo, los equivalentes   -->
+    <!-- night se sobreescribirían en values-night/colors.xml -->
+    <color name="bg_canvas">@color/bg_canvas_light</color>
+    <color name="bg_surface_1">@color/bg_surface_1_light</color>
+    <color name="border_surface_1">@color/border_surface_1_light</color>
+    <color name="bg_surface_2">@color/bg_surface_2_light</color>
+
+    <color name="text_primary">@color/text_primary_light</color>
+    <color name="text_secondary">@color/text_secondary_light</color>
+    <color name="text_muted">@color/text_muted_light</color>
+
+    <color name="risk_low_text">@color/risk_low_text_light</color>
+    <color name="risk_low_bg">@color/risk_low_bg_light</color>
+    <color name="risk_low_border">@color/risk_low_border_light</color>
+
+    <color name="risk_medium_text">@color/risk_medium_text_light</color>
+    <color name="risk_medium_bg">@color/risk_medium_bg_light</color>
+    <color name="risk_medium_border">@color/risk_medium_border_light</color>
+
+    <color name="risk_high_text">@color/risk_high_text_light</color>
+    <color name="risk_high_bg">@color/risk_high_bg_light</color>
+    <color name="risk_high_border">@color/risk_high_border_light</color>
+
+    <color name="risk_critical_text">@color/risk_critical_text_light</color>
+    <color name="risk_critical_bg">@color/risk_critical_bg_light</color>
+    <color name="risk_critical_border">@color/risk_critical_border_light</color>
+
+    <!-- ============================================ -->
+    <!-- 6. LEGACY MAPPING (Retrocompatibilidad)      -->
+    <!-- ============================================ -->
+    <color name="green_primary">@color/upc_green_primary</color>
+    <color name="green_primary_dark">@color/upc_green_dark</color>
+    <color name="green_light">@color/upc_green_light</color>
+    <color name="green_container">@color/upc_green_tint_light</color>
+    <color name="on_primary_container">@color/text_primary</color>
+    <color name="white_card">@color/bg_surface_1</color>
+    <color name="background_gray">@color/bg_canvas</color>
+    <color name="surface_container_low">@color/bg_surface_1</color>
+    <color name="surface_container">@color/bg_surface_2</color>
+    <color name="surface_container_high">@color/border_surface_1</color>
+    <color name="surface_container_highest">@color/border_surface_1</color>
     <color name="white">#FFFFFF</color>
-    <color name="black">#000000</color>
-
+    <color name="black">@color/text_primary</color>
     <color name="on_green">#FFFFFF</color>
+    <color name="text_hint">@color/text_muted</color>
+    <color name="danger_bg">@color/risk_critical_bg</color>
+    <color name="info_bg">@color/role_psychologist_light</color>
+    <color name="info_btn_bg">@color/role_psychologist_light</color>
+    <color name="info_text">#FFFFFF</color>
+    <color name="success_bg">@color/upc_green_primary</color>
+    <color name="success_text">#FFFFFF</color>
+    <color name="warning_text">@color/text_primary</color>
+    <color name="error_text">@color/risk_critical_text</color>
+    <color name="divider_color">@color/border_surface_1</color>
+    <color name="stroke_color">@color/border_surface_1</color>
+    <color name="surface_outline">@color/border_surface_1</color>
+    <color name="surface_outline_variant">@color/border_surface_1</color>
+    <color name="chip_bg">@color/bg_surface_2</color>
+    <color name="chip_text">@color/text_primary</color>
+    <color name="gray_light">@color/bg_surface_2</color>
+    <color name="gray_medium">@color/text_secondary</color>
+    <color name="gray_dark">@color/text_muted</color>
+    <color name="blue_primary">@color/role_psychologist_light</color>
+    <color name="blue_light">@color/bg_surface_2</color>
+    <color name="orange_primary">@color/risk_high_text</color>
+    <color name="teal_primary">@color/risk_low_text</color>
+    <color name="teal_light">@color/risk_low_border</color>
+    <color name="nav_item_selected">@color/upc_green_primary</color>
+    <color name="nav_item_unselected">@color/text_secondary</color>
+    <color name="nav_background">@color/bg_surface_1</color>
+    <color name="badge_notification">@color/risk_critical_accent</color>
+    <color name="badge_text">@color/bg_surface_1</color>
+    <color name="skeleton_shimmer">@color/border_surface_1</color>
+    <color name="role_admin_bg">@color/role_admin_light</color>
+    <color name="role_psicologo_bg">@color/role_psychologist_light</color>
+    <color name="role_docente_bg">@color/role_teacher_light</color>
+    <color name="role_estudiante_bg">@color/role_student</color>
+    <color name="kpi_blue_bg">@color/bg_surface_2</color>
+    <color name="kpi_risk_bg">@color/risk_critical_bg</color>
+    <color name="kpi_teal_bg">@color/risk_low_bg</color>
 
     <!-- ============================================ -->
-    <!-- TEXTOS -->
+    <!-- 7. MISSING LEGACY VARS (Para Build)          -->
     <!-- ============================================ -->
-    <color name="text_primary">#111827</color>
-    <color name="text_secondary">#6B7280</color>
-    <color name="text_hint">#9CA3AF</color>
+    <color name="green_primary_night">@color/upc_green_primary</color>
+    <color name="white_card_night">@color/bg_surface_1_dark</color>
+    <color name="background_gray_night">@color/bg_canvas_dark</color>
+    <color name="risk_high_text_night">@color/risk_high_text_dark</color>
 
-    <!-- ============================================ -->
-    <!-- SEMÃFORO DE RIESGO (pÃ­ldora clara + texto oscuro) -->
-    <!-- ============================================ -->
-    <color name="risk_high_bg">#F44336</color>
-    <color name="risk_high_text">#DC2626</color>
-    <color name="risk_medium_bg">#FFEB3B</color>
-    <color name="risk_medium_text">#B45309</color>
-    <color name="risk_low_bg">#4CAF50</color>
-    <color name="risk_low_text">#047857</color>
-
-    <!-- ============================================ -->
-    <!-- INFORMATIVO (AZUL CIELO) -->
-    <!-- ============================================ -->
-    <color name="info_bg">#E0F2FE</color>
-    <color name="info_text">#0369A1</color>
-
-    <!-- ============================================ -->
-    <!-- Ã‰XITO (ESMERALDA) -->
-    <!-- ============================================ -->
-    <color name="success_bg">#D1FAE5</color>
-    <color name="success_text">#047857</color>
-
-    <!-- ============================================ -->
-    <!-- ADVERTENCIA (ÃMBAR) -->
-    <!-- ============================================ -->
-    <color name="warning_text">#B45309</color>
-
-    <!-- ============================================ -->
-    <!-- ERROR (ROJO) -->
-    <!-- ============================================ -->
-    <color name="error_text">#DC2626</color>
-
-    <!-- ============================================ -->
-    <!-- DIVISORES Y CONTORNOS -->
-    <!-- ============================================ -->
-    <color name="divider_color">#E5E7EB</color>
-    <color name="stroke_color">#EDEFF2</color>
-    <color name="surface_outline">#C9CFD8</color>
-    <color name="surface_outline_variant">#E4E7EC</color>
-
-    <!-- ============================================ -->
-    <!-- CHIPS -->
-    <!-- ============================================ -->
-    <color name="chip_bg">#F3F4F6</color>
-    <color name="chip_text">#111827</color>
-
-    <!-- ============================================ -->
-    <!-- ACENTOS DE MÃ“DULO (misma profundidad tonal 600) -->
-    <!-- ============================================ -->
-    <color name="gray_light">#F3F4F6</color>
-    <color name="gray_medium">#9CA3AF</color>
-    <color name="gray_dark">#4B5563</color>
-    <color name="blue_primary">#0284C7</color>
-    <color name="blue_light">#BAE6FD</color>
-    <color name="orange_primary">#D97706</color>
-    <color name="teal_primary">#0D9488</color>
-    <color name="teal_light">#CCFBF1</color>
-
-    <!-- ============================================ -->
-    <!-- GRÃFICOS (frÃ­os + 1 acento cÃ¡lido, armÃ³nico con esmeralda) -->
-    <!-- ============================================ -->
-
-    <!-- ============================================ -->
-    <!-- ICONOS -->
-    <!-- ============================================ -->
-
-    <!-- ============================================ -->
-    <!-- NAVEGACIÃ“N -->
-    <!-- ============================================ -->
-    <color name="nav_item_selected">#047857</color>
-    <color name="nav_item_unselected">#6B7280</color>
-    <color name="nav_background">#FFFFFF</color>
-
-    <!-- ============================================ -->
-    <!-- BADGES Y NOTIFICACIONES -->
-    <!-- ============================================ -->
-    <color name="badge_notification">#DC2626</color>
-    <color name="badge_text">#FFFFFF</color>
-
-    <!-- ============================================ -->
-    <!-- GRADIENTES -->
-    <!-- ============================================ -->
-
-    <!-- ============================================ -->
-    <!-- TARJETAS -->
-    <!-- ============================================ -->
-
-    <!-- ============================================ -->
-    <!-- MODO OSCURO -->
-    <!-- ============================================ -->
-    <color name="green_primary_night">#34D399</color>
-    <color name="white_card_night">#171A1E</color>
-    <color name="background_gray_night">#0E1013</color>
-    <color name="risk_high_text_night">#FCA5A5</color>
-
-    <!-- ============================================ -->
-    <!-- ESTADOS DE CITAS -->
-    <!-- ============================================ -->
-
-    <!-- ============================================ -->
-    <!-- ÃNIMO (gradiente emocional cÃ¡lido -> frÃ­o esmeralda) -->
-    <!-- ============================================ -->
-    <color name="mood_1">#EF4444</color>
-    <color name="mood_2">#F97316</color>
-    <color name="mood_3">#F59E0B</color>
-    <color name="mood_4">#0D9488</color>
-    <color name="mood_5">#059669</color>
-
-    <!-- ============================================ -->
-    <!-- ROLES DE USUARIO Y ESTADOS (SOLIDOS Y LEGIBLES) -->
-    <!-- ============================================ -->
-<!-- PÃºrpura / Admin -->
-<!-- Azul Intenso / PsicÃ³logo -->
-<!-- Naranja Ãmbar / Docente -->
-<!-- Verde Esmeralda / Estudiante -->
-<!-- Verde Vivo / Activo -->
-<!-- Gris Pizarra / Inactivo -->
-
-    <!-- RIESGO CRÃTICO -->
-    <!-- ============================================ -->
-    <color name="risk_critical_bg">#B91C1C</color> <!-- Rojo CarmesÃ­ CrÃ­tico -->
-
-    <!-- SKELETON LOADING -->
-    <color name="skeleton_shimmer">#F3F4F6</color>
-
-    <color name="risk_critical_text">#DC2626</color>
+    <color name="mood_1">@color/risk_critical_text</color>
+    <color name="mood_2">@color/risk_high_text</color>
+    <color name="mood_3">@color/risk_medium_text</color>
+    <color name="mood_4">@color/risk_low_text</color>
+    <color name="mood_5">@color/upc_green_primary</color>
+    <color name="text_inverse">#FFFFFF</color>
 </resources>

@@ -28,7 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/txt_bienvenido"
-                android:textColor="@color/white"
+                android:textColor="@color/text_inverse"
                 android:textSize="28sp"
                 android:textStyle="bold" />
 
@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text=""
-                android:textColor="@color/green_light"
+                android:textColor="@color/text_inverse"
                 android:textSize="14sp" />
         </LinearLayout>
 
@@ -54,10 +54,11 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/white_card"
+                app:cardBackgroundColor="@color/bg_surface_1"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="3dp"
-                app:strokeWidth="0dp">
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/border_surface_1">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -131,10 +132,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
-                    app:cardBackgroundColor="@color/white_card"
+                    app:cardBackgroundColor="@color/bg_surface_1"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="2dp"
-                    app:strokeWidth="0dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/border_surface_1"
                     app:layout_columnWeight="1"
                     app:layout_rowWeight="1">
 
@@ -167,10 +169,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
-                    app:cardBackgroundColor="@color/white_card"
+                    app:cardBackgroundColor="@color/bg_surface_1"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="2dp"
-                    app:strokeWidth="0dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/border_surface_1"
                     app:layout_columnWeight="1"
                     app:layout_rowWeight="1">
 
@@ -203,10 +206,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
-                    app:cardBackgroundColor="@color/white_card"
+                    app:cardBackgroundColor="@color/bg_surface_1"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="2dp"
-                    app:strokeWidth="0dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/border_surface_1"
                     app:layout_columnWeight="1"
                     app:layout_rowWeight="1">
 
@@ -241,9 +245,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                app:cardBackgroundColor="@color/white_card"
+                app:cardBackgroundColor="@color/bg_surface_1"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="2dp">
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/border_surface_1">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -256,8 +262,7 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:src="@drawable/ic_calendar"
-                        app:tint="@color/blue_primary"
-                       
+                        app:tint="@color/role_psychologist_light"
                         android:padding="8dp" />
 
                     <LinearLayout
@@ -313,10 +318,11 @@
                         android:layout_width="110dp"
                         android:layout_height="110dp"
                         android:layout_marginEnd="12dp"
-                        app:cardBackgroundColor="@color/white_card"
+                        app:cardBackgroundColor="@color/bg_surface_1"
                         app:cardCornerRadius="16dp"
-                        app:cardElevation="2dp"
-                        app:strokeWidth="0dp"
+                        app:cardElevation="0dp"
+                        app:strokeWidth="1dp"
+                        app:strokeColor="@color/border_surface_1"
                         android:clickable="true"
                         android:focusable="true">
 
@@ -327,7 +333,7 @@
                             android:padding="12dp"
                             app:drawableTopCompat="@drawable/ic_trending_32"
                             android:drawablePadding="8dp"
-                            app:drawableTint="@color/green_primary"
+                            app:drawableTint="@color/upc_green_primary"
                             android:text="@string/txt_mi_progreso"
                             android:textColor="@color/text_primary"
                             android:textSize="12sp" />
@@ -338,10 +344,11 @@
                         android:layout_width="110dp"
                         android:layout_height="110dp"
                         android:layout_marginEnd="12dp"
-                        app:cardBackgroundColor="@color/white_card"
+                        app:cardBackgroundColor="@color/bg_surface_1"
                         app:cardCornerRadius="16dp"
-                        app:cardElevation="2dp"
-                        app:strokeWidth="0dp"
+                        app:cardElevation="0dp"
+                        app:strokeWidth="1dp"
+                        app:strokeColor="@color/border_surface_1"
                         android:clickable="true"
                         android:focusable="true">
 
@@ -352,7 +359,7 @@
                             android:padding="12dp"
                             app:drawableTopCompat="@drawable/ic_calendar_32"
                             android:drawablePadding="8dp"
-                            app:drawableTint="@color/blue_primary"
+                            app:drawableTint="@color/role_psychologist_light"
                             android:text="@string/txt_mis_citas"
                             android:textColor="@color/text_primary"
                             android:textSize="12sp" />
@@ -363,10 +370,11 @@
                         android:layout_width="110dp"
                         android:layout_height="110dp"
                         android:layout_marginEnd="12dp"
-                        app:cardBackgroundColor="@color/white_card"
+                        app:cardBackgroundColor="@color/bg_surface_1"
                         app:cardCornerRadius="16dp"
-                        app:cardElevation="2dp"
-                        app:strokeWidth="0dp"
+                        app:cardElevation="0dp"
+                        app:strokeWidth="1dp"
+                        app:strokeColor="@color/border_surface_1"
                         android:clickable="true"
                         android:focusable="true">
 
@@ -377,7 +385,7 @@
                             android:padding="12dp"
                             app:drawableTopCompat="@drawable/ic_warning_32"
                             android:drawablePadding="8dp"
-                            app:drawableTint="@color/orange_primary"
+                            app:drawableTint="@color/risk_high_text"
                             android:text="@string/txt_reporte_emoc"
                             android:textColor="@color/text_primary"
                             android:textSize="12sp" />
@@ -388,9 +396,11 @@
                         android:layout_width="110dp"
                         android:layout_height="110dp"
                         android:layout_marginEnd="12dp"
-                        app:cardBackgroundColor="@color/white_card"
+                        app:cardBackgroundColor="@color/bg_surface_1"
                         app:cardCornerRadius="16dp"
-                        app:cardElevation="2dp"
+                        app:cardElevation="0dp"
+                        app:strokeWidth="1dp"
+                        app:strokeColor="@color/border_surface_1"
                         android:clickable="true"
                         android:focusable="true">
 
@@ -401,7 +411,7 @@
                             android:padding="12dp"
                             app:drawableTopCompat="@drawable/ic_book_32"
                             android:drawablePadding="8dp"
-                            app:drawableTint="@color/blue_primary"
+                            app:drawableTint="@color/role_teacher_light"
                             android:text="@string/txt_mis_cursos"
                             android:textColor="@color/text_primary"
                             android:textSize="12sp" />
@@ -412,9 +422,11 @@
                         android:layout_width="110dp"
                         android:layout_height="110dp"
                         android:layout_marginEnd="12dp"
-                        app:cardBackgroundColor="@color/white_card"
+                        app:cardBackgroundColor="@color/bg_surface_1"
                         app:cardCornerRadius="16dp"
-                        app:cardElevation="2dp"
+                        app:cardElevation="0dp"
+                        app:strokeWidth="1dp"
+                        app:strokeColor="@color/border_surface_1"
                         android:clickable="true"
                         android:focusable="true">
 
@@ -425,7 +437,7 @@
                             android:padding="12dp"
                             app:drawableTopCompat="@drawable/ic_audit_32"
                             android:drawablePadding="8dp"
-                            app:drawableTint="@color/green_primary"
+                            app:drawableTint="@color/upc_green_primary"
                             android:text="@string/txt_mi_bienestar"
                             android:textColor="@color/text_primary"
                             android:textSize="12sp" />
@@ -443,7 +455,7 @@
                 android:layout_marginTop="24dp"
                 android:indeterminate="true"
                 android:visibility="gone"
-                app:indicatorColor="@color/green_primary"
+                app:indicatorColor="@color/upc_green_primary"
                 app:indicatorSize="40dp" />
 
             <!-- Estado sin notas -->

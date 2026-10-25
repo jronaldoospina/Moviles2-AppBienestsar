@@ -1,48 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="background_gray">#0E1013</color>
-    <color name="white_card">#171A1E</color>
-    <color name="text_primary">#E5E7EB</color>
-    <color name="text_secondary">#9CA3AF</color>
-    <color name="divider_color">#262A2F</color>
-    <color name="stroke_color">#262A2F</color>
-    <color name="chip_bg">#262A2F</color>
-    <color name="chip_text">#E5E7EB</color>
-    <color name="gray_light">#1F2328</color>
-    <color name="gray_medium">#6B7280</color>
-    <color name="nav_background">#171A1E</color>
-    <color name="nav_item_selected">#34D399</color>
-    <color name="nav_item_unselected">#9CA3AF</color>
-    <color name="surface_container_low">#15171A</color>
-    <color name="surface_container">#1A1E22</color>
-    <color name="surface_container_high">#22262C</color>
-    <color name="surface_container_highest">#2D323A</color>
-    <color name="surface_outline">#3E444D</color>
-    <color name="surface_outline_variant">#2B3037</color>
+    <!-- ============================================ -->
+    <!-- OVERRIDES PARA MODO OSCURO (DARK MODE)       -->
+    <!-- ============================================ -->
 
-    <!-- SKELETON LOADING: en oscuro los bloques van mas oscuros que la tarjeta -->
-    <color name="skeleton_shimmer">#333940</color>
+    <color name="bg_canvas">@color/bg_canvas_dark</color>
+    <color name="bg_surface_1">@color/bg_surface_1_dark</color>
+    <color name="border_surface_1">@color/border_surface_1_dark</color>
+    <color name="bg_surface_2">@color/bg_surface_2_dark</color>
 
-    <!-- CONTRASTE ACCESIBLE EN MODO OSCURO -->
-    <color name="green_primary">#34D399</color>   <!-- Esmeralda claro (acento) -->
-    <color name="green_primary_dark">#047857</color> <!-- Esmeralda oscuro (fondo de boton) -->
-    <color name="on_primary_container">#052E1B</color>
-    <color name="green_container">#065F46</color>
-    <color name="green_light">#0A7A5C</color>
-    <color name="error_text">#FCA5A5</color>
-    <color name="risk_high_text">#FCA5A5</color>
-    <color name="white">#FFFAFB</color>
+    <color name="text_primary">@color/text_primary_dark</color>
+    <color name="text_secondary">@color/text_secondary_dark</color>
+    <color name="text_muted">@color/text_muted_dark</color>
 
-    <!-- Texto sobre superficies verdes (botones/headers): siempre claro -->
+    <!-- Riesgo en Oscuro -->
+    <color name="risk_low_text">@color/risk_low_text_dark</color>
+    <color name="risk_low_bg">@color/risk_low_bg_dark</color>
+    <color name="risk_low_border">@color/risk_low_border_dark</color>
+
+    <color name="risk_medium_text">@color/risk_medium_text_dark</color>
+    <color name="risk_medium_bg">@color/risk_medium_bg_dark</color>
+    <color name="risk_medium_border">@color/risk_medium_border_dark</color>
+
+    <color name="risk_high_text">@color/risk_high_text_dark</color>
+    <color name="risk_high_bg">@color/risk_high_bg_dark</color>
+    <color name="risk_high_border">@color/risk_high_border_dark</color>
+
+    <color name="risk_critical_text">@color/risk_critical_text_dark</color>
+    <color name="risk_critical_bg">@color/risk_critical_bg_dark</color>
+    <color name="risk_critical_border">@color/risk_critical_border_dark</color>
+
+    <!-- Roles Acentos (Adaptados a fondo oscuro para no encandilar) -->
+    <color name="role_psychologist_light">@color/role_psychologist_dark</color>
+    <color name="role_teacher_light">@color/role_teacher_dark</color>
+    <color name="role_admin_light">@color/role_admin_dark</color>
+
+    <!-- Compatibilidad de Legado para el Dark Mode -->
+    <color name="background_gray">@color/bg_canvas_dark</color>
+    <color name="white_card">@color/bg_surface_1_dark</color>
+    <color name="divider_color">@color/border_surface_1_dark</color>
+    <color name="stroke_color">@color/border_surface_1_dark</color>
+    <color name="chip_bg">@color/bg_surface_2_dark</color>
+    <color name="chip_text">@color/text_primary_dark</color>
+    <color name="gray_light">@color/bg_surface_2_dark</color>
+    <color name="gray_medium">@color/text_secondary_dark</color>
+    <color name="gray_dark">@color/text_muted_dark</color>
+    <color name="nav_background">@color/bg_surface_1_dark</color>
+    <color name="nav_item_selected">@color/upc_green_primary</color>
+    <color name="nav_item_unselected">@color/text_muted_dark</color>
+    <color name="surface_container_low">@color/bg_surface_1_dark</color>
+    <color name="surface_container">@color/bg_surface_2_dark</color>
+    <color name="surface_container_high">@color/border_surface_1_dark</color>
+    <color name="surface_container_highest">@color/border_surface_1_dark</color>
+    <color name="surface_outline">@color/border_surface_1_dark</color>
+    <color name="surface_outline_variant">@color/border_surface_1_dark</color>
+    <color name="skeleton_shimmer">@color/bg_surface_2_dark</color>
+
+    <color name="green_primary">@color/upc_green_primary</color>
+    <color name="green_primary_dark">@color/upc_green_dark</color>
+    <color name="on_primary_container">@color/text_primary_dark</color>
+    <color name="green_container">@color/upc_green_tint_dark</color>
+    <color name="green_light">@color/upc_green_light</color>
+    <color name="error_text">@color/risk_critical_text_dark</color>
+
+    <color name="white">@color/bg_surface_1_dark</color>
+    <color name="black">@color/text_primary_dark</color>
+
     <color name="on_green">#FFFFFF</color>
 
-    <!-- Riesgo en oscuro: fondos oscuros, texto claro -->
-    <color name="risk_critical_text">#FF6B6B</color>
-    <color name="risk_critical_bg">#B91C1C</color>
-
-
-    <!-- Acentos claros invertidos para modo oscuro -->
-    <color name="teal_light">#115E59</color>
-    <color name="blue_light">#0C4A6E</color>
-
+    <color name="teal_light">@color/risk_low_bg_dark</color>
+    <color name="blue_light">@color/bg_surface_2_dark</color>
+    <color name="kpi_blue_bg">@color/bg_surface_2_dark</color>
+    <color name="kpi_risk_bg">@color/risk_critical_bg_dark</color>
+    <color name="kpi_teal_bg">@color/risk_low_bg_dark</color>
+    <color name="text_inverse">#FFFFFF</color>
 </resources>

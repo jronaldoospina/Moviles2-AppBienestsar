@@ -7,10 +7,11 @@
     android:layout_marginBottom="16dp"
     android:layout_marginStart="2dp"
     android:layout_marginEnd="2dp"
-    app:cardBackgroundColor="@color/white_card"
+    app:cardBackgroundColor="@color/bg_surface_1"
     app:cardCornerRadius="16dp"
-    app:cardElevation="3dp"
-    app:strokeWidth="0dp">
+    app:cardElevation="0dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="@color/border_surface_1">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,7 +31,7 @@
                 android:layout_height="22dp"
                 android:layout_marginEnd="8dp"
                 android:src="@drawable/ic_calendar"
-                app:tint="@color/green_primary" />
+                app:tint="@color/role_psychologist_light" />
 
             <TextView
                 android:id="@+id/txt_date"
@@ -62,7 +63,7 @@
             android:layout_height="1dp"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"
-            android:background="#E5E7EB" />
+            android:background="@color/border_surface_1" />
 
         <!-- Detalles de la cita -->
         <LinearLayout
@@ -120,9 +121,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/txt_cancelar_cita"
-            android:textColor="@color/risk_high_text"
-            app:strokeColor="@color/risk_high_bg"
-            app:rippleColor="#20DC2626"
+            android:textColor="@color/risk_critical_text"
+            app:strokeColor="@color/border_surface_1"
+            app:rippleColor="@color/risk_critical_bg"
             android:textSize="14sp"
             android:visibility="gone" />
 
